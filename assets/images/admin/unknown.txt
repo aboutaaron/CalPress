@@ -1,0 +1,5 @@
+unknown.png
+
+License: GPL
+Author: Sergio Sanchez Lopez
+Source: http://www.iconfinder.net/icondetails/7643/128/?q=unknown

@@ -1,0 +1,155 @@
+/* resets */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+/* mobile style */
+
+body{
+    background-color: #fff; 
+    color: #222;           
+    font-family: Helvetica; 
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    border-bottom: 1px solid #666;
+}
+
+#header h1 {
+    margin: 0;
+    padding: 0;
+}
+#header h1 a {
+    background-color: #ccc;
+    /* color: #222; */
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+#header #blog-description{
+    background-color: #ccc;
+    text-align: center;
+    padding: 0 0 10px 0;
+    margin-top: -10px;
+}
+
+#menu ul {
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+}
+
+#menu ul li a {
+    background-color: #FFFFFF;
+    border: 1px solid #999999;
+    /* color: #222222; */
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: -1px;
+    padding: 12px 10px;
+    text-decoration: none;
+}
+
+#content, #sidebar {
+    padding: 10px;
+}
+
+div.post{
+    border-bottom:1px solid #B2B2B2;
+    padding: 5px 0;
+}
+
+div.post h2{
+    padding: 6px 0;
+}
+
+div.post h2 a{
+    display: block;
+}
+
+div.post:hover{
+    background-color: #ccc;
+}
+
+.post .entry-meta{
+    display: none;
+}
+
+#sidebar{
+    display: none;
+}
+
+#footer{
+    text-align: center;
+    font-size: 12px;
+}
+
+#footer .poweredby{
+    display: block;
+    width: 100%;
+}
+
+#footer .meta-sep{
+    display: none;
+}
+
+#footer .switch-mode a{
+    display: block;
+    margin: 10px 0 5px 0;
+    padding: 5px 0;
+    font-size: 16px;
+    width: 100%;
+    height: 15px;
+    background-color: #000;
+    color: #FFF;
+    text-decoration: none;
+}

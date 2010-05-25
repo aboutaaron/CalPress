@@ -1,0 +1,23 @@
+/*
+THEME NAME: CalPress
+THEME URI: http://calpresstheme.org
+DESCRIPTION: Sandbox-based teaching and publication theme by the Graduate School of Journalism at UC Berkeley.
+VERSION: 0.7a
+AUTHOR: Josh Williams
+AUTHOR URI: http://people.journalism.berkeley.edu/~williams
+TAGS: uc berkeley, journalism, newspapers, sandbox, microformats, hcard, hatom, xoxo, widgets, blank slate, starter theme, minimalist, developer
+.
+CalPress is copyright The Regents of the University of California http://www.berkeley.edu/
+This work, like WordPress, is released under GNU General Public License, version 2 (GPL).
+http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+.
+*/
+
+/* Basic CSS grids and resets (960/eric myers resets) */
+@import url('assets/css/calpress-960-min.css');
+
+/* Uncompressed CalPress base CSS - typography, rails, etc */
+@import url('assets/css/calpress-base.css');
+
+/* Add your custom styles below */
+
