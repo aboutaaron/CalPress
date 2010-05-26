@@ -1,3 +1,23 @@
+// This file is part of the CalPress Theme for WordPress
+// http://calpresstheme.org
+//
+// CalPress is a project of the University of California 
+// Graduate School of Journalism
+// http://journalism.berkeley.edu
+//
+// Copyright (c) 2010 The Regents of the University of California
+//
+// Released under the GPL Version 2 license
+// http://www.opensource.org/licenses/gpl-2.0.php
+//
+// **********************************************************************
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+// **********************************************************************
+
+// Description
+
 CalPress is a fork of the wonderful Sandbox theme by Andy Skelton and Scott Wallick.
 http://www.plaintxt.org/themes/sandbox/
 http://scottwallick.com/
@@ -9,15 +29,3 @@ http://themeshaper.com/
 The base theme and most CalPress child themes run on Nathan Smith's 960 Grid System CSS framework and John Resig's jQuery JS framework.
 http://960.gs/
 http://jquery.org
-
-
-License:
-
-CalPress © The Regents of the University of California is licensed under the GNU General Public License:
-
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License Version 2 as published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc, 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-

@@ -1,7 +1,23 @@
 <?php
-/*
-    Allow post and pages to put stuff into the head of a document
-*/
+// This file is part of the CalPress Theme for WordPress
+// http://calpresstheme.org
+//
+// CalPress is a project of the University of California 
+// Graduate School of Journalism
+// http://journalism.berkeley.edu
+//
+// Copyright (c) 2010 The Regents of the University of California
+//
+// Released under the GPL Version 2 license
+// http://www.opensource.org/licenses/gpl-2.0.php
+//
+// **********************************************************************
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+// **********************************************************************
+
+//Allow post and pages to put stuff into the head of a document
 
 
 // add extra css to the head of the document
