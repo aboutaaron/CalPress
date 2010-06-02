@@ -1,6 +1,6 @@
 <?php
 /*
-	TimThumb script created by Tim McDaniels and Darren Hoyt with tweaks by Ben Gillbanks
+	Modified version of the TimThumb script created by Tim McDaniels and Darren Hoyt with tweaks by Ben Gillbanks
 	http://code.google.com/p/timthumb/
 
 	MIT License: http://www.opensource.org/licenses/mit-license.php
@@ -21,6 +21,18 @@ $sizeLimits = array(
 	"150x150",
 );
 */
+
+//Attempt to find wp-content/cache. Start by loading from WP, if found. If not, guess based on location of current file.
+if( is_file( $_SERVER['DOCUMENT_ROOT'] . 'wp-load.php' ) ) {
+    require ($_SERVER['DOCUMENT_ROOT'] . 'wp-load.php');
+    $cache_dir = WP_CONTENT_DIR . '/cache';
+}else{
+    $cache_dir = getcwd();
+    $cache_dir = str_replace("themes/calpress/library/extensions", "cache" , $cache_dir);
+    if(!is_dir($cache_dir)){
+        $cache_dir = '../../../../cache';
+    }
+}
 
 define ('CACHE_SIZE', 250);		// number of files to store before clearing cache
 define ('CACHE_CLEAR', 5);		// maximum number of files to delete on each cache clear
@@ -62,12 +74,6 @@ if ($new_width == 0 && $new_height == 0) {
 	$new_width = 100;
 	$new_height = 100;
 }
-
-// set path to cache directory (default is /wp-content/cache)
-// this can be changed to a different location
-//$cache_dir = getcwd();
-//$cache_dir = str_replace("themes/calpress/library/extensions", "cache" , $cache_dir);
-$cache_dir = '../../../../cache';
 
 // get mime type of src
 $mime_type = mime_type($src);
