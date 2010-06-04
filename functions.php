@@ -115,6 +115,9 @@ define('PRIMARYCSS', $primarycss);
 // Load CalPress extended functionality 
 require_once(THEMELIB . '/extensions/helpers.php');
 
+// Load CalPress enqueue scripts, etc
+require_once(THEMELIB . '/extensions/init.php');
+
 // Load CalPress custom shortcodes (eg: [pullquote]This is my quote[/pullquote])
 require_once(THEMELIB . '/extensions/shortcodes.php');
 
