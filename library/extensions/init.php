@@ -2,8 +2,8 @@
 function calpress_init() {
     
     //use google CDN jQuery
-    wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js');
+    //wp_deregister_script( 'jquery' );
+    //wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js');
     wp_enqueue_script('jquery');  
     
     //SWFOject 1.5
