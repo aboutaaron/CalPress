@@ -496,7 +496,7 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
 }
 
 /**
- * Returns an image url for a resized version of any image on the server
+ * Returns an img element with image url for a resized version of any image on the server
  *
  * Resize will only go from larger image to smaller image. The suggested upload 
  * size of all images is around 1600px on the longest side for maximum flexibility.
@@ -507,9 +507,21 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
  * @return string
  */
 function calpress_sizedimage($srcimg, $w, $alt=""){
-    $imgsrc = CALPRESSURI.'/library/extensions/timthumb.php?src='.$srcimg.'&amp;w='.$w;//resizer script
+    $imgsrc = calpress_sizedimageurl($srcimg, $w);
     $formattedURL = "<img alt=\"$alt\" src =\"$imgsrc\" />";
     return $formattedURL;
+}
+
+/**
+ * Returns an image path to dynamically resized image
+ *
+ * @param string $srcimg = the location of the original, unsized image on the server
+ * @param int $w = the output size of the image
+ * @return string
+ */
+function calpress_sizedimageurl($srcimg, $w){
+    $imgsrc = CALPRESSURI.'/library/extensions/timthumb.php?src='.$srcimg.'&amp;w='.$w;//resizer script
+    return $imgsrc;
 }
 
 /**

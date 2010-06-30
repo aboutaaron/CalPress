@@ -136,6 +136,9 @@ require_once(THEMELIB . '/extensions/media-players.php');
 // Load Geotag functionality
 //require_once(THEMELIB . '/extensions/geotag.php');
 
+// Load Feed functions
+require_once(THEMELIB . '/extensions/feed.php');
+
 // Load relative time functionality for timestamps (like 30 seconds ago, Yesterday, three days ago)
 require_once(THEMELIB . '/extensions/relative-time.php');
 

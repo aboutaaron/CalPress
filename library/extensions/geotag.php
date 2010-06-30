@@ -18,11 +18,13 @@
 // **********************************************************************
 
 /*
-Plugin Name: CalPress Geotag
+Description: Modified version of Geotag plugin by Boris Pulyer. Provides geocoding features for Wordpress, both
+in terms of geogoding post and generating georss feeds.
+
+Plugin Name: Geotag
 Plugin URI: http://www.bobsp.de/weblog/geotag/
-Description: Modified Geotag plugin by Boris Pulyer. Provides geocoding features for Wordpress.
 Version: 1.0
-Author: Boris Pulyer / Josh Williams
+Author: Boris Pulyer 
 Author URI: http://www.bobsp.de
 Minimum WordPress Version Required: 2.7.0
 Tested up to: 2.7.1
