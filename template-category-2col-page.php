@@ -26,6 +26,10 @@ remove_filter('the_content', 'wpautop');
                    //get custom category from page
                    $cats = calpress_customcategories();
                    $query = 'cat='.$cats;
+                   //TODO: can we add paging?
+                   // http://codex.wordpress.org/Template_Tags/query_posts
+                   // http://www.nathanrice.net/blog/creating-a-blog-page-with-paging/
+                   
                    //pull from those category/ies
                    $catPosts = new WP_Query();
                    $catPosts->query($query);

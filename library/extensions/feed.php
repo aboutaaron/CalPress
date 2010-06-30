@@ -94,6 +94,9 @@ function calpress_rss_leadart_embed($content = ''){
             $sized_image = calpress_sizedimageurl($img_url, 480);//only send a 480px sized version
             $art = "<img width=\"480\" src=\"$sized_image\" />";
         }
+        
+        //TODO - add youtube, etc
+        
 		$content = $art . $content;
 	}
 	
