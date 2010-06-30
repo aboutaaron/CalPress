@@ -18,17 +18,23 @@
 // **********************************************************************
 
 
-add_action('rss_item', 'calpress_rss_leadart');
-add_action('rss2_item', 'calpress_rss_leadart');
+/* Lead Art Enclosures */
+add_action('rss_item', 'calpress_rss_leadart_enclosure');
+add_action('rss2_item', 'calpress_rss_leadart_enclosure');
+
+/* Lead Art Embeded in content */
+add_filter("the_content", "calpress_rss_leadart_embed");
+
 
 /**
  * If no other enclosure in feed (like an mp3), put in lead art if available
  *
  * @return none
  */
-function calpress_rss_leadart(){
+function calpress_rss_leadart_enclosure(){
     
-    //see if art is applicable and make sure there's not already an enclosure in the post
+    // Add a lead art enclosure
+    // see if art is applicable and make sure there's not already an enclosure in the post
     $previous_enclosure = get_post_custom_values('enclosure');
     if (calpress_showleadart() && count($previous_enclosure==0)) {
         
@@ -71,4 +77,27 @@ function calpress_rss_leadart(){
         
     }
 }
+
+/**
+ * Embed various lead art in rss posts
+ *
+ * @return string
+ */
+function calpress_rss_leadart_embed($content = ''){
+
+	
+	if (is_feed()) {
+	    
+	    //show an image? most basic and likely lead art
+        if (calpress_showteaseart()) {
+            $img_url = calpress_leadimagepath();
+            $sized_image = calpress_sizedimageurl($img_url, 480);//only send a 480px sized version
+            $art = "<img width=\"480\" src=\"$sized_image\" />";
+        }
+		$content = $art . $content;
+	}
+	
+	return $content;
+}
+
 ?>
