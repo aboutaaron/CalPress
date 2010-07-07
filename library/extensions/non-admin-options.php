@@ -2,23 +2,26 @@
 $themename = "CalPress";
 $shortname = THEMESHORTNAME;
 
-// get dyanmic front page templats. 
+// get dyanmic front page templats. from /layouts/ folder in parent or child theme
 // based on a snippet from Premium News from Woo Themes, downloaded 8.19.2009.
-// accorrding to their terms and conditions on that date, all themes 
-// are GPL: http://www.woothemes.com/terms-conditions/
-// "All our themes are licensed under the GNU general public license (http://www.gnu.org/licenses/gpl.html). Our themes may be used by our customers on as many websites as they like."
-
-$layout_path = CURRENTTEMPLATEPATH . '/layouts/'; 
+$layout_paths = array();
+$layout_paths[] = CURRENTTEMPLATEPATH . '/layouts/'; // child themes
+$layout_paths[] = TEMPLATEPATH . '/layouts/'; // parent theme
 $layouts = array();
-if ( is_dir($layout_path) ) {
-	if ($layout_dir = opendir($layout_path) ) { 
-		while ( ($layout_file = readdir($layout_dir)) !== false ) {
-			if(stristr($layout_file, ".php") !== false) {
-				$layouts[] = $layout_file;
-			}
-		}	
-	}
+foreach ($layout_paths as $key => $layout_path) {
+    if ( is_dir($layout_path) ) {
+    	if ($layout_dir = opendir($layout_path) ) { 
+    		while ( ($layout_file = readdir($layout_dir)) !== false ) {
+    			if(stristr($layout_file, ".php") !== false) {
+    				$layouts[] = $layout_file;
+    			}
+    		}	
+    	}
+    }
 }
+$layouts = array_unique($layouts);
+
+
 
 // WP-Poll
 // http://lesterchan.net/wordpress/readme/wp-polls.html
@@ -45,7 +48,7 @@ $nonadmin_options = array (
 		    		"options" => $layouts),
 		    		
             array(	"name" => __('Lead Story Override','calpress'),
-    				"desc" => __('HTML code here replaces the lead story on the page. To restore the main feature, this code box *must* be empty.<br />','calpress'),
+    				"desc" => __('On supported themes, HTML code here replaces the lead story on the page. To restore the main feature, this code box *must* be empty. <a href="#">Documentation</a><br />','calpress'),
     				"id" => $shortname."_front_feature_override",
     				"std" => "",
     				"type" => "textarea",
@@ -53,7 +56,7 @@ $nonadmin_options = array (
     									"cols" => "94") ),
 		    		
             array(	"name" => __('Front Features','calpress'),
-					"desc" => __('HTML code here shows up in the feature block of your front page. It is usually below the main feature of a site.<br />','calpress'),
+					"desc" => __('On supported themes, HTML code here shows up in the feature block of your front page. It is usually below the main feature of a site. <a href="#">Documentation</a><br />','calpress'),
 					"id" => $shortname."_front_features",
 					"std" => "",
 					"type" => "textarea",
@@ -61,20 +64,20 @@ $nonadmin_options = array (
 										"cols" => "94") ),
 										
 			array(	"name" => __('Front Page Poll','calpress'),
-					"desc" => __("Requires WP-Poll and CalPress Poll-aware theme (like Mission and Oakland). Leave blank for no poll.",'calpress'),
+					"desc" => __('Requires WP-Poll and CalPress Poll-aware theme (like Mission and Oakland). Leave blank for no poll. <a href="#">Documentation</a>','calpress'),
 					"id" => $shortname."_front_poll",
 					"std" => "",
 					"type" => "arraylist",
 					"options" => $poll_list),
 					
             array(	"name" => __('Front Page Extra CSS','calpress'),
-    				"desc" => __('Path to CSS only applied to front page','calpress'),
+    				"desc" => __('Path to CSS only applied to front page. <a href="#">Documentation</a>','calpress'),
     				"id" => $shortname."_front_extra_css",
     				"std" => "",
     				"type" => "text"),
 					
 	        array(	"name" => __('Front Page Extra Javascript','calpress'),
-    				"desc" => __('Path to J/S only applied to front page','calpress'),
+    				"desc" => __('Path to J/S only applied to front page. <a href="#">Documentation</a>','calpress'),
     				"id" => $shortname."_front_extra_js",
     				"std" => "",
     				"type" => "text"),
@@ -173,15 +176,20 @@ function calpress_front_admin() {
 	                <?php foreach ($value['options'] as $option) { ?>
 	                    <li style="float:left;width:300px;padding:10px;text-align: center;">
 	                        <?php 
-	                            $img = str_replace(".php", ".jpg", $option);
-	                            $imgpath = CURRENTTEMPLATEPATH . '/layouts/'.$img;
-	                            if (file_exists($imgpath)){
-	                                $img = THEMEURL.'/layouts/'.$img;
-	                            }else{
-	                                $img = PARENTIMAGES.'/admin/unknown.png';
+	                            // see if a n
+	                            $img_needed = str_replace(".php", ".jpg", $option);
+	                            $imgpath_child = CURRENTTEMPLATEPATH . '/layouts/'.$img_needed;
+	                            $imgpath_parent = TEMPLATEPATH . '/layouts/'.$img_needed;
+	                            
+	                            $img = PARENTIMAGES.'/admin/unknown.png'; // final url for img element 
+	                            
+	                            if ( file_exists( $imgpath_child ) ){
+	                                $img = THEMEURL.'/layouts/'.$img_needed;
+	                            } elseif ( file_exists( $imgpath_parent ) ) {
+	                                $img = CALPRESSURI.'/layouts/'.$img_needed;
 	                            }
 	                        ?>
-	                        <img style="width:300px; height:190px;" src="<?php echo($img); ?>" /><br />
+	                    <img style="width:300px; height:190px;border: 2px solid #a2a2a2" src="<?php echo($img); ?>" /><br />
 	                    <input type="radio" name="<?php echo $value['id']; ?>" value="<?php echo $option; ?>" <?php if ( get_settings( $value['id'] ) == $option) { echo ' checked=""'; } elseif ($option == $value['std']) { echo ' checked=""'; } ?> /> <?php echo(ucwords(str_replace("-", " ", str_replace(".php", "", $option)))); ?>
 	                    </li>
 	                <?php } ?>
@@ -320,8 +328,8 @@ function calpress_front_admin() {
 
 </table>
 
-<p class="submit">
-<input name="save" type="submit" value="<?php _e('Make Live!','calpress'); ?>" />    
+<p class="submit" style="margin-left: 900px;">
+<input style="color: #f00;" name="save" type="submit" value="<?php _e('Make Live!','calpress'); ?>" />    
 <input type="hidden" name="action" value="save" />
 </p>
 </form>
@@ -329,6 +337,7 @@ function calpress_front_admin() {
 <hr />
 
 <form method="post">
+<h3>Need</h3>    
 <p class="submit">
 <input name="reset" type="submit" value="<?php _e('Reset the '.TEMPLATENAME,'calpress'); ?> front page." />
 <input type="hidden" name="action" value="reset" />
@@ -337,7 +346,7 @@ function calpress_front_admin() {
 
 <hr />
 
-<?php _e('Running '.THEMENAME.' version '.CALPRESSVERSION.' by ' . THEMEAUTHOR); ?>. This software is Copyright 2009 UC Regents. CalPress is released under the terms of the <a href="<?php echo(CALPRESSURI); ?>/license.txt">GNU General Public License, Version 2</a>.
+<?php _e('Running '.THEMENAME.' version '.CALPRESSVERSION.' by ' . THEMEAUTHOR); ?>. This software is Copyright 2009 - <?php echo(date('Y')); ?> UC Regents. CalPress is released under the terms of the <a href="<?php echo(CALPRESSURI); ?>/license.txt">GNU General Public License, Version 2</a>.
 
 <?php
 }

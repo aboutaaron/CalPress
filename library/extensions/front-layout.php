@@ -17,30 +17,20 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 // **********************************************************************
 
-/*
-Use custom CalPress styles on login page
+// Make homepage in CalPress selectable, with default layouts in CalPress
+// and new layouts available in the /layouts/ folder of child themes. Child
+// themes may also override parent theme layouts by using the same name.
 
-Based BM Custom Login plugin, GPL V.2
-URI: http://www.binarymoon.co.uk/projects/bm-custom-login/
-Author: Ben Gillbanks
-Author URI: http://www.binarymoon.co.uk/
-*/ 
+// Get selected layout from CalPress Producer?
+$layout = get_option('cp_layout');
 
-// display custom login styles
-function calpress_custom_login() {
-	$logincss = PRIMARYCSS;
-	echo '<link rel="stylesheet" type="text/css" href="' . $logincss . '" />';
+$layout_template = 'layouts/'.$layout;
+
+$front_template = TEMPLATEPATH.'/layouts/blog.php';
+
+if ( file_exists(TEMPLATEPATH . '/' .$layout_template) ) { // current theme
+    $front_template = TEMPLATEPATH . '/' .$layout_template ;
+} elseif ( file_exists(CURRENTTEMPLATEPATH . '/' .$layout_template)  ) { // calpress theme
+    $front_template = CURRENTTEMPLATEPATH . '/' .$layout_template ;
 }
-
-function calpress_change_wp_login_url() {
-    echo bloginfo('url');
-}
-
-function calpress_change_wp_login_title() {
-    echo get_option('blogname');
-}
-
-add_action('login_head', 'calpress_custom_login');
-add_filter('login_headerurl', 'calpress_change_wp_login_url');
-add_filter('login_headertitle', 'calpress_change_wp_login_title');
 ?>

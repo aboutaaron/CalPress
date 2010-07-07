@@ -136,6 +136,9 @@ require_once(THEMELIB . '/extensions/media-players.php');
 // Load Geotag functionality
 //require_once(THEMELIB . '/extensions/geotag.php');
 
+// Load selectable front page template
+require_once(THEMELIB . '/extensions/front-layout.php');
+
 // Load Feed functions
 require_once(THEMELIB . '/extensions/feed.php');
 
