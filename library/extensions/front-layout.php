@@ -24,13 +24,17 @@
 // Get selected layout from CalPress Producer?
 $layout = get_option('cp_layout');
 
+// Define the generic blog.php layout as the default layout, if not already
+if ($layout == "") {
+    $layout = "blog.php";
+}
+
 $layout_template = 'layouts/'.$layout;
-
-$front_template = TEMPLATEPATH.'/layouts/blog.php';
-
 if ( file_exists(TEMPLATEPATH . '/' .$layout_template) ) { // current theme
     $front_template = TEMPLATEPATH . '/' .$layout_template ;
 } elseif ( file_exists(CURRENTTEMPLATEPATH . '/' .$layout_template)  ) { // calpress theme
     $front_template = CURRENTTEMPLATEPATH . '/' .$layout_template ;
+} else {
+    $front_template = TEMPLATEPATH.'/layouts/blog.php';
 }
 ?>
