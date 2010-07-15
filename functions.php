@@ -115,6 +115,9 @@ define('PRIMARYCSS', $primarycss);
 // Load CalPress extended functionality 
 require_once(THEMELIB . '/extensions/helpers.php');
 
+// Load redirect functionality
+require_once(THEMELIB . '/extensions/redirect.php');
+
 // Load CalPress enqueue scripts, etc
 require_once(THEMELIB . '/extensions/init.php');
 
@@ -150,6 +153,8 @@ require_once(THEMELIB . '/extensions/twitter-search.php');
 
 // Load custom login screen
 require_once(THEMELIB . '/extensions/custom-login.php');
+
+
 
 // Load related posts
 //require_once(THEMELIB . '/extensions/related-posts.php');
