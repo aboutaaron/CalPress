@@ -17,6 +17,9 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 // **********************************************************************
 
+// Based on Ralf Hortt's Redirector plugin for WP
+// http://www.horttcore.de/wordpress/redirector
+
 
 /**
  * Redirect page or post with a "redirect" extra field to the value of that field
