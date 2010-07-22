@@ -7,6 +7,10 @@ body {
    line-height: 18px;
 }
 
+a{
+    color: #000;
+}
+
 p, ul, ol { 
     margin-bottom: 18px; 
 }
