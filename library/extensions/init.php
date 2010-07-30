@@ -24,8 +24,17 @@ function calpress_init() {
 }    
 add_action('init', 'calpress_init');
 
+
+/**
+ * register_calpress_global_menu() - Registers WP 3.0 menu
+ * 
+ * @since 0.7
+ */
 function register_calpress_global_menu() {
-	register_nav_menu( 'nav-bar', __( 'Nav Bar' ) );
+    if ( function_exists('wp_nav_menu') ){
+        register_nav_menu( 'nav-bar', __( 'Nav Bar' ) );
+    }
+	
 }
 add_action( 'init', 'register_calpress_global_menu' );
 ?>
