@@ -23,4 +23,9 @@ function calpress_init() {
     //wp_enqueue_script('calpress-min', PARENTJS . '/calpress-min.js');  
 }    
 add_action('init', 'calpress_init');
+
+function register_calpress_global_menu() {
+	register_nav_menu( 'nav-bar', __( 'Nav Bar' ) );
+}
+add_action( 'init', 'register_calpress_global_menu' );
 ?>
