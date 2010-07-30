@@ -1004,4 +1004,15 @@ function calpress_inspanish(){
         return false;
     }
 }
+
+// Check for static widgets in widget-ready areas
+// http://themeshaper.com/wordpress-theme-sidebar-template/
+function calpress_is_sidebar_active( $index ){
+    global $wp_registered_sidebars;
+    $widgetcolums = wp_get_sidebars_widgets();
+    if ($widgetcolums[$index]) return true;
+    
+    return false;
+} 
+
 ?>
