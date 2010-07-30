@@ -204,7 +204,8 @@ CalPress Content Section-specific rules
 #footer{
 	text-align: center;
 	border-top: 2px solid #000;
-	margin: 5px 0;
+	margin-top: 5px;
+	margin-bottom: 5px;
 	padding: 10px 0;
 }
 
