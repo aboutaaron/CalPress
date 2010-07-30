@@ -179,10 +179,6 @@ CalPress Content Section-specific rules
     display: none; /* Hide the auto-generated previous/next link at the top of posts */
 }
 
-#pre-title, #post-title{/* Dyanmic spots above and below header title. CalPress can populate via functions file */
-    display: none;
-}
-
 #header h1{
     margin-bottom: 0px;
 }

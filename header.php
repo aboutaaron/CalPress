@@ -30,10 +30,10 @@ global $calpress_mobile;
 <div id="wrapper" class="hfeed container_12">
 
 	<div id="header" class="grid_12">
-	    <div id="pre-title"></div>
-		<div id="blog-title"><h1><span><a href="<?php bloginfo('home') ?>/" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?>" rel="home"><?php bloginfo('name') ?></a></span></h1></div>
-		<div id="post-title"></div>
-		<div id="blog-description"><span><?php bloginfo('description') ?></span></div>
+	    <div id="pre-title"><?php calpress_hook_header_pretitle(); ?></div>
+		<div id="blog-title"><?php calpress_hook_blogtitle(); ?></div>
+		<div id="post-title"><?php calpress_hook_header_posttitle(); ?></div>
+		<div id="blog-description"><?php calpress_hook_blogdescription(); ?></div>
 	</div><div class="clear"></div><!--  #header -->
 	
 	<?php calpress_globalnav("12") ?><!-- #menu -->

@@ -121,6 +121,11 @@ require_once(THEMELIB . '/extensions/redirect.php');
 // Load CalPress enqueue scripts, etc
 require_once(THEMELIB . '/extensions/init.php');
 
+// Load CalPress hooks and related template builders
+require_once(THEMELIB . '/extensions/hooks.php');
+require_once(THEMELIB . '/extensions/template-helper.php');
+require_once(THEMELIB . '/extensions/template-builder.php');
+
 // Load CalPress custom shortcodes (eg: [pullquote]This is my quote[/pullquote])
 require_once(THEMELIB . '/extensions/shortcodes.php');
 

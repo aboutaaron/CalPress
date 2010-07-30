@@ -17,8 +17,62 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 // **********************************************************************
 
-// Inspired by the work of Benedict Eastaugh: 
+// Inspired by the work of Benedict Eastaugh
+// and the Tarski Theme
 // http://extralogical.net/2007/06/wphooks/
+// http://tarski.googlecode.com/svn/trunk/
 
+
+/**
+ * calpress_hook_blogtitle()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed in the <div id="blog-title"> block.
+ * @example add_action('calpress_hook_blogtitle', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_blogtitle
+ */
+function calpress_hook_blogtitle() {
+	do_action('calpress_hook_blogtitle');
+}
+
+/**
+ * calpress_hook_header_pretitle()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed in the <div id="pre-title"> block.
+ * @example add_action('calpress_hook_header_pretitle', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_header_pretitle
+ */
+function calpress_hook_header_pretitle() {
+	do_action('calpress_hook_header_pretitle');
+}
+
+/**
+ * calpress_hook_header_posttitle()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed in the <div id="post-title"> block.
+ * @example add_action('calpress_hook_header_posttitle', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_header_posttitle
+ */
+function calpress_hook_header_posttitle() {
+	do_action('calpress_hook_header_posttitle');
+}
+
+/**
+ * calpress_hook_blogdescription()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed in the <div id="blog-description"> block.
+ * @example add_action('calpress_hook_header_blogdescription', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_blogdescription
+ */
+function calpress_hook_blogdescription() {
+	do_action('calpress_hook_blogdescription');
+}
 
 ?>
