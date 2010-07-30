@@ -100,7 +100,8 @@ class Geotag {
 	function hookAdminMenu() {
 		add_meta_box("geotag", "Geotag Post", array("Geotag", "displayEditPostForm"), "post", "normal", "low");
 		add_meta_box("geotag", "Geotag Page", array("Geotag", "displayEditPostForm"), "page", "normal", "low");
-		add_options_page("Geotag Configuration", "Geotag", 8, __FILE__, array("Geotag", "displayOptions"));
+		//add_options_page("Geotag Configuration", "Geotag", 8, __FILE__, array("Geotag", "displayOptions"));
+		//add_submenu_page( dirname(__FILE__).'/admin-menu.php', 'CalPress Geo Options', 'Geo Options', 'manage_options', basename(__FILE__), 'displayOptions');
 	}
 	
 	function hookAdminFooter() {
@@ -353,12 +354,14 @@ class Geotag {
 	
 	function displayOptions() {
 		global $geotag_options;
+		echo "<div class='wrap'>";
+		if ( function_exists('screen_icon') ) screen_icon(); 
+		
 		echo "
-			<div class='wrap'>
 				<h2>Geotag Configuration</h2>
-				<h3>Documentation</h3>
-				<p>If you want to learn more about how to use this plugin, take a look at the <a href='?page=geotag/documentation.php'>documentation</a>. You may also check out the <a href='http://www.bobsp.de/weblog/geotag'><em>Geotag</em> website</a>.</p>
-				<h3 style='margin-top: 3em;'>General Options</h3>
+				<p>CalPress allows you to geotag posts. The information can be used for maps in post, as meta data in the site's GeoRSS feed and in collections of posts maps. The functionality is dervied mostly from Boris Pulyer's <a href='http://wordpress.org/extend/plugins/geotag/'>Geotag plugin</a>.</p>
+				<hr />
+				<h3>General Options</h3>
 				<form method='post' action='options.php'>";
 				wp_nonce_field("update-options");
 		echo "
@@ -385,8 +388,8 @@ class Geotag {
 							".Geotag::displayOptions_Checkbox("geotag_options[misc]", array("GEOTAG_HTML" => "Add geographical information to HTML Header"), $geotag_options["misc"])."</td>
 					</tr>
 				</table>
-				<h3 style='margin-top: 3em;'>Default Map Appearance</h3>
-				<p>Most of these settings can be overwritten in every post. See the <a href='?page=geotag/documentation.php'>documentation</a> for details.</p>
+				<h3>Default Map Appearance</h3>
+				<p>Most of these settings can be overwritten in every post.</p>
 				<table class='form-table'>
 					<tr valign='top'>
 						<th scope='row'>Map Type</th>
@@ -424,17 +427,19 @@ class Geotag {
 							Icon style: ".Geotag::displayOptions_Select("geotag_options[geotaged_photos][ICON]", array("DEFAULT" => "Standard icon", "CAMERA" => "Camera icon", "THUMBNAIL" => "Thumbnail of the photos"), $geotag_options["geotaged_photos"]["ICON"])."</td>
 					</tr>
 				</table>
-				<h3 style='margin-top: 3em;'>Miscellaneous</h3>
+				<h3>Miscellaneous</h3>
 				<table class='form-table'>
 					<tr valign='top'>
 						<th scope='row'><em>WP Geo</em> Compatibility</th>
 						<td><strong>Database</strong><br />".Geotag::displayOptions_Radio("geotag_options[misc_wpgeocompatibility][DB]", array("NULL" => "No compatibility - <em>WP Geo</em> coordinates will be ignored", "READ" => "Read compatibility - read the <em>WP Geo</em> coordinates only if no <em>Geotag</em> coordinates were saved", "WRITE" => "Read and write compatibility - read the <em>WP Geo</em> coordinates and save new coordinates in the <em>WP Geo</em> database field"), $geotag_options["misc_wpgeocompatibility"]["DB"])."<br />
 							<strong>Shortcode</strong><br />".Geotag::displayOptions_Checkbox("geotag_options[misc_wpgeocompatibility]", array("SHORTCODE" => "Process the <em>WP Geo</em> Shortcode <code>[wp_geo_map]</code> in posts"), $geotag_options["misc_wpgeocompatibility"])."</td>
 					</tr>
+					<!--
 					<tr valign='top'>
 						<th scope='row'>Quick Guide</th>
 						<td>".Geotag::displayOptions_Checkbox("geotag_options[misc]", array("QUICKGUIDE" => "Add a short documentation to the post writing page."), $geotag_options["misc"])."</td>
 					</tr>
+					-->
 				</table>
 				<p class='submit'>
 					<input type='submit' name='submit' value='Save Changes' class='button-primary' />
@@ -829,7 +834,7 @@ class Geotag {
 				}
 				gmapInit();
 			</script>
-			<!-- This page uses Geotag by Boris Pulyer to provide geocoding features for Wordpress - see http://www.bobsp.de/weblog/geotag/ for details -->";
+			<!-- This page uses code from Geotag by Boris Pulyer to provide geocoding features for Wordpress - see http://www.bobsp.de/weblog/geotag/ for details -->";
 	}
 	
 	function hookWPHeader() {

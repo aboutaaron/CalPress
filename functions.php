@@ -82,8 +82,8 @@ define('THEMELIB', TEMPLATEPATH . '/library');
 require_once(THEMELIB . '/sandbox-functions.php');
 
 // Load CalPress theme options and set user-updated constants
-require_once(THEMELIB . '/extensions/theme-options.php');
-require_once(THEMELIB . '/extensions/non-admin-options.php');
+//require_once(THEMELIB . '/extensions/theme-options.php');
+require_once(THEMELIB . '/extensions/admin-menu.php');
 
 
 $get_video_location = THEMESHORTNAME."_video_location";
@@ -137,7 +137,7 @@ require_once(THEMELIB . '/extensions/special-singles.php');
 require_once(THEMELIB . '/extensions/media-players.php');
 
 // Load Geotag functionality
-//require_once(THEMELIB . '/extensions/geotag.php');
+require_once(THEMELIB . '/extensions/admin-geotag.php');
 
 // Load selectable front page template
 require_once(THEMELIB . '/extensions/front-layout.php');
