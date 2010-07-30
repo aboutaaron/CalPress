@@ -59,9 +59,11 @@ function calpress_template_footer_credits() {
     $date = date('Y');
     $name = get_bloginfo('name');
     printf("
+    <div id=\"footer-credits\">
     <span class=\"copyright\">Copyright %s, %s</span>
     <span class=\"meta-sep\">|</span>
-    <span class=\"poweredby\">Powered by <span id=\"generator-link\"><a href=\"http://wordpress.org/\" title=\"WordPress\" rel=\"generator\">WordPress</a></span> and the <span id=\"theme-link\"><a href=\"http://calpresstheme.org\" title=\"CalPress theme\" rel=\"designer\">CalPress</a> theme.</span></span>", $date, $name);
+    <span class=\"poweredby\">Powered by <span id=\"generator-link\"><a href=\"http://wordpress.org/\" title=\"WordPress\" rel=\"generator\">WordPress</a></span> and the <span id=\"theme-link\"><a href=\"http://calpresstheme.org\" title=\"CalPress theme\" rel=\"designer\">CalPress</a> theme.</span></span>
+    </div>", $date, $name);
 }
 
  ?>
