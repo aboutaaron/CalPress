@@ -2,7 +2,7 @@
 function calpress_documentation_admin(){
     global $themename, $shortname, $calpress_nonadmin_options;
 ?>
-    <div class="wrap">
+    <div id="calpress-options" class="wrap metabox-holder">
     <?php if ( function_exists('screen_icon') ) screen_icon(); ?>
     <h2>Documentation</h2>
 

@@ -25,7 +25,7 @@ function calpress_producer_admin() {
      if ( $_REQUEST['reset'] ) echo '<div id="message" class="updated fade"><p><strong>'.$themename.' '.__('Producer settings reset.','calpress').'</strong></p></div>';
     
 ?>
-<div class="wrap">
+<div id="calpress-options" class="wrap metabox-holder">
 <?php if ( function_exists('screen_icon') ) screen_icon(); ?>
 <h2><?php echo $themename; ?> Front Page Producer</h2>
 

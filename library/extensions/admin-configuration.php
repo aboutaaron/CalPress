@@ -24,8 +24,9 @@ function calpress_configuration_admin(){
     if ( $_REQUEST['reset'] ) echo '<div id="message" class="updated fade"><p><strong>'.$themename.' '.__('configuration reset.','calpress').'</strong></p></div>';
     if ( $_REQUEST['reset_widgets'] ) echo '<div id="message" class="updated fade"><p><strong>'.$themename.' '.__('widgets reset.','calpress').'</strong></p></div>';
 ?>
-    <div class="wrap">
+    <div id="calpress-options" class="wrap metabox-holder">
         <?php if ( function_exists('screen_icon') ) screen_icon(); ?>
+        
         <h2>Configuration</h2>
 
         <p>CalPress allows you to set many Web site options, including front page templates.</p>

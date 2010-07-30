@@ -223,7 +223,7 @@ function calpress_admin_menus()
     // build menu
     add_menu_page('CalPress Producer', 'CalPress', 'edit_others_posts', basename(__FILE__), 'calpress_producer_admin', PARENTIMAGES . '/admin/calpress_logo16.png');
     add_submenu_page( basename(__FILE__), 'CalPress Front Page Producer', 'Producer', 'edit_others_posts', basename(__FILE__), 'calpress_producer_admin');
-     add_submenu_page( basename(__FILE__), 'CalPress Documentation', 'Documentation', 'edit_others_posts', 'admin-documentation.php', 'calpress_documentation_admin');
+    add_submenu_page( basename(__FILE__), 'CalPress Documentation', 'Documentation', 'edit_others_posts', 'admin-documentation.php', 'calpress_documentation_admin');
     add_submenu_page( basename(__FILE__), 'CalPress Configuration', 'Basic Configuration', 'manage_options', 'admin-configuration.php', 'calpress_configuration_admin');
     add_submenu_page( basename(__FILE__), 'CalPress Geo Options', 'Geotag Configuration', 'manage_options', 'admin-geotag.php', 'Geotag::displayOptions');
 }

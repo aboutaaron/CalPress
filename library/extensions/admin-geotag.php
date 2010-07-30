@@ -354,7 +354,7 @@ class Geotag {
 	
 	function displayOptions() {
 		global $geotag_options;
-		echo "<div class='wrap'>";
+		echo "<div id='calpress-options' class='wrap metabox-holder'>";
 		if ( function_exists('screen_icon') ) screen_icon(); 
 		
 		echo "
