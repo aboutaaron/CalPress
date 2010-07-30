@@ -1,9 +1,12 @@
 
     </div><div class="clear"></div><!-- #container -->
     <div id="footer" class="grid_12">
-		<span class="copyright">Copyright <?php echo date('Y'); ?>, <?php bloginfo('name') ?></span>
-		<span class="meta-sep">|</span>
-		<span class="poweredby">Powered by <span id="generator-link"><a href="http://wordpress.org/" title="<?php _e( 'WordPress', 'sandbox' ) ?>" rel="generator"><?php _e( 'WordPress', 'sandbox' ) ?></a></span> and the <span id="theme-link"><a href="http://calpresstheme.org" title="<?php _e( 'CalPress theme for WordPress', 'sandbox' ) ?>" rel="designer"><?php _e( 'CalPress', 'sandbox' ) ?></a> theme.</span></span>
+		
+		
+		<?php calpress_hook_footer(); ?>
+		
+		
+		
 		<?php
 		    global $calpress_mobile;
 		    if ($calpress_mobile->showMobile()) {

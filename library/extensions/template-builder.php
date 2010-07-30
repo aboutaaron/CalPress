@@ -28,4 +28,7 @@
 add_action('calpress_hook_blogtitle', 'calpress_template_blogtitle');
 add_action('calpress_hook_blogdescription', 'calpress_template_blogdescription');
 
+//Footer
+add_action('calpress_hook_footer', 'calpress_template_footer_credits');
+
 ?>

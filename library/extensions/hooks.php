@@ -53,7 +53,7 @@ function calpress_hook_header_pretitle() {
  * calpress_hook_header_posttitle()
  *
  * Template function appearing in header.php, allows actions
- * to be executed in the <div id="post-title"> block.
+ * to be executed in the <div id="footer"> block.
  * @example add_action('calpress_hook_header_posttitle', 'my_function');
  * @since 0.7
  * @hook action calpress_hook_header_posttitle
@@ -73,6 +73,19 @@ function calpress_hook_header_posttitle() {
  */
 function calpress_hook_blogdescription() {
 	do_action('calpress_hook_blogdescription');
+}
+
+/**
+ * calpress_hook_footer()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed in the <div id="footer"> block.
+ * @example add_action('calpress_hook_footer', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_footer
+ */
+function calpress_hook_footer() {
+	do_action('calpress_hook_footer');
 }
 
 ?>
