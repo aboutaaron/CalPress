@@ -37,4 +37,10 @@ if ( file_exists(TEMPLATEPATH . '/' .$layout_template) ) { // current theme
 } else {
     $front_template = TEMPLATEPATH.'/layouts/blog.php';
 }
+
+add_action('calpress_hook_bodyclass', 'bodyclass_layout');
+function bodyclass_layout(){
+    $bodyclass_layout = "josh-layout";
+    return $bodyclass_layout;
+}
 ?>

@@ -144,6 +144,9 @@ require_once(THEMELIB . '/extensions/media-players.php');
 // Load Geotag functionality
 require_once(THEMELIB . '/extensions/admin-geotag.php');
 
+// Load default loops
+require_once(TEMPLATEPATH."/loops/loop-content.php");
+
 // Load selectable front page template
 require_once(THEMELIB . '/extensions/front-layout.php');
 

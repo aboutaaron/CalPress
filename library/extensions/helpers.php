@@ -165,6 +165,19 @@ function calpress_body_class( $print = true ) {
 }
 
 /**
+ * Wrapper around Sandbox's post_class function
+ *
+ * @param boolean $print - print out the new body classes
+ * @return string
+ */
+function calpress_post_class( $print = true ) {
+    global $post;
+    $c = sandbox_post_class(false);
+    
+    return $print ? print($c) : $c;
+}
+
+/**
  * Explode and trim whitespace
  *
  * Returns an array of strings, each of which is a substring of $e split by $s with whitespace removed.
@@ -390,6 +403,8 @@ function calpress_leadartembed(){
 function calpress_showteaseart(){
     if (calpress_postimage()!=false ){
  	    return true;
+ 	} else {
+ 	    return false;
  	}
 }
 
@@ -1005,6 +1020,45 @@ function calpress_inspanish(){
     }
 }
 
+/**
+ * A custom version of WP's the_excerpt. This one
+ * allows for a truncation length to be set. 
+ *
+ * @param $length - int - number of words to use in the excerpt
+ * @return string
+ */ 
+function calpress_trim_excerpt($length = 55) {
+    global $post;
+
+	$text = $post->post_content;
+	$text = strip_shortcodes( $text );
+	$text = apply_filters('the_content', $text);
+	$text = str_replace(']]>', ']]&gt;', $text);
+	$text = strip_tags($text);
+	$excerpt_length = apply_filters('excerpt_length', $length);
+	$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
+	$words = preg_split("/[\n\r\t ]+/", $text, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY);
+	if ( count($words) > $excerpt_length ) {
+		array_pop($words);
+		$text = implode(' ', $words);
+		$text = $text . $excerpt_more;
+	} else {
+		$text = implode(' ', $words);
+	}
+	
+	echo $text;
+}
+
+function new_excerpt_more($more) {
+       //global $post;
+	   //return '<a href="'. get_permalink($post->ID) . '">' . '...' . '</a>';
+	   
+	   return ' ...';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
+
+
+
 // Check for static widgets in widget-ready areas
 // http://themeshaper.com/wordpress-theme-sidebar-template/
 function calpress_is_sidebar_active( $index ){
@@ -1013,6 +1067,6 @@ function calpress_is_sidebar_active( $index ){
     if ($widgetcolums[$index]) return true;
     
     return false;
-} 
+}
 
 ?>

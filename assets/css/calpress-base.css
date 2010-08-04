@@ -52,11 +52,6 @@ blockquote, q {
 	quotes: "" "";
 }
 
-/*blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '"';
-}*/
-
 q:before, q:after {
 	content: '"';
 }
@@ -152,6 +147,109 @@ img.aligncenter {display: block; margin-left: auto; margin-right: auto}
 a img.alignright {float:right; margin:0 0 10px 10px}
 a img.alignleft {float:left; margin:0 10px 10px 0}
 a img.aligncenter {display: block; margin-left: auto; margin-right: auto}
+
+
+/*****************************************
+960 Background Grid Guide
+-   CalPress can add grid to the body class
+*****************************************/
+body.grid #wrapper.container_12{
+    background-image: url(img/12_col.gif);
+}
+
+body.grid #wrapper.container_16{
+    background-image: url(img/16_col.gif);
+}
+
+/*****************************************
+CalPress Internal Page Columns
+-   rails align internally with external 
+    divs on 12 & 16 col 960 grids. 12 is 
+    assumed. 16 is specifed with .container_16
+*****************************************/
+/* All rails have an internal 5 pixel padding */
+.rail-1col-right, .rail-1col-left, .rail-2col-right, .rail-2col-left, .rail-3col-right, .rail-3col-left, .rail-4col-right, .rail-4col-left, .rail-5col-right, .rail-5col-left, .rail-6col-right, .rail-6col-left{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* the last elment in a rail need not have any inheirent bottom padding or margins (CSS 3 selector)
+.rail-1col-right :last-child, .rail-1col-left :last-child, .rail-2col-right :last-child, .rail-2col-left :last-child, .rail-3col-right :last-child, .rail-3col-left :last-child, .rail-4col-right :last-child, .rail-4col-left :last-child, .rail-5col-right :last-child, .rail-5col-left :last-child, .rail-6col-right :last-child, .rail-6col-left :last-child{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}*/
+
+/* Float rails and give them the appropriate l/r margins*/
+.rail-1col-right, .rail-2col-right, .rail-3col-right, .rail-4col-right, .rail-5col-right, .rail-6col-right, .rail-7col-right, .rail-8col-right{
+    margin-left: 10px;
+    float: right;
+	clear: right;
+}
+.rail-1col-left, .rail-2col-left, .rail-3col-left, .rail-4col-left, .rail-5col-left, .rail-6col-left, .rail-7col-left, .rail-8col-left{
+    margin-right: 10px;
+    float: left;
+	clear: left;
+}
+
+/* To account for internal l/r padding and margin, all rails 
+are 10px narrower than their 960 grid parents */
+
+/* 12 cols */
+.rail-1col-right, .rail-1col-left{
+    width: 50px;
+}
+
+.rail-2col-right, .rail-2col-left{
+    width: 130px;
+}
+
+.rail-3col-right, .rail-3col-left{
+    width: 210px;
+}
+
+.rail-4col-right, .rail-4col-left{
+    width: 290px;
+}
+
+.rail-5col-right, .rail-5col-left{
+    width: 370px;
+}
+
+.rail-6col-right, .rail-6col-left{
+    width: 450px;
+}
+
+/* 16 cols */
+.container_16 .rail-1col-right, .container_16 .rail-1col-left{
+    width: 30px;
+} 
+.container_16 .rail-2col-right, .container_16 .rail-2col-left{
+    width: 90px;
+}
+.container_16 .rail-3col-right, .container_16 .rail-3col-left{
+    width: 150px;
+}
+.container_16 .rail-4col-right, .container_16 .rail-4col-left{
+    width: 210px;
+}
+.container_16 .rail-5col-right, .container_16 .rail-5col-left{
+    width: 270px;
+}
+.container_16 .rail-6col-right, .container_16 .rail-6col-left{
+    width: 330px;
+}
+.container_16 .rail-7col-right, .container_16 .rail-7col-left{
+    width: 390px;
+}
+.container_16 .rail-8col-right, .container_16 .rail-8col-left{
+    width: 450px;
+}
+
+
+/* inner-rail spacing. l/r padding in parent. we need b, t is inherent in first elements parent top padding. */
+.rail-element, .sidebar-element{
+    margin-bottom: 15px;
+}
 
 /*****************************************
 CalPress Content Section-specific rules
@@ -324,104 +422,12 @@ body.login .button-primary{
 	-moz-border-radius: 0;
 }
 
-/*****************************************
-960 Background Grid Guide
--   CalPress can add grid to the body class
-*****************************************/
-body.grid #wrapper.container_12{
-    background-image: url(img/12_col.gif);
-}
+/*************************
+ CalPress ships with 2 
+ default layouts. Rules for
+ those are here.
+*************************/
 
-body.grid #wrapper.container_16{
-    background-image: url(img/16_col.gif);
-}
+/* Blog */
 
-/*****************************************
-CalPress Internal Page Columns
--   rails align internally with external 
-    divs on 12 & 16 col 960 grids. 12 is 
-    assumed. 16 is specifed with .container_16
-*****************************************/
-/* All rails have an internal 5 pixel padding */
-.rail-1col-right, .rail-1col-left, .rail-2col-right, .rail-2col-left, .rail-3col-right, .rail-3col-left, .rail-4col-right, .rail-4col-left, .rail-5col-right, .rail-5col-left, .rail-6col-right, .rail-6col-left{
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-/* the last elment in a rail need not have any inheirent bottom padding or margins (CSS 3 selector)
-.rail-1col-right :last-child, .rail-1col-left :last-child, .rail-2col-right :last-child, .rail-2col-left :last-child, .rail-3col-right :last-child, .rail-3col-left :last-child, .rail-4col-right :last-child, .rail-4col-left :last-child, .rail-5col-right :last-child, .rail-5col-left :last-child, .rail-6col-right :last-child, .rail-6col-left :last-child{
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-}*/
-
-/* Float rails and give them the appropriate l/r margins*/
-.rail-1col-right, .rail-2col-right, .rail-3col-right, .rail-4col-right, .rail-5col-right, .rail-6col-right, .rail-7col-right, .rail-8col-right{
-    margin-left: 10px;
-    float: right;
-	clear: right;
-}
-.rail-1col-left, .rail-2col-left, .rail-3col-left, .rail-4col-left, .rail-5col-left, .rail-6col-left, .rail-7col-left, .rail-8col-left{
-    margin-right: 10px;
-    float: left;
-	clear: left;
-}
-
-/* To account for internal l/r padding and margin, all rails 
-are 10px narrower than their 960 grid parents */
-
-/* 12 cols */
-.rail-1col-right, .rail-1col-left{
-    width: 50px;
-}
-
-.rail-2col-right, .rail-2col-left{
-    width: 130px;
-}
-
-.rail-3col-right, .rail-3col-left{
-    width: 210px;
-}
-
-.rail-4col-right, .rail-4col-left{
-    width: 290px;
-}
-
-.rail-5col-right, .rail-5col-left{
-    width: 370px;
-}
-
-.rail-6col-right, .rail-6col-left{
-    width: 450px;
-}
-
-/* 16 cols */
-.container_16 .rail-1col-right, .container_16 .rail-1col-left{
-    width: 30px;
-} 
-.container_16 .rail-2col-right, .container_16 .rail-2col-left{
-    width: 90px;
-}
-.container_16 .rail-3col-right, .container_16 .rail-3col-left{
-    width: 150px;
-}
-.container_16 .rail-4col-right, .container_16 .rail-4col-left{
-    width: 210px;
-}
-.container_16 .rail-5col-right, .container_16 .rail-5col-left{
-    width: 270px;
-}
-.container_16 .rail-6col-right, .container_16 .rail-6col-left{
-    width: 330px;
-}
-.container_16 .rail-7col-right, .container_16 .rail-7col-left{
-    width: 390px;
-}
-.container_16 .rail-8col-right, .container_16 .rail-8col-left{
-    width: 450px;
-}
-
-
-/* inner-rail spacing. l/r padding in parent. we need b, t is inherent in first elements parent top padding. */
-.rail-element, .sidebar-element{
-    margin-bottom: 15px;
-}
+/* News */ 
