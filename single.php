@@ -17,6 +17,8 @@ if(!loadSpecialSingle()){
 				<div class="nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">&raquo;</span>' ) ?></div>
 			</div>
 
+            <?php calpress_hook_post_above(); ?>
+
 			<div id="post-<?php the_ID() ?>" class="<?php sandbox_post_class() ?>">
 				<h2 class="entry-title"><?php the_title() ?></h2>
 								
@@ -39,11 +41,11 @@ if(!loadSpecialSingle()){
 				<?php calpress_sharethis(); ?>
 				
 				<div class="entry-content">
-                    <?php calpress_hook_singlecontent_above(); ?>
+                    <?php calpress_hook_postcontent_above(); ?>
                     
                     <?php the_content(); ?>
                     
-                    <?php calpress_hook_singlecontent_below(); ?>
+                    <?php calpress_hook_postcontent_below(); ?>
                     
                 	<?php wp_link_pages('before=<div class="page-link">' . __( 'Pages:', 'sandbox' ) . '&after=</div>') ?>
 				</div>
@@ -85,9 +87,11 @@ if(!loadSpecialSingle()){
 				<div class="clear"></div>
 			</div>
             
-            <?php calpress_twittersearch(); ?>
-            
-            <?php comments_template() ?>
+            <?php 
+                // Includes by default calpress_twittersearch() and comments_template()
+                // see template-builder.php for default list
+                calpress_hook_post_below();
+            ?>     
 
 		</div><!-- #content -->
         <?php get_sidebar() ?>
