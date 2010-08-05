@@ -129,4 +129,32 @@ function calpress_hook_frontfeatures_below() {
 function calpress_hook_frontfeatures_above() {
 	do_action('calpress_hook_frontfeatures_above');
 }
+
+/**
+ * calpress_hook_loopcontent_above()
+ *
+ * Template function appearing in loop-content.php, allows actions
+ * to be executed above the default loop content.
+ * @example add_action('calpress_hook_loopcontent_above', 'my_function');
+ * @example see home.php
+ * @since 0.7
+ * @hook action calpress_hook_loopcontent_above
+ */
+function calpress_hook_loopcontent_above() {
+	do_action('calpress_hook_loopcontent_above');
+}
+
+/**
+ * calpress_hook_loopcontent_below()
+ *
+ * Template function appearing in loop-content.php, allows actions
+ * to be executed below the default loop content.
+ * @example add_action('calpress_hook_loopcontent_below', 'my_function');
+ * @example see home.php
+ * @since 0.7
+ * @hook action calpress_hook_loopcontent_below
+ */
+function calpress_hook_loopcontent_below() {
+	do_action('calpress_hook_loopcontent_below');
+}
 ?>

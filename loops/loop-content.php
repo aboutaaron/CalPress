@@ -19,6 +19,7 @@ function calpress_loop_content($art=true, $artsize=620, $multimedia=true, $hed=t
 ?>  
   
   <div id="post-<?php the_ID() ?>" class="<?php calpress_post_class() ?>">
+      <?php calpress_hook_loopcontent_above(); ?>
 
   	<?php 
   	if ($art) { // attempt to show art
@@ -65,7 +66,7 @@ function calpress_loop_content($art=true, $artsize=620, $multimedia=true, $hed=t
               <?php wp_link_pages('before=<div class="page-link">' . __( 'Pages:', 'sandbox' ) . '&after=</div>') ?>
       	</div>
   	<?php endif ?>
-  	
+  	<?php calpress_hook_loopcontent_below(); ?>
   </div><!-- .post -->
   
 <?php   
