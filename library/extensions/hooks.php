@@ -101,4 +101,32 @@ function calpress_hook_footer() {
 function calpress_hook_bodyclass() {
 	do_action('calpress_hook_bodyclass');
 }
+
+/**
+ * calpress_hook_frontfeatures_below()
+ *
+ * Template function appearing in home.php, allows actions
+ * to be executed below the default loop.
+ * @example add_action('calpress_hook_frontfeatures_below', 'my_function');
+ * @example see home.php
+ * @since 0.7
+ * @hook action calpress_hook_frontfeatures_below
+ */
+function calpress_hook_frontfeatures_below() {
+	do_action('calpress_hook_frontfeatures_below');
+}
+
+/**
+ * calpress_hook_frontfeatures_above()
+ *
+ * Template function appearing in home.php, allows actions
+ * to be executed above the default loop.
+ * @example add_action('calpress_hook_frontfeatures_above', 'my_function');
+ * @example see home.php
+ * @since 0.7
+ * @hook action calpress_hook_frontfeatures_above
+ */
+function calpress_hook_frontfeatures_above() {
+	do_action('calpress_hook_frontfeatures_above');
+}
 ?>
