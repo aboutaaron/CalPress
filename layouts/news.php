@@ -49,8 +49,7 @@
                 <?php calpress_loop_content(true, 300, true, true, true, true, 15); ?>
             
             </div><!-- #secondary-stories -->
-            <div id="tertiary-stories">
-                
+            <div id="tertiary-stories">         
     <?php elseif ($storyCounter > 2): ?>
             <?php calpress_loop_content(false, 0, false,true,true,false, 0); ?>
     <?php endif; ?>

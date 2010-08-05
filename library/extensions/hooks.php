@@ -157,4 +157,30 @@ function calpress_hook_loopcontent_above() {
 function calpress_hook_loopcontent_below() {
 	do_action('calpress_hook_loopcontent_below');
 }
+
+/**
+ * calpress_hook_singlecontent_above()
+ *
+ * Template function appearing in single.php, allows actions
+ * to be executed above the content.
+ * @example add_action('calpress_hook_singlecontent_above', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_singlecontent_above
+ */
+function calpress_hook_singlecontent_above() {
+	do_action('calpress_hook_singlecontent_above');
+}
+
+/**
+ * calpress_hook_singlecontent_below()
+ *
+ * Template function appearing in single.php, allows actions
+ * to be executed below the content.
+ * @example add_action('calpress_hook_singlecontent_below', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_singlecontent_below
+ */
+function calpress_hook_singlecontent_below() {
+	do_action('calpress_hook_singlecontent_below');
+}
 ?>

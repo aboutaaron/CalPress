@@ -39,12 +39,16 @@ if(!loadSpecialSingle()){
 				<?php calpress_sharethis(); ?>
 				
 				<div class="entry-content">
+                    <?php calpress_hook_singlecontent_above(); ?>
+                    
                     <?php the_content(); ?>
+                    
+                    <?php calpress_hook_singlecontent_below(); ?>
+                    
                 	<?php wp_link_pages('before=<div class="page-link">' . __( 'Pages:', 'sandbox' ) . '&after=</div>') ?>
 				</div>
 				
 				<div class="clear"></div>
-				<?php //calpress_sharethis(); ?>
 				<div class="entry-categories"><p>Filed Under: <?php the_category(', '); ?></p></div>
 				<div class="entry-tags"><p><?php the_tags('Tagged: ',' , ',''); ?></p></div>
 				<div class="entry-meta">
