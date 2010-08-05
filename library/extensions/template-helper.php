@@ -66,10 +66,26 @@ function calpress_template_footer_credits() {
     </div>", $date, $name);
 }
 
+/**
+* calpress_template_inline_above()
+*
+* works with helper.php calpress_inlines() 
+* to hook content above story inlines.
+* 
+* @since 0.7
+*/
 function calpress_template_inline_above(){
     calpress_hook_postinline_above();
 }
 
+/**
+* calpress_template_inline_below()
+*
+* works with helper.php calpress_inlines() 
+* to hook content below story inlines.
+* 
+* @since 0.7
+*/
 function calpress_template_inline_below(){
     calpress_hook_postinline_below();
 }
