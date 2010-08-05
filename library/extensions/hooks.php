@@ -209,4 +209,30 @@ function calpress_hook_post_above() {
 function calpress_hook_post_below() {
 	do_action('calpress_hook_post_below');
 }
+
+/**
+ * calpress_hook_postinline_above()
+ *
+ * Template function appearing in helper.php, allows actions
+ * to be executed above the first article inline.
+ * @example add_action('calpress_hook_postinline_above', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_postinline_above
+ */
+function calpress_hook_postinline_above() {
+	do_action('calpress_hook_postinline_above');
+}
+
+/**
+ * calpress_hook_postinline_below()
+ *
+ * Template function appearing in helper.php, allows actions
+ * to be executed below the first article inline.
+ * @example add_action('calpress_hook_postinline_below', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_postinline_below
+ */
+function calpress_hook_postinline_below() {
+	do_action('calpress_hook_postinline_below');
+}
 ?>

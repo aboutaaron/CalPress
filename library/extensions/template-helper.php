@@ -65,4 +65,12 @@ function calpress_template_footer_credits() {
     <span class=\"poweredby\">Powered by <span id=\"generator-link\"><a href=\"http://wordpress.org/\" title=\"WordPress\" rel=\"generator\">WordPress</a></span> and the <span id=\"theme-link\"><a href=\"http://calpresstheme.org\" title=\"CalPress theme\" rel=\"designer\">CalPress</a> theme.</span></span>
     </div>", $date, $name);
 }
+
+function calpress_template_inline_above(){
+    calpress_hook_postinline_above();
+}
+
+function calpress_template_inline_below(){
+    calpress_hook_postinline_below();
+}
 ?>

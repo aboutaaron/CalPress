@@ -711,10 +711,45 @@ function calpress_showinlines(){
  * @return void
  */
 function calpress_inlines($content = ''){
-	$inlines = calpress_get_inlines();
-	$inlines = str_replace("\r\n","",$inlines);
-	if (is_single()) {
-		$content = $inlines . $content;
+	if (is_single() && calpress_showinlines()) {
+	    //build inlines from extra fields in post
+	    $inlines = calpress_get_inlines();
+    	$inlines = str_replace("\r\n","",$inlines);
+	    
+	    //container div
+		$inlinehtml = "<div id=\"entry-sidebar\">\n";
+		
+		    //above inline hook
+    		ob_start();
+    		calpress_template_inline_above();
+    		$above_inline = ob_get_contents();
+            ob_end_clean();
+        
+            if ($above_inline != "") {
+                $inlinehtml .= "<div class=\"sidebar-element inline-above\">\n";
+                $inlinehtml .= $above_inline . "\n";
+                $inlinehtml .= "\n</div><!-- //end .inline-above-->\n";
+            }
+        
+    		//main inline content
+    		$inlinehtml .= $inlines;
+		
+    		//below inline hook
+    		ob_start();
+    		calpress_template_inline_below();
+    		$below_inline = ob_get_contents();
+            ob_end_clean();
+		    
+		    if ($below_inline != "") {
+                $inlinehtml .= "<div class=\"sidebar-element inline-below\">\n";
+                $inlinehtml .= $below_inline . "\n";
+                $inlinehtml .= "\n</div><!-- //end .inline-below-->\n";
+            }
+		
+		$inlinehtml .= "\n</div><!-- //end #entry-sidebar-->\n";
+		
+		//combine content and inlines
+		$content = $inlinehtml . $content; 
 	}
 	return $content;
 }
@@ -734,13 +769,11 @@ function calpress_get_inlines(){
     
     // make sure we having something to print
     if ( calpress_showinlines() ) {
-        $html .= "<div id=\"entry-sidebar\">";    
         
         // determine if there is a correct order. If not print in default order
         if ( get_post_custom_values('inline_order') ) {
             
         } else {
-            
             // map
              if ( get_post_custom_values('inline_map') ) {
                 $maps = get_post_custom_values('inline_map');
@@ -955,7 +988,6 @@ function calpress_get_inlines(){
     	    }
     	    
         }
-        $html .= "</div><!-- //end #entry-sidebar-->";  
     }
 	return $html;
 }
