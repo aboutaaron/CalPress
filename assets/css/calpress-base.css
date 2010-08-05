@@ -11,6 +11,10 @@ a{
     color: #000;
 }
 
+.entry-title a, #blog-title a{
+    text-decoration: none;
+}
+
 p, ul, ol { 
     margin-bottom: 18px; 
 }
@@ -59,6 +63,11 @@ q:before, q:after {
 /* When a sub head follows a headline (H1 > H2), eleminate the margin between */
 h1 + h2, h2 + h3 {
     margin-top: -18px;
+}
+
+.more{
+    font-weight: bold;
+    text-align: right;
 }
 
 /* In a nested list, eliminate bottom UL margin */
@@ -431,3 +440,133 @@ body.login .button-primary{
 /* Blog */
 
 /* News */ 
+body.front-layout-news #lead-story, body.front-layout-news #secondary-stories {
+    /* avoid clearing after */
+    overflow: auto;
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+    body.front-layout-news #lead-story p{
+        margin-bottom: 0;
+        margin-top: 10px;
+    }
+    
+    body.front-layout-news #lead-story p:first-child{
+        margin-top: 0;
+    }
+    
+    body.front-layout-news #lead-story .lead-art, body.front-layout-news #lead-story .caption{
+        width: 300px;
+        float: left;
+        margin-right: 20px;
+    }
+    
+    body.front-layout-news #lead-story p.caption{
+        clear: left;
+        font-size: .8em;
+        line-height: 1.3em;
+        margin-top: 0;
+    }
+    
+    
+    body.front-layout-news #lead-story .entry-title, body.front-layout-news #lead-story .entry-meta, body.front-layout-news #lead-story .entry-content{
+        margin-left: 10px;
+    }
+    
+    body.front-layout-news #lead-story .entry-title{
+        margin-bottom: 9px;
+    }
+
+    body.front-layout-news #lead-story .entry-meta{
+        margin-bottom: 12px;
+    }
+
+
+#secondary-block{
+    clear: both;
+}
+
+    #secondary-block #secondary-stories>div{
+        width: 300px;
+        float: left;
+        margin: 0 0 10px 10px;
+    }
+    
+    #secondary-block #secondary-stories>div:first-child{
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    
+    #secondary-block .entry-title{
+        margin-bottom: 0;
+    }
+
+    #secondary-block h3{
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        padding: 5px 0;
+        font-size: 1.4em;
+    }
+    
+    #secondary-block .more{
+        clear: left;
+    }
+    
+    #secondary-block #tertiary-stories, #secondary-block #special-features{
+        clear: both;
+    }
+    
+    #secondary-stories .p2 .caption, #secondary-stories .p3 .caption{
+        display: none;
+    }
+    
+    #secondary-block #tertiary-stories>div{
+        width:280px;
+        border-top:1px solid #000;
+        float:left;
+        margin:0 0 7px 10px;
+        padding-top:7px;
+    }
+    
+    #secondary-block #tertiary-stories>div.alt{
+        margin-left: 0;
+        margin-right: 10px;
+        clear: left;
+    }
+    
+    #secondary-block #extra-features{
+        /* avoid clearing after */
+        overflow: auto;
+        width: 100%
+    }
+    
+    #extra-features div.feature{
+        width: 300px;
+        float: left;
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+    
+    #extra-features div.feature:first-child{
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    
+    #extra-features h5, #extra-features h5 a{
+        display: block;
+        width: 300px;
+        text-indent: -9999em;
+    }
+    
+    #extra-features #front-radio h5 a{
+        background: transparent url('images/extras/front-radio.png') no-repeat 0 0;
+        height: 43px;
+    }
+    
+    #extra-features #front-seeclickfix h5 a{
+        background: transparent url('images/extras/front-seeclickfix.jpg') no-repeat 0 0;
+        height: 80px;
+    }
+
+

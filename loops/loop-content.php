@@ -5,7 +5,7 @@
  * The content of most generic loops can be built from these options. This call needs to be wrapped in a loop have_posts.
  * @since 0.7
  * @param boolean $art - show lead story art if available
- * @param boolean $arttease - show tease art still photo instead of full fledge mutlimedia options
+ * @param boolean $arttease - show full fledge multimedia options (video, soundslides, youtube, etc). If false, just an image will appear
  * @param int $artsize - width of art. The default is 620px, which is full column lead story size
  * @param boolean $hed - show headline
  * @param boolean $meta - show story meta
@@ -14,7 +14,7 @@
  * @return string
  */
 
-function calpress_loop_content($art=true, $artsize=620, $arttease=false, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0){
+function calpress_loop_content($art=true, $artsize=620, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0){
     global $post, $authordata;
 ?>  
   
@@ -23,7 +23,7 @@ function calpress_loop_content($art=true, $artsize=620, $arttease=false, $hed=tr
   	<?php 
   	if ($art) { // attempt to show art
 
-        if ($arttease) { // show tease art only (just images, not videos, etc)
+        if (!$multimedia) { // show tease art only (just images, not videos, etc)
             if (calpress_showteaseart()) { // only show tease if one is availble to show. otherwise, show nothing. 
                 echo('<div class="entry-image">');
                     calpress_teaseart($artsize);

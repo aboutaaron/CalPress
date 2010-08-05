@@ -38,9 +38,13 @@ if ( file_exists(TEMPLATEPATH . '/' .$layout_template) ) { // current theme
     $front_template = TEMPLATEPATH.'/layouts/blog.php';
 }
 
+//on home page, add a custom body class
 add_action('calpress_hook_bodyclass', 'bodyclass_layout');
 function bodyclass_layout(){
-    $bodyclass_layout = "josh-layout";
-    return $bodyclass_layout;
+    global $layout;
+    if (is_home()) {
+        $bodyclass_layout = substr($layout, 0, -4);
+        echo " front-layout-".$bodyclass_layout;
+    }
 }
 ?>

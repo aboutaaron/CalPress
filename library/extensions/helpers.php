@@ -1052,8 +1052,7 @@ function calpress_trim_excerpt($length = 55) {
 function new_excerpt_more($more) {
        //global $post;
 	   //return '<a href="'. get_permalink($post->ID) . '">' . '...' . '</a>';
-	   
-	   return ' ...';
+	   return '...';
 }
 add_filter('excerpt_more', 'new_excerpt_more');
 

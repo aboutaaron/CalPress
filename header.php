@@ -19,7 +19,7 @@ global $calpress_mobile;
 	<link rel="shortcut icon" href="<?php echo(THEMEURL); ?>/favicon.ico" />
 </head>
 
-<body class="<?php calpress_body_class(); ?>">
+<body class="<?php calpress_body_class(); ?><?php calpress_hook_bodyclass(); ?>">
     <?php
     // if on mobile phone but not viewing mobile site, give option
     if (!$calpress_mobile->showMobile() && $calpress_mobile->mobiledevice) {

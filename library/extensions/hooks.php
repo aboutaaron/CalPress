@@ -89,11 +89,12 @@ function calpress_hook_footer() {
 }
 
 /**
- * calpress_hook_bodyclass() - TODO
+ * calpress_hook_bodyclass()
  *
  * Template function appearing in header.php, allows actions
  * to be executed in loop that produces <body class="XXX XXX XXX"
  * @example add_action('calpress_hook_bodyclass', 'my_function');
+ * @example see front-layout.php for working example
  * @since 0.7
  * @hook action calpress_hook_bodyclass
  */
