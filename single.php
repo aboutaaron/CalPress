@@ -19,7 +19,7 @@ if(!loadSpecialSingle()){
 
             <?php calpress_hook_post_above(); ?>
 
-			<div id="post-<?php the_ID() ?>" class="<?php sandbox_post_class() ?>">
+			<div id="post-<?php the_ID() ?>" class="<?php calpress_post_class() ?>">
 				<h2 class="entry-title"><?php the_title() ?></h2>
 								
 				<?php calpress_leadart(); ?>

@@ -70,6 +70,10 @@ h1 + h2, h2 + h3 {
     text-align: right;
 }
 
+.caption{
+    color: #a2a2a2;
+}
+
 /* In a nested list, eliminate bottom UL margin */
 ul ul{
 	margin-bottom: 0;

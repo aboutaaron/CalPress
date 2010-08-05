@@ -37,7 +37,7 @@ remove_filter('the_content', 'wpautop');
             ?>
 
                 <?php while ($catPosts->have_posts()) : $catPosts->the_post(); ?>
-                    <div id="post-<?php the_ID() ?>" class="<?php sandbox_post_class() ?>">
+                    <div id="post-<?php the_ID() ?>" class="<?php calpress_post_class() ?>">
                         <?php 
         				    if (calpress_showleadart() != false) {
         				        if ($storyCounter>0) {

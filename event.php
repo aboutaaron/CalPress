@@ -4,7 +4,7 @@
 
             <?php the_post() ?>
 
-			<div id="post-<?php the_ID() ?>" class="<?php sandbox_post_class() ?>">
+			<div id="post-<?php the_ID() ?>" class="<?php calpress_post_class() ?>">
 				
 								
 				<?php calpress_leadart(620); ?>
