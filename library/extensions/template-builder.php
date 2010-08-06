@@ -32,6 +32,9 @@ add_action('calpress_hook_blogdescription', 'calpress_template_blogdescription')
 add_action('calpress_hook_post_below', 'calpress_twittersearch');
 add_action('calpress_hook_post_below', 'comments_template');
 
+//Comment messages
+add_action('calpress_hook_comment_message', 'calpress_template_comment_message');
+
 //Footer
 add_action('calpress_hook_footer', 'calpress_template_footer_credits');
 

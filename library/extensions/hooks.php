@@ -235,4 +235,18 @@ function calpress_hook_postinline_above() {
 function calpress_hook_postinline_below() {
 	do_action('calpress_hook_postinline_below');
 }
+
+/**
+ * calpress_hook_comment_message()
+ *
+ * Template function appearing in comments.php, allows actions
+ * to be executed below the "Post a comment" message.
+ * @example add_action('calpress_hook_comment_message', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_comment_message
+ */
+function calpress_hook_comment_message() {
+	do_action('calpress_hook_comment_message');
+}
+
 ?>

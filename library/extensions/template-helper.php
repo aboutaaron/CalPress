@@ -67,6 +67,17 @@ function calpress_template_footer_credits() {
 }
 
 /**
+* calpress_template_comment_message() - Outputs comments messge
+* 
+* @since 0.7
+* @return string
+*/
+function calpress_template_comment_message() {
+    echo '<p id="comment-notes">Your email is <em>never</em> shared. Required fields are marked <span class="required">*</span></p>';
+}
+
+
+/**
 * calpress_template_inline_above()
 *
 * works with helper.php calpress_inlines() 
