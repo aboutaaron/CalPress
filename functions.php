@@ -141,6 +141,9 @@ require_once(THEMELIB . '/extensions/special-singles.php');
 // Load CalPress media embed funtionality 
 require_once(THEMELIB . '/extensions/media-players.php');
 
+// Load user photo functionality
+require_once(THEMELIB . '/extensions/user-photo.php');
+
 // Load Geotag functionality
 require_once(THEMELIB . '/extensions/admin-geotag.php');
 

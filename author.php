@@ -34,7 +34,7 @@
                     }
                 ?> 
             
-
+                <?php userphoto($authordata) ?>
             <div class="clear"></div>
 
 <?php rewind_posts() ?>
