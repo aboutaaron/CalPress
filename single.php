@@ -33,9 +33,6 @@ if(!loadSpecialSingle()){
     				</span>
 				    <span class="meta-sep">|</span>
 				    <span class="entry-categories">Filed Under: <?php the_category(', '); ?></span>
-				    <span class="meta-sep">|</span>
-				    <span class="entry-tags"><?php the_tags('Tagged: ',' , ',''); ?></span>
-				    <?php calpress_spanishurl(); ?>
 				</div>
 				
 				<?php calpress_sharethis(); ?>

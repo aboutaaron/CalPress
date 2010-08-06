@@ -32,7 +32,7 @@ function calpress_twittersearch(){
         echo("<script src=\"http://widgets.twimg.com/j/2/widget.js\"></script>");
         
         echo("<div class=\"twitter-search\">");
-            echo("<div class=\"search-terms\"><h3><span class=\"twitter-name\">Twitter:</span> <span class=\"search-terms\">$searchterms</span></h3></div>");
+            //echo("<div class=\"search-terms\"><h3><span class=\"twitter-name\">Twitter:</span> <span class=\"search-terms\">$searchterms</span></h3></div>");
             echo("<div class=\"twitter-feed\">");
                 echo"
             <script>
