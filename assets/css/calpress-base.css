@@ -344,70 +344,43 @@ li.comment p br{
 /*************************
  Comments
  #comments
+ Threaded commenting derived from the Magazine Basic Theme:
+ http://bavotasan.com/tutorials/how-to-add-nested-comments-to-your-wordpress-theme/
+ http://wordpress.org/extend/themes/magazine-basic
 *************************/
 #comments-list > h3{
-	background-color: #ddd;
+	background-color: #999;
 	color: #fff;
 	padding: 4px;
 	margin-bottom: 0;
 }
 
-#comments-list ul, #comments-list ol{
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
+#comments-list .says{
+    display: none;
 }
-
-#comments-list li{
-	min-height: 95px;
-	border-top: 1px solid #ddd;
-	padding: 10px;
-	list-style-type: none;
-	margin-left: 0;
-	overflow: hidden;
-}
-
-#comments-list li:first-child{
-	border-top: 0;
-}
-
-#comments-list .comment-author{
-	width: 90px;
-	float: left;
-	clear: left;
-	margin-right: 10px;
-}
-
-#comments-list p{
-	margin-left: 100px;
-	margin-top: 20px;
-	margin-bottom: 0;
-}
-
-#comments-list .comment-meta + p{
-	margin-top: 0;
-}
-
-#comments-list .comment-meta, #comments-list .comment-meta a{
-	color: #a2a2a2;
-}
-
-#comments-list .comment-author img{
-    display: block;
-	width: 65px;
-	height: 65px;
-	border: 10px solid #ddd;
-	margin: auto;
-}
-
-#comments-list .comment-author span{
-	display: block;
-	text-align: center;
-	font-style:italic; 
-}
-
-#comments-list .bypostauthor{
-	background-color: #FEFFCD;
-}
+ol.commentlist li { border:1px solid #d5d5d5; margin:0 0 10px; padding:5px 7px 5px 64px; position:relative; }
+ol.commentlist li.pingback comment-author { padding:0 170px 0 0; }
+ol.commentlist li div.vcard { font-weight:bold; font-size: 14px; line-height: 16px; font-family: helvetica,arial,sans-serif; }
+ol.commentlist li div.vcard cite.fn { font-style:normal; font-size: 11px; }
+ol.commentlist li div.vcard cite.fn a.url { color: #999; text-decoration:underline; }
+ol.commentlist li div.vcard cite.fn a.url:hover { color: #ccc; }
+ol.commentlist li div.vcard img.avatar { background: #fff; border:1px solid #aaa; padding: 5px; left:7px; position:absolute; top:7px; }
+ol.commentlist li div.comment-meta { font-weight:bold; font-size: 10px; line-height: 16px; font-family: helvetica,arial,sans-serif; position:absolute; right:10px; text-align:right; top:5px; }
+ol.commentlist li div.comment-meta a { color:#999; text-decoration:underline; }
+ol.commentlist li div.comment-meta a:hover { color: #ccc; }
+ol.commentlist li p { font-weight:normal; font-size: 12px; line-height: 16px; font-family: helvetica,arial,sans-serif; margin:5px 0 12px; }
+ol.commentlist li ul { font-weight:normal; font-size: 12px; line-height: 16px; font-family: helvetica,arial,sans-serif; list-style:square; margin:0 0 12px; padding:0; }
+ol.commentlist li div.reply { background:#999; border:1px solid #666; color:#fff; font:bold 9px/1 helvetica,arial,sans-serif; padding:6px 5px 4px;  text-align:center; width:36px; }
+ol.commentlist li div.reply:hover { background:#ccc; border:1px solid #999; }
+ol.commentlist li div.reply a { color:#fff; text-decoration:none; text-transform:uppercase; }
+ol.commentlist li ul.children { list-style:none; margin:12px 0 0; text-indent:0; }
+ol.commentlist li ul.children li.depth-2 { margin:0 0 3px; }
+ol.commentlist li ul.children li.depth-3 { margin:0 0 3px; }
+ol.commentlist li ul.children li.depth-4 { margin:0 0 3px; }
+ol.commentlist li ul.children li.depth-5 { margin:0 0 3px; }
+ol.commentlist ul.children li.odd { background:#fff; }
+ol.commentlist ul.children li.even { background:#f6f6f6; }
+ol.commentlist li.pingback div.vcard { padding:0 170px 0 0; }
 
 /*************************
  Category Page

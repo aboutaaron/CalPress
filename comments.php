@@ -1,89 +1,46 @@
 <?php
+    // this is drop-in replacement for Sandbox's comments.php. This supports comment threading and pagination. 
+    // http://alicebob.cryptoland.net/sandbox-wordpress-theme-for-27-with-threaded-comments/
+?>
+<?php
 	if ( 'comments.php' == basename($_SERVER['SCRIPT_FILENAME']) )
 		die ( 'Please do not load this page directly. Thanks.' );
 ?>
 			<div id="comments">
 <?php
-	if ( !empty($post->post_password) ) :
-		if ( $_COOKIE['wp-postpass_' . COOKIEHASH] != $post->post_password ) :
+	if ( post_password_required() ) :
 ?>
 				<div class="nopassword"><?php _e( 'This post is protected. Enter the password to view any comments.', 'sandbox' ) ?></div>
 			</div><!-- .comments -->
 <?php
 		return;
 	endif;
-endif;
 ?>
-<?php if ( $comments ) : ?>
-<?php global $sandbox_comment_alt ?>
-
-<?php // Number of pings and comments
-$ping_count = $comment_count = 0;
-foreach ( $comments as $comment )
-	get_comment_type() == "comment" ? ++$comment_count : ++$ping_count;
-?>
-<?php if ( $comment_count ) : ?>
-<?php $sandbox_comment_alt = 0 ?>
-
+<?php if ( have_comments() ) : ?>
 				<div id="comments-list" class="comments">
-					<h3><?php printf($comment_count > 1 ? __('<span>%d</span> Comments', 'sandbox') : __('<span>One</span> Comment', 'sandbox'), $comment_count) ?></h3>
-
-					<ol>
-<?php foreach ($comments as $comment) : ?>
-<?php if ( get_comment_type() == "comment" ) : ?>
-						<li id="comment-<?php comment_ID() ?>" class="<?php calpress_comment_class() ?>">
-							<div class="comment-author vcard"><?php calpress_commenter_link() ?></div>
-							<div class="comment-meta"><?php printf(__('Posted %1$s at %2$s <span class="meta-sep">|</span> <a href="%3$s" title="Permalink to this comment">Permalink</a>', 'sandbox'),
-										get_comment_date(),
-										get_comment_time(),
-										'#comment-' . get_comment_ID() );
-										edit_comment_link(__('Edit', 'sandbox'), ' <span class="meta-sep">|</span> <span class="edit-link">', '</span>'); ?></div>
-<?php if ($comment->comment_approved == '0') _e("\t\t\t\t\t<span class='unapproved'>Your comment is awaiting moderation.</span>\n", 'sandbox') ?>
-							<?php comment_text() ?>
-						</li>
-<?php endif; // REFERENCE: if ( get_comment_type() == "comment" ) ?>
-<?php endforeach; ?>
-
+					<h3><?php comments_number('', __('<span>One</span> Comment', 'sandbox'), __('<span>%</span> Comments', 'sandbox') ); ?></h3>
+					<div id="comments-nav-above" class="comments-navigation">
+<?php paginate_comments_links($args); ?>
+					</div>
+					<ol class="commentlist">
+<?php wp_list_comments(); ?>
 					</ol>
+					<div id="comments-nav-below" class="comments-navigation">
+<?php paginate_comments_links($args); ?>
+					</div>
 				</div><!-- #comments-list .comments -->
-
-<?php endif; // REFERENCE: if ( $comment_count ) ?>
-<?php if ( $ping_count ) : ?>
-<?php $sandbox_comment_alt = 0 ?>
-
-				<div id="trackbacks-list" class="comments">
-					<h3><?php printf($ping_count > 1 ? __('<span>%d</span> Trackbacks', 'sandbox') : __('<span>One</span> Trackback', 'sandbox'), $ping_count) ?></h3>
-
-					<ol>
-<?php foreach ( $comments as $comment ) : ?>
-<?php if ( get_comment_type() != "comment" ) : ?>
-
-						<li id="comment-<?php comment_ID() ?>" class="<?php sandbox_comment_class() ?>">
-							<div class="comment-author"><?php printf(__('By %1$s on %2$s at %3$s', 'sandbox'),
-									get_comment_author_link(),
-									get_comment_date(),
-									get_comment_time() );
-									edit_comment_link(__('Edit', 'sandbox'), ' <span class="meta-sep">|</span> <span class="edit-link">', '</span>'); ?></div>
-<?php if ($comment->comment_approved == '0') _e('\t\t\t\t\t<span class="unapproved">Your trackback is awaiting moderation.</span>\n', 'sandbox') ?>
-							<?php comment_text() ?>
-						</li>
-<?php endif // REFERENCE: if ( get_comment_type() != "comment" ) ?>
-<?php endforeach; ?>
-
-					</ol>
-				</div><!-- #trackbacks-list .comments -->
-
-<?php endif // REFERENCE: if ( $ping_count ) ?>
-<?php endif // REFERENCE: if ( $comments ) ?>
+<?php endif // REFERENCE: if ( have_comments() ) ?>
 <?php if ( 'open' == $post->comment_status ) : ?>
 <?php $req = get_option('require_name_email'); // Checks if fields are required. Thanks, Adam. ;-) ?>
 
 				<div id="respond">
-					<h3><?php _e( 'Post a Comment', 'sandbox' ) ?></h3>
+					<h3><?php comment_form_title( __( 'Post a Comment', 'sandbox' ), __( 'Post a Reply to %s', 'sandbox' ) ); ?></h3>
+
+					<div id="cancel-comment-reply"><?php cancel_comment_reply_link() ?></div>
 
 <?php if ( get_option('comment_registration') && !$user_ID ) : ?>
 					<p id="login-req"><?php printf(__('You must be <a href="%s" title="Log in">logged in</a> to post a comment.', 'sandbox'),
-					get_bloginfo('wpurl') . '/wp-login.php?redirect_to=' . get_permalink() ) ?></p>
+					wp_logout_url(get_permalink()) ) ?></p>
 
 <?php else : ?>
 					<div class="formcontainer">	
@@ -97,23 +54,27 @@ foreach ( $comments as $comment )
 
 <?php else : ?>
 
+                            
+
 							<p id="comment-notes"><?php _e( 'Your email is <em>never</em> shared.', 'sandbox' ) ?> <?php if ($req) _e( 'Required fields are marked <span class="required">*</span>', 'sandbox' ) ?></p>
-                            <div id="comment-user-details"> <?php do_action('alt_comment_login'); ?>
-							    <div class="form-label"><label for="author"><?php _e( 'Name', 'sandbox' ) ?></label> <?php if ($req) _e( '<span class="required">*</span>', 'sandbox' ) ?></div>
-    							<div class="form-input"><input id="author" name="author" class="text<?php if ($req) echo ' required'; ?>" type="text" value="<?php echo $comment_author ?>" size="30" maxlength="50" tabindex="3" /></div>
 
-    							<div class="form-label"><label for="email"><?php _e( 'Email', 'sandbox' ) ?></label> <?php if ($req) _e( '<span class="required">*</span>', 'sandbox' ) ?></div>
-    							<div class="form-input"><input id="email" name="email" class="text<?php if ($req) echo ' required'; ?>" type="text" value="<?php echo $comment_author_email ?>" size="30" maxlength="50" tabindex="4" /></div>
+							<div class="form-label"><label for="author"><?php _e( 'Name', 'sandbox' ) ?></label> <?php if ($req) _e( '<span class="required">*</span>', 'sandbox' ) ?></div>
+							<div class="form-input"><input id="author" name="author" class="text<?php if ($req) echo ' required'; ?>" type="text" value="<?php echo $comment_author ?>" size="30" maxlength="50" tabindex="3" /></div>
 
-    							<div class="form-label"><label for="url"><?php _e( 'Website', 'sandbox' ) ?></label></div>
-    							<div class="form-input"><input id="url" name="url" class="text" type="text" value="<?php echo $comment_author_url ?>" size="30" maxlength="50" tabindex="5" /></div>
-                            </div>
+							<div class="form-label"><label for="email"><?php _e( 'Email', 'sandbox' ) ?></label> <?php if ($req) _e( '<span class="required">*</span>', 'sandbox' ) ?></div>
+							<div class="form-input"><input id="email" name="email" class="text<?php if ($req) echo ' required'; ?>" type="text" value="<?php echo $comment_author_email ?>" size="30" maxlength="50" tabindex="4" /></div>
+
+							<div class="form-label"><label for="url"><?php _e( 'Website', 'sandbox' ) ?></label></div>
+							<div class="form-input"><input id="url" name="url" class="text" type="text" value="<?php echo $comment_author_url ?>" size="30" maxlength="50" tabindex="5" /></div>
+
 <?php endif // REFERENCE: * if ( $user_ID ) ?>
 
 							<div class="form-label"><label for="comment"><?php _e( 'Comment', 'sandbox' ) ?></label></div>
 							<div class="form-textarea"><textarea id="comment" name="comment" class="text required" cols="45" rows="8" tabindex="6"></textarea></div>
 
-							<div class="form-submit"><input id="submit" name="submit" class="button" type="submit" value="<?php _e( 'Post Comment', 'sandbox' ) ?>" tabindex="7" /><input type="hidden" name="comment_post_ID" value="<?php echo $id ?>" /></div>
+							<div class="form-submit"><input id="submit" name="submit" class="button" type="submit" value="<?php _e( 'Post Comment', 'sandbox' ) ?>" tabindex="7" />
+							<?php comment_id_fields(); ?>
+							</div>
 
 							<div class="form-option"><?php do_action( 'comment_form', $post->ID ) ?></div>
 
