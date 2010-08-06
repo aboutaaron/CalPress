@@ -1129,6 +1129,7 @@ function calpress_commenter_link(){
 }
 
 // drop in replacement for sandbox_gallery
+// using custom calpress image sizes, and striping HTML from captions before inclusion into gallery. 
 function calpress_gallery($attr) {
 	global $post;
 	if ( isset($attr['orderby']) ) {

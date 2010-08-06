@@ -32,6 +32,10 @@ h2 {
     margin-bottom: 18px; 
 }
 
+h2.entry-title{
+    line-height: 24px;
+}
+
 h3 { 
     font-size: 18px; 
     line-height: 18px; 
@@ -412,7 +416,7 @@ li.comment p br{
 body.category .post, body.page-template-category-page-php .post{
     padding-top: 15px;
     margin-bottom: 15px;
-    width: 380px;
+    width: 620px;
 }
 
 body.category .p1.post, body.page-template-category-page-php .p1.post{
@@ -422,15 +426,9 @@ body.category .p1.post, body.page-template-category-page-php .p1.post{
 
 body.category .entry-image, body.page-template-category-page-php .entry-image{
     float: left;
-    width: 140px;
-    margin-right: 10px;
+    width: 300px;
+    margin-right: 20px;
     margin-bottom: 10px;
-}
-
-body.category .p1 .entry-image, body.page-template-category-page-php .p1 .entry-image{
-    float: none;
-    width: 380px;
-    margin-right: 0;
 }
 
 body.category .entry-date, body.page-template-category-page-php .entry-date{
@@ -575,15 +573,19 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories {
     clear: both;
 }
 
-    #secondary-block #secondary-stories>div{
+    #secondary-stories>div{
         width: 300px;
         float: left;
         margin: 0 0 10px 10px;
     }
     
-    #secondary-block #secondary-stories>div:first-child{
+    #secondary-stories>div:first-child{
         margin-left: 0;
         margin-right: 10px;
+    }
+    
+    #secondary-stories .entry-image{
+        margin-bottom: 18px;
     }
     
     #secondary-block .entry-title{
@@ -609,21 +611,30 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories {
         display: none;
     }
     
-    #secondary-block #tertiary-stories>div{
+    #tertiary-stories>div{
         width:280px;
         border-top:1px solid #000;
         float:left;
         margin:0 0 7px 10px;
-        padding-top:7px;
+        padding-top:18px;
     }
     
-    #secondary-block #tertiary-stories>div.alt{
+    #tertiary-stories>div.alt{
         margin-left: 0;
         margin-right: 10px;
         clear: left;
     }
     
-    #secondary-block #extra-features{
+    #tertiary-stories .entry-title{
+        font-size: 18px;
+        line-height: 18px;
+    }
+    
+    #tertiary-stories .more{
+        margin: 18px 0;
+    }
+    
+    #extra-features{
         /* avoid clearing after */
         overflow: auto;
         width: 100%
