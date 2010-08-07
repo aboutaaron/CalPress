@@ -23,7 +23,8 @@
 <?php paginate_comments_links($args); ?>
 					</div>
 					<ol class="commentlist">
-<?php wp_list_comments(); ?>
+<?php //wp_list_comments(); ?>
+<?php wp_list_comments('type=comment&callback=calpress_custom_comments'); ?>
 					</ol>
 					<div id="comments-nav-below" class="comments-navigation">
 <?php paginate_comments_links($args); ?>

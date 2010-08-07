@@ -1200,4 +1200,83 @@ function calpress_gallery($attr) {
 remove_filter( 'post_gallery', 'sandbox_gallery', $attr );
 // add new
 add_filter( 'post_gallery', 'calpress_gallery', $attr );
+
+/**
+ * A custom callback for wp_list_comments, so we can 
+ * customize commenter links/stats.
+ *
+ * @return string
+ */
+function calpress_custom_comments($comment, $args, $depth) {
+   $GLOBALS['comment'] = $comment; 
+   // get correct avatar type from Settings->Discussion
+   $avatar_default = get_option('avatar_default');
+   if ( empty($avatar_default) ) {
+       $default = 'mystery';
+   } else {
+       $default = $avatar_default;
+   }
+   
+   
+   // We want commentor URLs to point to their WP profile, if possible
+   // - Is the comment author registered on the site? the author of the post?
+    $registered_user = false;
+    $post_author = false;
+    $staff_memeber = false;
+   if ( $comment->user_id > 0 && $user = get_userdata($comment->user_id) ) {
+       // get user info
+       $registered_user = true;
+       $user_info = get_userdata($comment->user_id);
+       $post_author_link = get_author_posts_url( $comment->user_id ); 
+       $post_author_name = $user_info->display_name;
+       $post_author_registered_date = calpress_relativetime(strtotime($user_info->user_registered));
+       $commentauthorlink = "<a href=\"$post_author_link\">$post_author_name</a>";
+       
+       // is this registered user also the post author?
+       if ( $post = get_post($post_id) ) {
+			if ( $comment->user_id === $post->post_author )
+				$post_author = true;
+		}
+		
+		// is the registered user a staff member (editor level or above)?
+		if ($user_info->user_level >= 7) {
+		  $staff_memeber = true;
+		}
+       
+   } else {
+       $commentauthorlink = get_comment_author_link();
+   }
+   
+   ?>
+   <li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+     <div id="comment-<?php comment_ID(); ?>">
+      <div class="comment-author vcard">
+         <?php echo get_avatar($comment,$size='32',$default); ?>
+         <?php 
+         if ($post_author){
+             printf(__('<cite class="fn">%s</cite> <span class="member-status">Post author</span>'), $commentauthorlink);
+         } elseif ($staff_memeber) {
+             printf(__('<cite class="fn">%s</cite> <span class="member-status">Staff</span>'), $commentauthorlink);
+         } elseif ($registered_user) {
+             printf(__('<cite class="fn">%s</cite> <span class="member-status">Joined %s</span>'), $commentauthorlink, $post_author_registered_date);
+         } else {
+             printf(__('<cite class="fn">%s</cite>'), $commentauthorlink);  
+         }
+         ?>
+      </div>
+      <?php if ($comment->comment_approved == '0') : ?>
+         <em><?php _e('Your comment is awaiting moderation.') ?></em>
+         <br />
+      <?php endif; ?>
+
+      <div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php printf(__('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','') ?></div>
+
+      <?php comment_text() ?>
+
+      <div class="reply">
+         <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+      </div>
+     </div>
+<?php
+}
 ?>
