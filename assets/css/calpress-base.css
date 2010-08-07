@@ -370,8 +370,8 @@ ol.commentlist li div.comment-meta a { color:#999; text-decoration:underline; }
 ol.commentlist li div.comment-meta a:hover { color: #ccc; }
 ol.commentlist li p { font-weight:normal; font-size: 12px; line-height: 16px; font-family: helvetica,arial,sans-serif; margin:5px 0 12px; }
 ol.commentlist li ul { font-weight:normal; font-size: 12px; line-height: 16px; font-family: helvetica,arial,sans-serif; list-style:square; margin:0 0 12px; padding:0; }
-ol.commentlist li div.reply { background:#999; border:1px solid #666; color:#fff; font:bold 9px/1 helvetica,arial,sans-serif; padding:6px 5px 4px;  text-align:center; width:36px; }
-ol.commentlist li div.reply:hover { background:#ccc; border:1px solid #999; }
+ol.commentlist li div.reply, #comments input#submit { background:#999; border:1px solid #666; color:#fff; font:bold 9px/1 helvetica,arial,sans-serif; padding:6px 5px 4px;  text-align:center; width:36px; }
+ol.commentlist li div.reply:hover, #comments input#submit:hover { background:#ccc; border:1px solid #999; }
 ol.commentlist li div.reply a { color:#fff; text-decoration:none; text-transform:uppercase; }
 ol.commentlist li ul.children { list-style:none; margin:12px 0 0; text-indent:0; }
 ol.commentlist li ul.children li.depth-2 { margin:0 0 3px; }
@@ -385,6 +385,14 @@ ol.commentlist li.pingback div.vcard { padding:0 170px 0 0; }
 ol.commentlist li div.vcard span.member-status {
     display:block;
 }
+
+#comments input#submit{
+    width: 85px;
+    margin: 20px 0;
+    cursor:pointer;cursor:hand
+}
+
+
 
 /*************************
  Category / Author and all default archive pages
