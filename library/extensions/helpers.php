@@ -1219,6 +1219,7 @@ function calpress_custom_comments($comment, $args, $depth) {
    
    // get user-defined depth of contents from Settings->Discussion
    $comment_depth = get_option('thread_comments_depth');
+   $threaded_comments_enabled = get_option('thread_comments');
    
    // We want commentor URLs to point to their WP profile, if possible
    // - Is the comment author registered on the site? the author of the post?
@@ -1275,7 +1276,7 @@ function calpress_custom_comments($comment, $args, $depth) {
 
       <?php comment_text() ?>
 
-      <?php if ($comment_depth > $depth): ?>
+      <?php if ($comment_depth > $depth && $threaded_comments_enabled): ?>
           <div class="reply">
                <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
             </div>
