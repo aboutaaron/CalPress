@@ -75,6 +75,10 @@ $authordata = get_userdata(intval($author));
             } 
             ?>
 
+            <?php if (get_the_author_meta('twitter')): ?>
+                <h2 class="page-element twitter">Twitter</h2>
+                <?php calpress_twitterprofile(get_the_author_meta('twitter')); ?>
+            <?php endif ?>
 
 
 			

@@ -47,13 +47,13 @@ function calpress_twittersearch(){
               height: 300,
               theme: {
                 shell: {
-                  background: '#8ec1da',
-                  color: '#ffffff'
+                     background: '#333333',
+                      color: '#ffffff'
                 },
                 tweets: {
-                  background: '#ffffff',
-                  color: '#444444',
-                  links: '#1985b5'
+                    background: '#000000',
+                    color: '#ffffff',
+                    links: '#4aed05'
                 }
               },
               features: {
@@ -72,4 +72,52 @@ function calpress_twittersearch(){
         echo("</div><!--//end .twitter-search -->");
     }
 }
+
+// =================================
+// = Twitterprofile =
+// =================================
+function calpress_twitterprofile($twitterhandle){
+        
+     //load twitter's JS file
+    echo("<script src=\"http://widgets.twimg.com/j/2/widget.js\"></script>");
+    
+    echo("<div class=\"twitter-search\">");
+        //echo("<div class=\"search-terms\"><h3><span class=\"twitter-name\">Twitter:</span> <span class=\"search-terms\">$searchterms</span></h3></div>");
+        echo("<div class=\"twitter-feed\">");
+            echo"
+            <script>
+            new TWTR.Widget({
+              version: 2,
+              type: 'profile',
+              rpp: 4,
+              interval: 6000,
+              width: 'auto',
+              height: 300,
+              theme: {
+                shell: {
+                  background: '#333333',
+                  color: '#ffffff'
+                },
+                tweets: {
+                  background: '#000000',
+                  color: '#ffffff',
+                  links: '#4aed05'
+                }
+              },
+              features: {
+                scrollbar: true,
+                loop: false,
+                live: false,
+                hashtags: true,
+                timestamp: true,
+                avatars: false,
+                behavior: 'all'
+              }
+            }).render().setUser('$twitterhandle').start();
+            </script>
+        ";
+        echo("</div><!--//end .twitter-feed -->");
+    echo("</div><!--//end .twitter-search -->");
+}
+
 ?>
