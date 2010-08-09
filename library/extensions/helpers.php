@@ -1276,12 +1276,45 @@ function calpress_custom_comments($comment, $args, $depth) {
 
       <?php comment_text() ?>
 
-      <?php if ($comment_depth > $depth && $threaded_comments_enabled): ?>
+      <?php if ($comment_depth > $depth && $threaded_comments_enabled && comments_open()): ?>
           <div class="reply">
                <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
             </div>
       <?php endif ?>
      </div>
 <?php
+}
+
+/**
+ * Returns object of approved comments posted by a user
+ *
+ * @param int $authorID
+ * 
+ * @return obj
+ */
+function calpress_author_comments_by_id($authorID){
+    global $wpdb;
+    $sql  = 'SELECT wp_comments.*, wp_posts.post_title FROM ' . $wpdb->comments . ',' . $wpdb->posts . ' WHERE user_id = '. $authorID . ' AND comment_approved = \'1\' AND wp_comments.comment_post_ID = wp_posts.ID';
+    return $wpdb->get_results($sql);
+}
+
+/**
+ * Displays comments posted by a user by name and email.
+ *
+ * Wrapper around ppm_author_comments. Flexible with lots of options. See function doc.
+ * library/extensions/get-author-comments
+ *
+ * @uses apply_filters() Calls 'ppm_get_author_comments' on author's comments before displaying
+ * 
+ * @param string $author_name The author's name
+ * @param string|array $author_email The author's e-mail
+ * @param int    $postID An optional post ID
+ * @param array  $args Formatting options ({@link ppm_get_author_comments()} and {@link wp_list_comments()})
+ * 
+ * @return void
+ */
+function calpress_author_comments($author_name, $author_email, $postID = null, $args = array()){
+    require_once('get-author-comments.php');
+    ppm_author_comments($author_name, $author_email, $postID, $args);
 }
 ?>

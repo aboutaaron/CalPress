@@ -2,7 +2,13 @@
 
 		<div id="content" class="grid_8 alpha">
 
-<?php the_post() ?>
+<?php 
+the_post();
+// by default, author.php's $authordata is only populated for 
+// users with a published story. This remedies that!
+// http://codex.wordpress.org/Author_Templates
+$authordata = get_userdata(intval($author));
+?>
 
 			
             <h2 class="page-title author"><?php printf( __( '<span class="author-name">%s</span>', 'sandbox' ), "$authordata->display_name" ); ?></h2>
@@ -18,40 +24,59 @@
                 </div>
             </div>
             
-                <?php 
-                    //if there is an author description, print it
-                    $authordesc = $authordata->user_description; 
-                    if ( !empty($authordesc) ){
-                    ?>
-                        <div id="author-info">
-                            <div class="element">
-                                <p class="bio"> <?php echo($authordesc); ?> </p> 
-                            </div>
-                            
-                            
-                        </div>
-                <?php
-                    }
-                ?> 
+            <?php 
+            //if there is an author description, print it
+            $authordesc = $authordata->user_description; 
+            if ( !empty($authordesc) ){
+            ?>
+                <div id="author-info">
+                    <div class="element">
+                        <p class="bio"> <?php echo($authordesc); ?> </p> 
+                    </div>
+                </div>
+            <?php
+            }
+            ?> 
             
-                <?php userphoto($authordata) ?>
+            <?php userphoto($authordata) ?>
             <div class="clear"></div>
 
-<?php rewind_posts() ?>
 
-            <h2 class="page-element stories">Stories</h2>
+        
+            <?php 
+            // get author comments
+            $author_comments = calpress_author_comments_by_id($authordata->ID);
+            if ($author_comments) {
+                echo '<h2 class="page-element comments">Comments</h2>';
+                echo "<ul>";
+                foreach ($author_comments as $comment){
+                    $commenturl = get_permalink( $comment->comment_post_ID ) . "#comment-$comment->comment_ID";
+                    echo '<li><a href="' . $commenturl . '" rel="bookmark" title="Permanent Link to ' . $comment->post_title . '">'.$comment->comment_content.'</a></li>';
+                }
+                echo "</ul>";
+            } 	
+            ?>
             
-            <?php while ( have_posts() ) : the_post() ?>
+            <?php 
+            if ( have_posts() ){
+                echo '<h2 class="page-element stories">Stories</h2>';
+                while ( have_posts() ) { 
+                    the_post();
+                    // show post with art, sized at 300px 
+                    calpress_loop_content(true, 300, true, true, true, true, 100);
+                }
+            ?>
+                <div id="nav-below" class="navigation">
+    				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
+    				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+    			</div>
+            <?php    
+            } 
+            ?>
 
-			    <?php // show post with art, sized at 300px ?>
-                <?php calpress_loop_content(true, 300, true, true, true, true, 100); ?>
 
-            <?php endwhile; ?>
 
-			<div id="nav-below" class="navigation">
-				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
-				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
-			</div>
+			
 
 		</div><!-- #content -->
         <?php get_sidebar() ?>
