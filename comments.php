@@ -31,7 +31,7 @@
 					</div>
 				</div><!-- #comments-list .comments -->
 <?php endif // REFERENCE: if ( have_comments() ) ?>
-<?php if ( 'open' == $post->comment_status ) : ?>
+<?php if ( comments_open() ) : ?>
 <?php $req = get_option('require_name_email'); // Checks if fields are required. Thanks, Adam. ;-) ?>
 
 				<div id="respond">
