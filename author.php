@@ -58,6 +58,7 @@ $authordata = get_userdata(intval($author));
             ?>
             
             <?php 
+            rewind_posts();
             if ( have_posts() ){
                 echo '<h2 class="page-element stories">Stories</h2>';
                 while ( have_posts() ) { 
