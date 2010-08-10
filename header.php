@@ -38,6 +38,5 @@ global $calpress_mobile;
 	</div><div class="clear"></div><!--  #header -->
 	
 	<?php calpress_globalnav("12") ?><!-- #menu -->
-    <div class="clear"></div>
 
     <div id="container" class="grid_12">

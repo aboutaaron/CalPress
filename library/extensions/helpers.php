@@ -123,6 +123,7 @@ function calpress_globalnav( $g = "12" ) {
         	$menu = '<div id="menu" class="grid_' . $grid . '">' . $menu . '</div><div class="clear"></div>';
         	echo apply_filters( 'globalnav_menu', $menu ); // Filter to override default globalnav: globalnav_menu  
     	}
+    	echo '<div class="clear"></div><!-- #menu -->';
     }	
 }
 
