@@ -427,9 +427,35 @@ body.author .entry-meta .vcard, body.author .entry-meta .meta-sep{
     display: none;
 }
 
+body.author h3.title{
+    font-style: italic;
+    font-size: 1.2em;
+    margin-top: -24px;
+    font-weight: 300;
+}
+
 body.author p.author-profile.aux, body.author .comments p{
     margin-bottom: 2px;
     margin-top: 0;
+}
+
+body.author .vcard{
+    float: left;
+    width: 300px;
+    margin-right: 10px;
+}
+
+body.author .vcard.company{
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+body.author .page-element{
+    clear: both;
+}
+
+body.author h3.page-element{
+    margin-top: 18px;
 }
 
 body.author .comments li{
@@ -452,6 +478,9 @@ body.author .comments .comment-time{
    font-size: .9em;
 }
 
+body.author .comment-post{
+    font-weight: bold;
+}
 
 body.author #author-photo{
     width: 380px;
@@ -469,10 +498,9 @@ body.author #content.community-profile .participation{
     margin-bottom: 10px;
 }
 
-body.author h2.page-element.comments{
-    clear: right;
+body.author h2.entry-title{
+    
 }
-
 /*************************
  Package Page
  #content.package

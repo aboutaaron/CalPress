@@ -65,45 +65,54 @@
                             echo '</div>';
                         }
 
-                        echo '<h2>Contact ' . $authordata->first_name . '</h2>';
+                        echo '<h3 class="contact">Contact ' . $authordata->first_name . '</h3>';
 
-                        // email
-                        if (!empty($authordata->user_email)) {
-                            printf ('<p class="author-profile aux email">Email: <a href="mailto:%s">%s</a></p>', $authordata->user_email, $authordata->user_email);
-                        }
-
-                        // twitter
-                        if (!empty($authordata->twitter)) {
-                            printf ('<p class="author-profile aux twitter">Twitter: <a href="http://twitter.com/%s">@%s</a></p>', $authordata->twitter, $authordata->twitter);
-                        }
-
-                        // website
-                        if (!empty($authordata->user_url)) {
-                            printf ('<p class="author-profile aux website">Website: <a href="%s">%s</a></p>', $authordata->user_url, $authordata->user_url);
-                        }
-
-                        // organization
-                        if (!empty($authordata->org)) {
-                            printf ('<p class="author-profile aux organization">%s</p>', $authordata->org);
-                        }
-
-                        // Address
-                        if (!empty($authordata->address_1)) {
-                            printf ('<p class="author-profile aux address adddress_1">%s</p>', $authordata->address_1);
-                            if (!empty($authordata->address_2)) {
-                                printf ('<p class="author-profile aux address adddress_2">%s</p>', $authordata->address_2);
+                        echo '<div class="person vcard">';
+                            // email
+                            if (!empty($authordata->user_email)) {
+                                printf ('<p class="author-profile aux email">Email: <a href="mailto:%s">%s</a></p>', $authordata->user_email, $authordata->user_email);
                             }
-                        }
 
-                        // City / State / Zip
-                        if (!empty($authordata->address_city)) {
-                            printf ('<p class="author-profile aux address city-state-zip">%s %s, %s</p>', $authordata->address_city, $authordata->address_state, $authordata->address_zip);
-                        }
+                            // twitter
+                            if (!empty($authordata->twitter)) {
+                                printf ('<p class="author-profile aux twitter">Twitter: <a href="http://twitter.com/%s">@%s</a></p>', $authordata->twitter, $authordata->twitter);
+                            }
+
+                            // website
+                            if (!empty($authordata->user_url)) {
+                                printf ('<p class="author-profile aux website">Website: <a href="%s">%s</a></p>', $authordata->user_url, $authordata->user_url);
+                            }
+                        echo '</div><!-- .person -->';
+
+                        echo '<div class="company vcard">';
+                            // organization
+                            if (!empty($authordata->org)) {
+                                printf ('<p class="author-profile aux organization">%s</p>', $authordata->org);
+                            }
+
+                            // Address
+                            if (!empty($authordata->address_1)) {
+                                printf ('<p class="author-profile aux address adddress_1">%s</p>', $authordata->address_1);
+                                if (!empty($authordata->address_2)) {
+                                    printf ('<p class="author-profile aux address adddress_2">%s</p>', $authordata->address_2);
+                                }
+                            }
+
+                            // City / State / Zip
+                            if (!empty($authordata->address_city)) {
+                                printf ('<p class="author-profile aux address city-state-zip">%s %s, %s</p>', $authordata->address_city, $authordata->address_state, $authordata->address_zip);
+                            }
+                        echo '</div><div class="clear"></div><!-- .company -->';
                     echo '</div><!-- #author-meta -->';      
+                    
+                    if (get_the_author_meta('twitter')){
+                        echo '<h3 class="page-element twitter">Twitter</h3>';
+                        calpress_twitterprofile(get_the_author_meta('twitter')); 
+                    }
                     
                     // comments
                     if ($author_comments) {
-                        echo '<h2 class="page-element comments">Recent Comments</h2>';
+                        echo '<h3 class="page-element comments">Recent Comments</h3>';
                         echo '<div class="comments"><ul>';
                         foreach ($author_comments as $comment){
                             $posturl = get_permalink( $comment->comment_post_ID );
@@ -115,11 +124,6 @@
                         }
                         echo "</ul></div><!-- .comments -->";
                     }
-
-                    if (get_the_author_meta('twitter')){
-                        echo '<h2 class="page-element twitter">Twitter</h2>';
-                        calpress_twitterprofile(get_the_author_meta('twitter')); 
-                    }
                     
                     
                 }// if !is_paged() for show author bio
@@ -128,11 +132,11 @@
                 // articles
                 rewind_posts();
                 if ( have_posts() ){
-                    echo '<h2 class="page-element stories">Stories</h2>';
+                    echo '<h3 class="page-element stories">Stories</h3>';
                     while ( have_posts() ) { 
                         the_post();
                         // show post with art, sized at 300px 
-                        calpress_loop_content(false, 300, true, true, true, true, 100);
+                        calpress_loop_content(false, 300, true, true, true, true, 15);
                     }
                 ?>
                     <div id="nav-below" class="navigation">
@@ -183,7 +187,7 @@
                 echo '</div><!-- #author-meta -->';
                 
                 if ($author_comments) {
-                    echo '<h2 class="page-element comments">Comments</h2>';
+                    echo '<h3 class="page-element comments">Comments</h3>';
                     echo '<div class="comments"><ul>';
                     foreach ($author_comments as $comment){
                         $posturl = get_permalink( $comment->comment_post_ID );
