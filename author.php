@@ -41,77 +41,65 @@
                 echo '<h2 class="page-title">Profile: <span class="author-name">'.$authordata->nickname.'</span></h2>';
             }
             
-            //photo
-            if ( userphoto_exists($authordata) ) {
-                $profile_pic = calpress_sizedimageurl(WP_CONTENT_URL . '/uploads/userphoto/'.$authordata->userphoto_image_file, 380);
-                echo '<div id="author-photo">';
-                    echo '<img class="photo" src="' . $profile_pic .'" alt="Profile photo: ' . $authordata->display_name .'" />';
-                echo '</div>';
-            }
+            // This page is essentially two seperate pages seperated at this conditional: an author page and a non-author page
+            
+            // Author Page    
+            if ($is_author) {
              
-            echo '<div id="author-meta">'; 
-                
-                if ($is_author) {
-                    
-                    //bio
-                    $authordesc = $authordata->user_description; 
-                    if ( !empty($authordesc) ){
-                        echo '<div id="author-bio">';
-                        echo "<p>$authordesc</p>";
+                // Author pages may be "paged" with old stories. Only show bios on the first page.
+                if (!is_paged()) {
+                    //photo
+                    if ( userphoto_exists($authordata) ) {
+                        $profile_pic = calpress_sizedimageurl(WP_CONTENT_URL . '/uploads/userphoto/'.$authordata->userphoto_image_file, 380);
+                        echo '<div id="author-photo">';
+                            echo '<img class="photo" src="' . $profile_pic .'" alt="Profile photo: ' . $authordata->display_name .'" />';
                         echo '</div>';
                     }
-                    
-                    echo '<h2>Contact ' . $authordata->first_name . '</h2>';
-                    
-                    // email
-                    if (!empty($authordata->user_email)) {
-                        printf ('<p class="author-profile aux email">Email: <a href="mailto:%s">%s</a></p>', $authordata->user_email, $authordata->user_email);
-                    }
-                    
-                    // twitter
-                    if (!empty($authordata->twitter)) {
-                        printf ('<p class="author-profile aux twitter">Twitter: <a href="http://twitter.com/%s">@%s</a></p>', $authordata->twitter, $authordata->twitter);
-                    }
 
-                    // website
-                    if (!empty($authordata->user_url)) {
-                        printf ('<p class="author-profile aux website">Website: <a href="%s">%s</a></p>', $authordata->user_url, $authordata->user_url);
-                    }
-                    
-                    // organization
-                    if (!empty($authordata->org)) {
-                        printf ('<p class="author-profile aux organization">%s</p>', $authordata->org);
-                    }
-                    
-                    // Address
-                    if (!empty($authordata->address_1)) {
-                        printf ('<p class="author-profile aux address adddress_1">%s</p>', $authordata->address_1);
-                        if (!empty($authordata->address_2)) {
-                            printf ('<p class="author-profile aux address adddress_2">%s</p>', $authordata->address_2);
+                    echo '<div id="author-meta">'; 
+                        //bio
+                        $authordesc = $authordata->user_description; 
+                        if ( !empty($authordesc) ){
+                            echo '<div id="author-bio">';
+                            echo "<p>$authordesc</p>";
+                            echo '</div>';
                         }
-                    }
-                    
-                    // City / State / Zip
-                    if (!empty($authordata->address_city)) {
-                        printf ('<p class="author-profile aux address city-state-zip">%s %s, %s</p>', $authordata->address_city, $authordata->address_state, $authordata->address_zip);
-                    }
-                    
-                    // articles
-                    rewind_posts();
-                    if ( have_posts() ){
-                        echo '<h2 class="page-element stories">Stories</h2>';
-                        while ( have_posts() ) { 
-                            the_post();
-                            // show post with art, sized at 300px 
-                            calpress_loop_content(false, 300, true, true, true, true, 100);
+
+                        echo '<h2>Contact ' . $authordata->first_name . '</h2>';
+
+                        // email
+                        if (!empty($authordata->user_email)) {
+                            printf ('<p class="author-profile aux email">Email: <a href="mailto:%s">%s</a></p>', $authordata->user_email, $authordata->user_email);
                         }
-                    ?>
-                        <div id="nav-below" class="navigation">
-            				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
-            				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
-            			</div>
-                    <?php    
-                    }
+
+                        // twitter
+                        if (!empty($authordata->twitter)) {
+                            printf ('<p class="author-profile aux twitter">Twitter: <a href="http://twitter.com/%s">@%s</a></p>', $authordata->twitter, $authordata->twitter);
+                        }
+
+                        // website
+                        if (!empty($authordata->user_url)) {
+                            printf ('<p class="author-profile aux website">Website: <a href="%s">%s</a></p>', $authordata->user_url, $authordata->user_url);
+                        }
+
+                        // organization
+                        if (!empty($authordata->org)) {
+                            printf ('<p class="author-profile aux organization">%s</p>', $authordata->org);
+                        }
+
+                        // Address
+                        if (!empty($authordata->address_1)) {
+                            printf ('<p class="author-profile aux address adddress_1">%s</p>', $authordata->address_1);
+                            if (!empty($authordata->address_2)) {
+                                printf ('<p class="author-profile aux address adddress_2">%s</p>', $authordata->address_2);
+                            }
+                        }
+
+                        // City / State / Zip
+                        if (!empty($authordata->address_city)) {
+                            printf ('<p class="author-profile aux address city-state-zip">%s %s, %s</p>', $authordata->address_city, $authordata->address_state, $authordata->address_zip);
+                        }
+                    echo '</div><!-- #author-meta -->';      
                     
                     // comments
                     if ($author_comments) {
@@ -127,52 +115,88 @@
                         }
                         echo "</ul></div><!-- .comments -->";
                     }
-                    
-                    
-                } else {
-                    echo '<p class="author-profile aux">Real name: '. $authordata->first_name . ' '. $authordata->last_name . '</p>';
-                    printf ('<p class="author-profile aux">Joined: %s</p>', date( 'F j, Y', strtotime($authordata->user_registered)) );
-                    
-                    // twitter
-                    if (!empty($authordata->twitter)) {
-                        printf ('<p class="author-profile aux twitter">Twitter: <a href="http://twitter.com/%s">@%s</a></p>', $authordata->twitter, $authordata->twitter);
-                    }
 
-                    // website
-                    if (!empty($authordata->user_url)) {
-                        printf ('<p class="author-profile aux website">Website: <a href="%s">%s</a></p>', $authordata->user_url, $authordata->user_url);
+                    if (get_the_author_meta('twitter')){
+                        echo '<h2 class="page-element twitter">Twitter</h2>';
+                        calpress_twitterprofile(get_the_author_meta('twitter')); 
                     }
                     
-                    // participation
-                    printf ('<p class="author-profile aux participation participation-count-%s">Participation: %s comment%s, %s stor%s</p>', count($author_comments), count($author_comments), pluralize(count($author_comments)), count($posts), pluralize( count($posts), 'ies', 'y') );
                     
-                    //bio
-                    $authordesc = $authordata->user_description; 
-                    if ( !empty($authordesc) ){
-                        echo '<div id="author-bio">';
-                        echo "<p>$authordesc</p>";
-                        echo '</div>';
-                    }
-                    
-                    if ($author_comments) {
-                        echo '<h2 class="page-element comments">Comments</h2>';
-                        echo '<div class="comments"><ul>';
-                        foreach ($author_comments as $comment){
-                            $posturl = get_permalink( $comment->comment_post_ID );
-                            $commenturl = $posturl . "#comment-$comment->comment_ID";
-                            $commenttime =  date( 'F j, Y \a\t g:i a', strtotime($comment->comment_date) );
-                            echo '<li><p class="comment-post">Posted on: <em><a href="' . $posturl .'" title="Permanent Link to ' . $comment->post_title . '">' . $comment->post_title . '</a></em></p>';
-                            echo '<p class="comment-content">'.$comment->comment_content.' <a href="' . $commenturl . '" rel="bookmark" title="Permanent Link to ' . $comment->post_title . '">#</a></p>';
-                            echo '<p class="comment-time">' . $commenttime . '</p></li>';
-                        }
-                        echo "</ul></div><!-- .comments -->";
-                    }
-                    
-                }
-            
+                }// if !is_paged() for show author bio
                 
+                
+                // articles
+                rewind_posts();
+                if ( have_posts() ){
+                    echo '<h2 class="page-element stories">Stories</h2>';
+                    while ( have_posts() ) { 
+                        the_post();
+                        // show post with art, sized at 300px 
+                        calpress_loop_content(false, 300, true, true, true, true, 100);
+                    }
+                ?>
+                    <div id="nav-below" class="navigation">
+        				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
+        				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+        			</div>
+                <?php    
+                }
+                
+            // end author page    
+            } else {
+            // A non-author page
+                
+                //photo
+                if ( userphoto_exists($authordata) ) {
+                    $profile_pic = calpress_sizedimageurl(WP_CONTENT_URL . '/uploads/userphoto/'.$authordata->userphoto_image_file, 380);
+                    echo '<div id="author-photo">';
+                        echo '<img class="photo" src="' . $profile_pic .'" alt="Profile photo: ' . $authordata->display_name .'" />';
+                    echo '</div>';
+                }
+                
+                echo '<div id="author-meta">'; 
+                
+                echo '<p class="author-profile aux">Real name: '. $authordata->first_name . ' '. $authordata->last_name . '</p>';
+                printf ('<p class="author-profile aux">Joined: %s</p>', date( 'F j, Y', strtotime($authordata->user_registered)) );
+                
+                // twitter
+                if (!empty($authordata->twitter)) {
+                    printf ('<p class="author-profile aux twitter">Twitter: <a href="http://twitter.com/%s">@%s</a></p>', $authordata->twitter, $authordata->twitter);
+                }
+
+                // website
+                if (!empty($authordata->user_url)) {
+                    printf ('<p class="author-profile aux website">Website: <a href="%s">%s</a></p>', $authordata->user_url, $authordata->user_url);
+                }
+                
+                // participation
+                printf ('<p class="author-profile aux participation participation-count-%s">Participation: %s comment%s, %s stor%s</p>', count($author_comments), count($author_comments), pluralize(count($author_comments)), count($posts), pluralize( count($posts), 'ies', 'y') );
+                
+                //bio
+                $authordesc = $authordata->user_description; 
+                if ( !empty($authordesc) ){
+                    echo '<div id="author-bio">';
+                    echo "<p>$authordesc</p>";
+                    echo '</div>';
+                }
+                
+                echo '</div><!-- #author-meta -->';
+                
+                if ($author_comments) {
+                    echo '<h2 class="page-element comments">Comments</h2>';
+                    echo '<div class="comments"><ul>';
+                    foreach ($author_comments as $comment){
+                        $posturl = get_permalink( $comment->comment_post_ID );
+                        $commenturl = $posturl . "#comment-$comment->comment_ID";
+                        $commenttime =  date( 'F j, Y \a\t g:i a', strtotime($comment->comment_date) );
+                        echo '<li><p class="comment-post">Posted on: <em><a href="' . $posturl .'" title="Permanent Link to ' . $comment->post_title . '">' . $comment->post_title . '</a></em></p>';
+                        echo '<p class="comment-content">'.$comment->comment_content.' <a href="' . $commenturl . '" rel="bookmark" title="Permanent Link to ' . $comment->post_title . '">#</a></p>';
+                        echo '<p class="comment-time">' . $commenttime . '</p></li>';
+                    }
+                    echo "</ul></div><!-- .comments -->";
+                }
+            }
             
-            echo '</div>';
             
             // if grunion contact form plugin is enabled, show a contact form for the user
             if (function_exists('contact_form_init')) {
@@ -186,14 +210,8 @@
             ?>
             
             <?php if ($is_author): ?>
-                <?php if (get_the_author_meta('twitter')): ?>
-                    <h2 class="page-element twitter">Twitter</h2>
-                    <?php calpress_twitterprofile(get_the_author_meta('twitter')); ?>
-                <?php endif ?>
+                
             <?php endif ?>
-            
-
-
 			
 
 		</div><!-- #content -->
