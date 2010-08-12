@@ -563,8 +563,14 @@ body.login .button-primary{
 
 /* Blog */
 
-/* News */ 
-body.front-layout-news #lead-story, body.front-layout-news #secondary-stories {
+
+
+/* 
+    News 
+    - in two parts
+    - the front page (body.home) is structred and boxy. The "paged" pages (body.home.paged [/page/2/]) are blog-like
+*/ 
+body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, body.front-layout-news #tertiary-stories {
     /* avoid clearing after */
     overflow: auto;
     width: 100%;
@@ -637,7 +643,7 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories {
         font-size: 1.4em;
     }
     
-    #secondary-block .more{
+    #secondary-block .more, #secondary-block .navigation{
         clear: left;
     }
     
@@ -666,10 +672,6 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories {
     #tertiary-stories .entry-title{
         font-size: 18px;
         line-height: 18px;
-    }
-    
-    #tertiary-stories .more{
-        margin: 18px 0;
     }
     
     #extra-features{

@@ -28,34 +28,64 @@
 //  @return string
 ?>
 <?php $storyCounter = 0 ?>
-<?php while ( have_posts() ) : the_post() ?>
 
-    <?php if ($storyCounter === 0): // lead story ?>
-        <div id="lead-story">
-            <?php // show post with art, sized at 300px ?>
-            <?php calpress_loop_content(true, 300, true, true, true, true, 70); ?>
-        </div><!-- #lead story -->
-        <div class="clear"></div>
-    <?php elseif ($storyCounter === 1 ): // story 2 ?>
-        <div id="secondary-block">
-            <h3>News</h3>
-            <div id="secondary-stories">
+<?php // Only show news design page on the very front page. Once we start paging, go to a basic view ?>
+<?php if (!is_paged()): ?>
+    <?php while ( have_posts() ) : the_post() ?>
+
+        <?php if ($storyCounter === 0): // lead story ?>
+            <div id="lead-story">
                 <?php // show post with art, sized at 300px ?>
-                <?php calpress_loop_content(true, 300, true, true, true, true, 15); ?>
-                
-    <?php elseif ($storyCounter === 2): //story 3 ?>
-            
-                <?php // show post with art, sized at 300px ?>
-                <?php calpress_loop_content(true, 300, true, true, true, true, 15); ?>
-            
-            </div><!-- #secondary-stories -->
-            <div id="tertiary-stories">         
-    <?php elseif ($storyCounter > 2): ?>
-            <?php calpress_loop_content(false, 0, false,true,true,false, 0); ?>
-    <?php endif; ?>
+                <?php calpress_loop_content(true, 300, true, true, true, true, 70); ?>
+            </div><!-- #lead story -->
+            <div class="clear"></div>
+        <?php elseif ($storyCounter === 1 ): // story 2 ?>
+            <div id="secondary-block">
+                <h3>News</h3>
+                <div id="secondary-stories">
+                    <?php // show post with art, sized at 300px ?>
+                    <?php calpress_loop_content(true, 300, true, true, true, true, 15); ?>
+
+        <?php elseif ($storyCounter === 2): //story 3 ?>
+
+                    <?php // show post with art, sized at 300px ?>
+                    <?php calpress_loop_content(true, 300, true, true, true, true, 15); ?>
+
+                </div><!-- #secondary-stories -->
+                <div id="tertiary-stories">         
+        <?php elseif ($storyCounter > 2): ?>
+                <?php calpress_loop_content(false, 0, false,true,true,false, 0); ?>
+        <?php endif; ?>
+
+    <?php $storyCounter++ ?>
+    <?php endwhile; ?>
+        </div><!-- #tertiary-stories -->
+            <div id="nav-below" class="navigation">
+            	<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
+            	<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+            </div>
+        </div><!-- #secondary-block -->
+
+<?php else: ?>    
     
-<?php $storyCounter++ ?>
-<?php endwhile; ?>
-    	<p class="more"><a href="/page/2/">More news</a></p>
-    </div><!-- #tertiary-stories -->
-</div><!-- #secondary-block -->
+    <div id="nav-above" class="navigation">
+    	<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
+    	<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+    </div>
+
+    <?php while ( have_posts() ) : the_post() ?>
+        <?php // show post with art, sized at 620px ?>
+        <?php calpress_loop_content(); ?>
+
+    <?php endwhile; ?>
+
+    <div id="nav-below" class="navigation">
+    	<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
+    	<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+    </div>
+    
+<?php endif ?>
+
+
+    
+    
