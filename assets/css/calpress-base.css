@@ -429,8 +429,8 @@ body.author .entry-meta .vcard, body.author .entry-meta .meta-sep{
 
 body.author h3.title{
     font-style: italic;
-    font-size: 1.2em;
-    margin-top: -24px;
+    font-size: 1.4em;
+    margin-top: -21px;
     font-weight: 300;
 }
 
@@ -499,7 +499,20 @@ body.author #content.community-profile .participation{
 }
 
 body.author h2.entry-title{
-    
+    font-size: 1em;
+    line-height: 1.2em;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+body.author .entry-meta, body.author .entry-content{
+    padding: 0 15px;
+}
+
+body.author .post{
+    border-top:1px solid #000000;
+    padding: 4px 0;
+    margin-bottom: 4px;
 }
 /*************************
  Package Page

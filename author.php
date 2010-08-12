@@ -133,11 +133,13 @@
                 rewind_posts();
                 if ( have_posts() ){
                     echo '<h3 class="page-element stories">Stories</h3>';
+                    echo '<div class="stories">';
                     while ( have_posts() ) { 
                         the_post();
                         // show post with art, sized at 300px 
                         calpress_loop_content(false, 300, true, true, true, true, 15);
                     }
+                    echo "</div><!-- .stories -->";
                 ?>
                     <div id="nav-below" class="navigation">
         				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
