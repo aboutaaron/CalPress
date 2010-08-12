@@ -1035,6 +1035,12 @@ function change_contactmethod( $contactmethods ) {
   $contactmethods['twitter'] = 'Twitter Name (no @)';
   $contactmethods['phone'] = 'Phone Number';
   $contactmethods['title'] = 'Title';
+  $contactmethods['org'] = 'Organization';
+  $contactmethods['address_1'] = 'Address Line 1';
+  $contactmethods['address_2'] = 'Address Line 2';
+  $contactmethods['address_city'] = 'City';
+  $contactmethods['address_state'] = 'State';
+  $contactmethods['address_zip'] = 'Zip Code';
   // Remove AIM, Yahoo IM, Google Talk/Jabber
   unset($contactmethods['aim']);
   unset($contactmethods['yim']);
@@ -1318,4 +1324,10 @@ function calpress_author_comments($author_name, $author_email, $postID = null, $
     require_once('get-author-comments.php');
     ppm_author_comments($author_name, $author_email, $postID, $args);
 }
+
+// http://www.nerdydork.com/simple-php-pluralize.html
+function pluralize($num, $plural = 's', $single = '') {
+    if ($num == 1) return $single; else return $plural;
+}
+
 ?>
