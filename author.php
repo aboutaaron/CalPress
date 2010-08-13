@@ -106,24 +106,27 @@
                     echo '</div><!-- #author-meta -->';      
                     
                     if (get_the_author_meta('twitter')){
-                        echo '<h3 class="page-element twitter">Twitter</h3>';
-                        calpress_twitterprofile(get_the_author_meta('twitter')); 
+                        //echo '<h3 class="page-element twitter">Twitter</h3>';
+                        //calpress_twitterprofile(get_the_author_meta('twitter')); 
                     }
                     
-                    // comments
-                    if ($author_comments) {
-                        echo '<h3 class="page-element comments">Recent Comments</h3>';
-                        echo '<div class="comments"><ul>';
-                        foreach ($author_comments as $comment){
-                            $posturl = get_permalink( $comment->comment_post_ID );
-                            $commenturl = $posturl . "#comment-$comment->comment_ID";
-                            $commenttime =  date( 'F j, Y \a\t g:i a', strtotime($comment->comment_date) );
-                            echo '<li><p class="comment-post">Posted on: <em><a href="' . $posturl .'" title="Permanent Link to ' . $comment->post_title . '">' . $comment->post_title . '</a></em></p>';
-                            echo '<p class="comment-content">'.$comment->comment_content.' <a href="' . $commenturl . '" rel="bookmark" title="Permanent Link to ' . $comment->post_title . '">#</a></p>';
-                            echo '<p class="comment-time">' . $commenttime . '</p></li>';
+                    echo '<div id="contributed-content">';
+                    calpress_hook_authorpage_precontributedcontent();
+                        // comments
+                        if ($author_comments) {
+                            
+                            echo '<div id="author-comments">';
+                            echo '<h3 class="page-element comments">Recent Comments</h3><ul>';
+                            foreach ($author_comments as $comment){
+                                $posturl = get_permalink( $comment->comment_post_ID );
+                                $commenturl = $posturl . "#comment-$comment->comment_ID";
+                                $commenttime =  date( 'F j, Y \a\t g:i a', strtotime($comment->comment_date) );
+                                echo '<li><p class="comment-post">Posted on: <em><a href="' . $posturl .'" title="Permanent Link to ' . $comment->post_title . '">' . $comment->post_title . '</a></em></p>';
+                                echo '<p class="comment-content">'.$comment->comment_content.' <a href="' . $commenturl . '" rel="bookmark" title="Permanent Link to ' . $comment->post_title . '">#</a></p>';
+                                echo '<p class="comment-time">' . $commenttime . '</p></li>';
+                            }
+                            echo "</ul></div><!-- #author-comments -->";
                         }
-                        echo "</ul></div><!-- .comments -->";
-                    }
                     
                     
                 }// if !is_paged() for show author bio
@@ -132,20 +135,25 @@
                 // articles
                 rewind_posts();
                 if ( have_posts() ){
+                    echo '<div id="author-stories">';
                     echo '<h3 class="page-element stories">Stories</h3>';
-                    echo '<div class="stories">';
                     while ( have_posts() ) { 
                         the_post();
                         // show post with art, sized at 300px 
                         calpress_loop_content(false, 300, true, true, true, true, 15);
                     }
-                    echo "</div><!-- .stories -->";
-                ?>
+                    ?>
                     <div id="nav-below" class="navigation">
         				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
         				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
         			</div>
                 <?php    
+                    echo "</div><!-- #author-stories -->";  
+                    
+                    //close out contributed content only if not a paged view
+                    if (!is_paged()) {
+                        echo '</div><!-- #contributed-content -->';   
+                    }
                 }
                 
             // end author page    

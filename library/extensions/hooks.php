@@ -249,4 +249,16 @@ function calpress_hook_comment_message() {
 	do_action('calpress_hook_comment_message');
 }
 
+/**
+ * calpress_hook_authorpage_precontributedcontent()
+ *
+ * Template function appearing in author.php, allows actions
+ * to be executed just inside the contributed content div, where stories and comments go
+ * @example add_action('calpress_hook_authorpage_precontributedcontent', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_authorpage_precontributedcontent
+ */
+function calpress_hook_authorpage_precontributedcontent() {
+	do_action('calpress_hook_authorpage_precontributedcontent');
+}
 ?>
