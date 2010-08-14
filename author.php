@@ -154,10 +154,11 @@
                 
                 
                 // if grunion contact form plugin is enabled, show a contact form for the user
-                if (function_exists('contact_form_init')) {
+                if (function_exists('contact_form_init') && !empty($authordata->user_email)) {
+                    $contactformmarkup = '[contact-form to="' . $authordata->user_email . '"]';
                     echo '<div id="author-contact">';
                         echo '<h3 class="page-element contact">Contact</h3>';
-                        echo do_shortcode('[contact-form to="josh@joshwilliams.com"]');
+                        echo do_shortcode($contactformmarkup);
                     echo "</div><!-- #author-contact -->";
                 } 
                 
