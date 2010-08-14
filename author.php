@@ -146,11 +146,20 @@
                     echo "</div><!-- #author-stories -->";  
                                         
                 if (get_the_author_meta('twitter')){
-                    echo '<h3 class="page-element twitter">Twitter</h3>';
                     echo '<div id="author-twitter">';
+                    echo '<h3 class="page-element twitter">Twitter</h3>';
                         calpress_twitterprofile(get_the_author_meta('twitter'));
                     echo "</div><!-- #author-twitter -->";  
-                }    
+                }   
+                
+                
+                // if grunion contact form plugin is enabled, show a contact form for the user
+                if (function_exists('contact_form_init')) {
+                    echo '<div id="author-contact">';
+                        echo '<h3 class="page-element contact">Contact</h3>';
+                        echo do_shortcode('[contact-form to="josh@joshwilliams.com"]');
+                    echo "</div><!-- #author-contact -->";
+                } 
                 
                     //close out contributed content only if not a paged view
                     if (!is_paged()) {
@@ -212,16 +221,7 @@
                     echo "</ul></div><!-- .comments -->";
                 }
             }
-            
-            
-            // if grunion contact form plugin is enabled, show a contact form for the user
-            if (function_exists('contact_form_init')) {
-                //echo do_shortcode('[contact-form to="josh@joshwilliams.com"]');
-            }
              
-            
-            
-        
 
             ?>
             

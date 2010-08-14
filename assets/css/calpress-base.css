@@ -514,6 +514,11 @@ body.author .post{
     padding: 4px 0;
     margin-bottom: 4px;
 }
+
+body.author #author-contact textarea{
+    width: 100%;
+}
+
 /*************************
  Package Page
  #content.package
