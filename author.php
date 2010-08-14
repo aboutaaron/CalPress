@@ -156,7 +156,7 @@
                 // if grunion contact form plugin is enabled, show a contact form for the user
                 if (function_exists('contact_form_init') && !empty($authordata->user_email)) {
                     $blogname = get_bloginfo('name');
-                    $contactformmarkup = '[contact-form to="' . $authordata->user_email . '" subject="Your profile on ' . $blogname . '" show_subject="yes"]';
+                    $contactformmarkup = '[contact-form to="' . $authordata->user_email . '" subject="Your profile on ' . $blogname . '"]';
                     echo '<div id="author-contact">';
                         echo '<h3 class="page-element contact">Contact</h3>';
                         echo do_shortcode($contactformmarkup);

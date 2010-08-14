@@ -1041,6 +1041,8 @@ function change_contactmethod( $contactmethods ) {
   $contactmethods['address_city'] = 'City';
   $contactmethods['address_state'] = 'State';
   $contactmethods['address_zip'] = 'Zip Code';
+  $contactmethods['short_bio'] = 'Short biography';
+  
   // Remove AIM, Yahoo IM, Google Talk/Jabber
   unset($contactmethods['aim']);
   unset($contactmethods['yim']);
