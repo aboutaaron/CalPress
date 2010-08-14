@@ -105,11 +105,6 @@
                         echo '</div><div class="clear"></div><!-- .company -->';
                     echo '</div><!-- #author-meta -->';      
                     
-                    if (get_the_author_meta('twitter')){
-                        //echo '<h3 class="page-element twitter">Twitter</h3>';
-                        //calpress_twitterprofile(get_the_author_meta('twitter')); 
-                    }
-                    
                     echo '<div id="contributed-content">';
                     calpress_hook_authorpage_precontributedcontent();
                         // comments
@@ -149,7 +144,14 @@
         			</div>
                 <?php    
                     echo "</div><!-- #author-stories -->";  
-                    
+                                        
+                if (get_the_author_meta('twitter')){
+                    echo '<h3 class="page-element twitter">Twitter</h3>';
+                    echo '<div id="author-twitter">';
+                        calpress_twitterprofile(get_the_author_meta('twitter'));
+                    echo "</div><!-- #author-twitter -->";  
+                }    
+                
                     //close out contributed content only if not a paged view
                     if (!is_paged()) {
                         echo '</div><!-- #contributed-content -->';   
