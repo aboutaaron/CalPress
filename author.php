@@ -50,7 +50,7 @@
                 if (!is_paged()) {
                     //photo
                     if ( userphoto_exists($authordata) ) {
-                        $profile_pic = calpress_sizedimageurl(WP_CONTENT_URL . '/uploads/userphoto/'.$authordata->userphoto_image_file, 380);
+                        $profile_pic = calpress_sizedimageurl(WP_CONTENT_URL . '/uploads/userphoto/'.$authordata->userphoto_image_file, 220);
                         echo '<div id="author-photo">';
                             echo '<img class="photo" src="' . $profile_pic .'" alt="Profile photo: ' . $authordata->display_name .'" />';
                         echo '</div>';
