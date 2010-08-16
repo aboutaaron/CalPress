@@ -547,6 +547,25 @@ function calpress_sizedimage($srcimg, $w, $alt=""){
 }
 
 /**
+ * Returns an img element with image url for a resized and cropped version of any image on the server
+ *
+ * Resize will only go from larger image to smaller image. The suggested upload 
+ * size of all images is around 1600px on the longest side for maximum flexibility.
+ *
+ * @param string $srcimg = the location of the original, unsized image on the server
+ * @param int $w = the output size of the image
+ * @param int $h = the output height image
+ * @param int $z = zoom crop 
+ * @param string $alt = image alt text
+ * @return string
+ */
+function calpress_croppedimage($srcimg, $w, $h, $z=1,$alt=""){
+    $imgsrc = calpress_croppedimageurl($srcimg, $w, $h, $z);
+    $formattedURL = "<img alt=\"$alt\" src =\"$imgsrc\" />";
+    return $formattedURL;
+}
+
+/**
  * Returns an image path to dynamically resized image
  *
  * @param string $srcimg = the location of the original, unsized image on the server
@@ -555,6 +574,20 @@ function calpress_sizedimage($srcimg, $w, $alt=""){
  */
 function calpress_sizedimageurl($srcimg, $w){
     $imgsrc = CALPRESSURI.'/library/extensions/timthumb.php?src='.$srcimg.'&amp;w='.$w;//resizer script
+    return $imgsrc;
+}
+
+/**
+ * Returns an image path to dynamically resized image
+ *
+ * @param string $srcimg = the location of the original, unsized image on the server
+ * @param int $w = the output width of the image
+ * @param int $h = the output height of the image
+ * @param int $z = crop zoom
+ * @return string
+ */
+function calpress_croppedimageurl($srcimg, $w, $h, $z){
+    $imgsrc = CALPRESSURI.'/library/extensions/timthumb.php?src='.$srcimg.'&amp;w='.$w.'&amp;h='.$h.'&amp;z='.$z;//resizer script
     return $imgsrc;
 }
 
