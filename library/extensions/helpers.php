@@ -747,8 +747,6 @@ function calpress_get_weighted_story_list($number_of_posts = 10, $images_require
     // limit number of results
     $query .= " LIMIT $number_of_posts;";
     
-    echo $query;
-    
     //exectute query
     return $wpdb->get_results($query);
 }
