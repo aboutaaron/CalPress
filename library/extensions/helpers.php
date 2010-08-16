@@ -708,6 +708,53 @@ function calpress_popularposts($num=10, $days=20) {
 }
 
 /**
+ * Return an array of stories weighted by timeliness and number of comments
+ *
+ * @param int $number_of_posts = number of results. default = 10
+ * @param boolean $images_required = only return posts with images. default = true
+ * @param int/array int or an array of ints with IDs that must be excluded from search 
+ * @return string
+ */
+function calpress_get_weighted_story_list($number_of_posts = 10, $images_required = true, $exludeposts = array()) {
+    global $wpdb;  
+    
+    // build query
+    
+    // find only posts with images?
+   if ($images_required) {
+       $query = "SELECT wp_posts.ID, wp_posts.post_title AS post_title, wp_posts.post_date, ( To_days(now()) - To_days(wp_posts.post_date) ) AS post_age, ( 8 - ( To_days(now()) - To_days(wp_posts.post_date) ) ) AS post_weight, wp_posts.comment_count, (1 + wp_posts.comment_count ) * ( 8 - ( To_days(now()) - To_days(wp_posts.post_date) ) ) AS post_relevance, attachments.post_title AS attachment_title, attachments.guid as attachment_file from $wpdb->posts LEFT JOIN $wpdb->posts AS attachments on wp_posts.id = attachments.post_parent WHERE wp_posts.post_status LIKE 'publish' AND wp_posts.post_type LIKE 'post' AND attachments.post_type LIKE 'attachment'";  
+   } else {
+        $query = "SELECT wp_posts.ID, wp_posts.post_title AS post_title, wp_posts.post_date, ( To_days(now()) - To_days(wp_posts.post_date) ) AS post_age, ( 8 - ( To_days(now()) - To_days(wp_posts.post_date) ) ) AS post_weight, wp_posts.comment_count, (1 + wp_posts.comment_count ) * ( 8 - ( To_days(now()) - To_days(wp_posts.post_date) ) ) AS post_relevance from $wpdb->posts WHERE wp_posts.post_status LIKE 'publish' AND wp_posts.post_type LIKE 'post'";  
+   }
+    
+    
+    // exclude certain posts
+    if (!empty($exludeposts)) {
+        if (is_array($exludeposts)) {
+            $excludes = " AND wp_posts.ID != ";
+            $excludes .= implode(" AND wp_posts.ID != ", $exludeposts);
+        }
+        elseif (is_int($exludeposts)) {
+            $excludes = " AND wp_posts.ID != " . $exludeposts;
+        }
+    }
+
+    $query .= $excludes;
+    
+    // group and sort
+    $query .= " GROUP BY wp_posts.ID ORDER BY wp_posts.post_date DESC";
+    
+    // limit number of results
+    $query .= " LIMIT $number_of_posts;";
+    
+    echo $query;
+    
+    //exectute query
+    return $wpdb->get_results($query);
+}
+
+
+/**
  * Return a string from a post or page formatted to be a list categories for a WP Query object.
  *
  * see: http://codex.wordpress.org/Template_Tags/query_posts
