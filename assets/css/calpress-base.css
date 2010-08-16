@@ -341,6 +341,13 @@ li.comment p br{
     margin-bottom: 10px;
 }
 
+/*
+ Twitter Search
+*/
+.twitter-search{
+    clear: both;
+}
+
 /*************************
  Comments
  #comments
@@ -348,6 +355,11 @@ li.comment p br{
  http://bavotasan.com/tutorials/how-to-add-nested-comments-to-your-wordpress-theme/
  http://wordpress.org/extend/themes/magazine-basic
 *************************/
+
+#comments{
+    clear: both;
+}
+
 #comments-list > h3{
 	background-color: #999;
 	color: #fff;

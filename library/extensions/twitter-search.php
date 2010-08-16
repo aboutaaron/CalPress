@@ -47,13 +47,13 @@ function calpress_twittersearch(){
               height: 300,
               theme: {
                 shell: {
-                     background: '#333333',
+                     background: '#999999',
                       color: '#ffffff'
                 },
                 tweets: {
-                    background: '#000000',
-                    color: '#ffffff',
-                    links: '#4aed05'
+                    background: '#eeeeee',
+                    color: '#000000',
+                    links: '#666666'
                 }
               },
               features: {
@@ -95,13 +95,13 @@ function calpress_twitterprofile($twitterhandle){
               height: 300,
               theme: {
                 shell: {
-                  background: '#333333',
+                  background: '#999999',
                   color: '#ffffff'
                 },
                 tweets: {
-                  background: '#000000',
-                  color: '#ffffff',
-                  links: '#4aed05'
+                  background: '#eeeeee',
+                  color: '#000000',
+                  links: '#666666'
                 }
               },
               features: {
