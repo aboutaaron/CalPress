@@ -3,7 +3,7 @@
 // http://calpresstheme.org
 //
 // CalPress is a project of the University of California 
-// Graduate School of Journalism
+// Berkeley Graduate School of Journalism
 // http://journalism.berkeley.edu
 //
 // Copyright (c) 2010 The Regents of the University of California
