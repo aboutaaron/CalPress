@@ -416,7 +416,9 @@ ol.commentlist li div.reply:hover, #comments input#submit:hover, input.pushbutto
     cursor:pointer;cursor:hand
 }
 
-
+#comments #respond{
+    margin-top: 18px;
+}
 
 /*************************
  Category / Author and all default archive pages
