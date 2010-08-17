@@ -33,7 +33,8 @@
 
 
             if ($is_author) {
-                echo '<h2 class="page-title"><span class="author-name">'.$authordata->display_name.'</span></h2>';
+                $authorurl = get_author_posts_url( $authordata->ID, $authordata->user_nicename );
+                echo '<h2 class="page-title"><span class="author-name"><a href="' . $authorurl . '">'.$authordata->display_name.'</a></span></h2>';
                 if (!empty($authordata->title)) {
                     echo '<h3 class="sub-hed title">' . $authordata->title . '</h3>';
                 }
@@ -48,6 +49,7 @@
              
                 // Author pages may be "paged" with old stories. Only show bios on the first page.
                 if (!is_paged()) {
+                    
                     //photo
                     if ( userphoto_exists($authordata) ) {
                         $profile_pic = calpress_sizedimageurl(WP_CONTENT_URL . '/uploads/userphoto/'.$authordata->userphoto_image_file, 220);
@@ -55,6 +57,10 @@
                             echo '<img class="photo" src="' . $profile_pic .'" alt="Profile photo: ' . $authordata->display_name .'" />';
                         echo '</div>';
                     }
+                }// if !is_paged() 
+
+
+                if (!is_paged()) {
 
                     echo '<div id="author-meta">'; 
                         //bio
@@ -104,70 +110,85 @@
                             }
                         echo '</div><div class="clear"></div><!-- .company -->';
                     echo '</div><!-- #author-meta -->';      
+                }// if !is_paged() 
+                
+                echo '<div id="contributed-content">';
                     
-                    echo '<div id="contributed-content">';
-                    calpress_hook_authorpage_precontributedcontent();
-                        // comments
-                        if ($author_comments) {
+                     // comments
+                    if (!is_paged()) {   
+                                       
+                        calpress_hook_authorpage_precontributedcontent();
+                                         
+                        echo '<div id="author-comments">';
+                            echo '<h3 class="page-element comments">Recent Comments</h3>';
                             
-                            echo '<div id="author-comments">';
-                            echo '<h3 class="page-element comments">Recent Comments</h3><ul>';
-                            foreach ($author_comments as $comment){
-                                $posturl = get_permalink( $comment->comment_post_ID );
-                                $commenturl = $posturl . "#comment-$comment->comment_ID";
-                                $commenttime =  date( 'F j, Y \a\t g:i a', strtotime($comment->comment_date) );
-                                echo '<li><p class="comment-post">Posted on: <em><a href="' . $posturl .'" title="Permanent Link to ' . $comment->post_title . '">' . $comment->post_title . '</a></em></p>';
-                                echo '<p class="comment-content">'.$comment->comment_content.' <a href="' . $commenturl . '" rel="bookmark" title="Permanent Link to ' . $comment->post_title . '">#</a></p>';
-                                echo '<p class="comment-time">' . $commenttime . '</p></li>';
+                            if ($author_comments) {
+                                echo '<ul>';
+                                foreach ($author_comments as $comment){
+                                    $posturl = get_permalink( $comment->comment_post_ID );
+                                    $commenturl = $posturl . "#comment-$comment->comment_ID";
+                                    $commenttime =  date( 'F j, Y \a\t g:i a', strtotime($comment->comment_date) );
+                                    echo '<li><p class="comment-post">Posted on: <em><a href="' . $posturl .'" title="Permanent Link to ' . $comment->post_title . '">' . $comment->post_title . '</a></em></p>';
+                                    echo '<p class="comment-content">'.$comment->comment_content.' <a href="' . $commenturl . '" rel="bookmark" title="Permanent Link to ' . $comment->post_title . '">#</a></p>';
+                                    echo '<p class="comment-time">' . $commenttime . '</p></li>';
+                                }
+                                echo '</ul>';
+                            } else {
+                                echo '<p>No comments yet.</p>';
                             }
-                            echo "</ul></div><!-- #author-comments -->";
-                        }
-                    
-                    
-                }// if !is_paged() for show author bio
+                        echo "</div><!-- #author-comments -->";
+                        
+                    }
                 
+                    
                 
-                // articles
-                rewind_posts();
-                if ( have_posts() ){
+                    // articles
+                    rewind_posts();
                     echo '<div id="author-stories">';
-                    echo '<h3 class="page-element stories">Stories</h3>';
-                    while ( have_posts() ) { 
-                        the_post();
-                        // show post with art, sized at 300px 
-                        calpress_loop_content(false, 300, true, true, true, true, 15);
-                    }
-                    ?>
-                    <div id="nav-below" class="navigation">
-        				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
-        				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
-        			</div>
-                <?php    
+                        echo '<h3 class="page-element stories">Stories</h3>';
+                        if ( have_posts() ){
+                            while ( have_posts() ) { 
+                                the_post();
+                                // show post with art, sized at 300px 
+                                calpress_loop_content(false, 300, true, true, true, true, 15);
+                            }
+                        ?>
+                            <div id="nav-below" class="navigation">
+                				<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
+                				<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+                			</div>
+                    <?php
+                        } else {
+                            echo '<p>No stories yet.</p>';
+                        }
                     echo "</div><!-- #author-stories -->";  
-                                        
-                if (get_the_author_meta('twitter')){
-                    echo '<div id="author-twitter">';
-                    echo '<h3 class="page-element twitter">Twitter</h3>';
-                        calpress_twitterprofile(get_the_author_meta('twitter'));
-                    echo "</div><!-- #author-twitter -->";  
-                }   
+                    
+                        
+                    // twitter
+                    if (!is_paged()) {   
+                        echo '<div id="author-twitter">';
+                        echo '<h3 class="page-element twitter">Twitter</h3>';                    
+                        if (get_the_author_meta('twitter')){
+                            calpress_twitterprofile(get_the_author_meta('twitter'));
+                        } else {
+                            echo '<p>No tweets yet.</p>';
+                        }
+                        echo "</div><!-- #author-twitter -->";
+                    }   
                 
+                    // if grunion contact form plugin is enabled, show a contact form for the user
+                    /*
+                    if (function_exists('contact_form_init') && !empty($authordata->user_email)) {
+                        $blogname = get_bloginfo('name');
+                        $contactformmarkup = '[contact-form to="' . $authordata->user_email . '" subject="Your profile on ' . $blogname . '"]';
+                        echo '<div id="author-contact">';
+                            echo '<h3 class="page-element contact">Contact</h3>';
+                            echo do_shortcode($contactformmarkup);
+                        echo "</div><!-- #author-contact -->";
+                    }*/ 
                 
-                // if grunion contact form plugin is enabled, show a contact form for the user
-                if (function_exists('contact_form_init') && !empty($authordata->user_email)) {
-                    $blogname = get_bloginfo('name');
-                    $contactformmarkup = '[contact-form to="' . $authordata->user_email . '" subject="Your profile on ' . $blogname . '"]';
-                    echo '<div id="author-contact">';
-                        echo '<h3 class="page-element contact">Contact</h3>';
-                        echo do_shortcode($contactformmarkup);
-                    echo "</div><!-- #author-contact -->";
-                } 
-                
-                    //close out contributed content only if not a paged view
-                    if (!is_paged()) {
-                        echo '</div><!-- #contributed-content -->';   
-                    }
-                }
+                echo '</div><!-- #contributed-content -->';   
+              
                 
             // end author page    
             } else {
