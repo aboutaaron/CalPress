@@ -37,6 +37,7 @@
             <div id="lead-story">
                 <?php // show post with art, sized at 300px ?>
                 <?php calpress_loop_content(true, 300, true, true, true, true, 70); ?>
+                <p class="more"><a href="<?php the_permalink() ?>">More</a></p>
             </div><!-- #lead story -->
             <div class="clear"></div>
         <?php elseif ($storyCounter === 1 ): // story 2 ?>
