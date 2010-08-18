@@ -44,6 +44,9 @@ function calpress_init() {
      
     //Non-standard, Calpress-specific plugins and scripts
     //wp_enqueue_script('calpress-min', PARENTJS . '/calpress-min.js');  
+    
+    //Featured comments
+    wp_enqueue_script( 'feature_comments', PARENTJS . '/feature-comments.js', array( 'jquery' ) );
 }    
 add_action('init', 'calpress_init');
 

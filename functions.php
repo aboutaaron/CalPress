@@ -144,6 +144,9 @@ require_once(THEMELIB . '/extensions/media-players.php');
 // Load user photo functionality
 require_once(THEMELIB . '/extensions/user-photo.php');
 
+// Load featured comment functionality
+require_once(THEMELIB . '/extensions/featured-comments.php');
+
 // Load Geotag functionality
 require_once(THEMELIB . '/extensions/admin-geotag.php');
 
