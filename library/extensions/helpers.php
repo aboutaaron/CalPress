@@ -1153,6 +1153,29 @@ function calpress_inspanish(){
 }
 
 /**
+ * Much like calpress_trim_except, except can trim any text to a lenght
+ *
+ * @param $length - int - number of words to use in the excerpt
+ * @return string
+ */ 
+function calpress_trim_text($text, $length = 55) {
+    
+	$text = str_replace(']]>', ']]&gt;', $text);
+	$text = strip_tags($text);
+	$excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
+	$words = preg_split("/[\n\r\t ]+/", $text, $length + 1, PREG_SPLIT_NO_EMPTY);
+	if ( count($words) > $length ) {
+		array_pop($words);
+		$text = implode(' ', $words);
+		$text = $text . $excerpt_more;
+	} else {
+		$text = implode(' ', $words);
+	}
+	
+	return $text;
+}
+
+/**
  * A custom version of WP's the_excerpt. This one
  * allows for a truncation length to be set. 
  *
@@ -1408,6 +1431,21 @@ function calpress_author_comments($author_name, $author_email, $postID = null, $
 // http://www.nerdydork.com/simple-php-pluralize.html
 function pluralize($num, $plural = 's', $single = '') {
     if ($num == 1) return $single; else return $plural;
+}
+
+/**
+ * Returns object of featured comments, sorted by my recently commented.
+ *
+ * This function assumes use of the featured-comments.php file, which updates wp_commentsmeta table
+ *
+ * @param int $limit - number of comments to return
+ * 
+ * @return obj
+ */
+function calpress_featured_comments($limit = 1){
+    global $wpdb;
+    $sql = "SELECT wp_commentmeta.*, wp_comments.comment_ID, wp_comments.comment_content, wp_comments.comment_post_ID, wp_comments.comment_author, wp_comments.comment_date, wp_posts.post_title, wp_posts.post_date FROM $wpdb->commentmeta, $wpdb->comments, $wpdb->posts WHERE wp_commentmeta.meta_key LIKE 'featured' AND wp_commentmeta.meta_value = 1 AND wp_commentmeta.comment_id = wp_comments.comment_ID AND wp_posts.id = wp_comments.comment_post_ID ORDER BY wp_commentmeta.meta_id DESC LIMIT $limit;";
+    return $wpdb->get_results($sql);
 }
 
 ?>
