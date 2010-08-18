@@ -413,7 +413,8 @@ ol.commentlist li div.reply:hover, #comments input#submit:hover, input.pushbutto
 #comments input#submit, input.pushbutton-wide{
     width: 85px;
     margin: 20px 0;
-    cursor:pointer;cursor:hand
+    cursor:pointer;
+    cursor:hand;
 }
 
 #comments #respond{
@@ -625,6 +626,23 @@ body.login .button-primary{
 	font-weight:bold;
 	text-shadow:0;
 	-moz-border-radius: 0;
+}
+
+/* generic home page rules */
+
+.home.paged .post{
+    border-top: 1px solid #000;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.home.paged .p1{
+    border-top: 0;
+    padding-top: 0;
+}
+
+.home.paged .post .entry-content p{
+    margin-bottom: 2px;
 }
 
 /*************************
