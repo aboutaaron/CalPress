@@ -421,6 +421,10 @@ ol.commentlist li div.reply:hover, #comments input#submit:hover, input.pushbutto
     margin-top: 18px;
 }
 
+.bypostauthor{
+    background-color: #FEFFCD;
+}
+
 /*************************
  Category / Author and all default archive pages
  body.page-template-category-page-php or body.category
