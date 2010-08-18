@@ -37,6 +37,33 @@ function calpress_hook_blogtitle() {
 }
 
 /**
+ * calpress_hook_prewrapper()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed before the  <div id="wrapper"> block.
+ * @example add_action('calpress_hook_prewrapper', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_prewrapper
+ */
+function calpress_hook_prewrapper() {
+	do_action('calpress_hook_prewrapper');
+}
+
+/**
+ * calpress_hook_preheader()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed between the <div id="wrapper"> and
+ * <div id="header"> blocks.
+ * @example add_action('calpress_hook_preheader', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_preheader
+ */
+function calpress_hook_preheader() {
+	do_action('calpress_hook_preheader');
+}
+
+/**
  * calpress_hook_header_pretitle()
  *
  * Template function appearing in header.php, allows actions

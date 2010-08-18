@@ -28,8 +28,10 @@ global $calpress_mobile;
     }
     ?>
 
+<?php calpress_hook_prewrapper(); ?>
 <div id="wrapper" class="hfeed container_12">
 
+    <?php calpress_hook_preheader(); ?>
 	<div id="header" class="grid_12">
 	    <div id="pre-title"><?php calpress_hook_header_pretitle(); ?></div>
 		<div id="blog-title"><?php calpress_hook_blogtitle(); ?></div>
