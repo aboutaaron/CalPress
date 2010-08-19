@@ -18,7 +18,10 @@
 
 // Description
 
-CalPress is a fork of the wonderful Sandbox theme by Andy Skelton and Scott Wallick.
+CalPress is a theme framework for media, developed my Josh Williams and the
+UC Berkeley Graduate School of Journalism. 
+
+CalPress started as a fork of the wonderful Sandbox theme by Andy Skelton and Scott Wallick.
 http://www.plaintxt.org/themes/sandbox/
 http://scottwallick.com/
 http://andyskelton.com/
