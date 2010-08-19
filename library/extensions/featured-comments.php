@@ -73,7 +73,7 @@ abstract class FeatureComments
 		if(current_user_can('moderate_comments'))
 		{
 			?>
-				<style>
+				<style type="text/css">
 					.feature-comments.unfeature, .feature-comments.unbury {display:none;}
 					.feature-comments { color:#D54E21; cursor:pointer;}
 					.featured.feature-comments.feature { display:none;}
