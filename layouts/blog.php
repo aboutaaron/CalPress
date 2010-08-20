@@ -14,7 +14,7 @@
 // This file makes extensive use of the calpress_loop_content function. This is the default CalPress loop, and it lives in 
 // /loops/loop-content.php. The function has the following signature and default values:
 //
-// calpress_loop_content($art=true, $artsize=620, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0)
+// calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0)
 //
 // And the functions documentation:
 //

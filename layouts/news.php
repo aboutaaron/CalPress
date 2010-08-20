@@ -14,7 +14,7 @@
 // This file makes extensive use of the calpress_loop_content function. This is the default CalPress loop, and it lives in 
 // /loops/loop-content.php. The function has the following signature and default values:
 //
-// calpress_loop_content($art=true, $artsize=620, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0)
+// calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0)
 //
 // And the functions documentation:
 //
@@ -36,7 +36,7 @@
         <?php if ($storyCounter === 0): // lead story ?>
             <div id="lead-story">
                 <?php // show post with art, sized at 300px ?>
-                <?php calpress_loop_content(true, 300, true, true, true, true, 70); ?>
+                <?php calpress_loop_content(true, 300, 0, true, true, true, true, 70); ?>
                 <p class="more"><a href="<?php the_permalink() ?>">More</a></p>
             </div><!-- #lead story -->
             <div class="clear"></div>
@@ -45,17 +45,17 @@
                 <h3>News</h3>
                 <div id="secondary-stories">
                     <?php // show post with art, sized at 300px ?>
-                    <?php calpress_loop_content(true, 300, true, true, true, true, 15); ?>
+                    <?php calpress_loop_content(true, 300, 200, true, true, true, true, 15); ?>
 
         <?php elseif ($storyCounter === 2): //story 3 ?>
 
                     <?php // show post with art, sized at 300px ?>
-                    <?php calpress_loop_content(true, 300, true, true, true, true, 15); ?>
+                    <?php calpress_loop_content(true, 300, 200, true, true, true, true, 15); ?>
 
                 </div><!-- #secondary-stories -->
                 <div id="tertiary-stories">         
         <?php elseif ($storyCounter > 2): ?>
-                <?php calpress_loop_content(false, 0, false,true,true,false, 0); ?>
+                <?php calpress_loop_content(false, 0, 0, false,true,true,false, 0); ?>
         <?php endif; ?>
 
     <?php $storyCounter++ ?>

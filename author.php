@@ -150,7 +150,7 @@
                             while ( have_posts() ) { 
                                 the_post();
                                 // show post with art, sized at 300px 
-                                calpress_loop_content(false, 300, true, true, true, true, 15);
+                                calpress_loop_content(false, 300, 0, true, true, true, true, 15);
                             }
                         ?>
                             <div id="nav-below" class="navigation">

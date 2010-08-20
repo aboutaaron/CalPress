@@ -343,14 +343,40 @@ function calpress_sidebarmediawidth(){
  * Display the lead image of an asset (billboard image, etc). no cutline
  *
  * @param int $w = known width of the element
- * @param string $ration = desired ratio. 43 for 4x3. 169 for 16x9 (default).
+ * @param string $ration = desired ratio. 43 for 4x3. 169 for 16x9 (default). currently unused. will probably go away. 
  * @return void
  */
 function calpress_teaseart($w = LEADARTSIZE, $ratio = "169"){
 	global $posts;
     if(calpress_postimage()!=false) { //show the lead art photo
         $srcimg = calpress_leadimagepath();//uploaded photo
-        $imgsrc = CALPRESSURI.'/library/extensions/timthumb.php?src='.$srcimg.'&amp;w='.$w;//resizer script
+        $imgsrc = calpress_sizedimageurl($srcimg, $w);
+        
+        echo("<div class=\"tease-art entry-leadphoto\">");
+            if (is_single(get_the_ID())) {
+                echo ('<img alt="" src ="'.$imgsrc.'" />');//on article. no need to make image a link
+            }else{
+                $link = get_permalink();
+                echo ('<a href="'.$link.'"><img alt="" src ="'.$imgsrc.'" /></a>');
+            }
+            
+        echo("</div>");  
+    }
+}
+
+/**
+ * Display a cropped version of the lead image of an asset (billboard image, etc). no cutline
+ *
+ * @param int $w = known width of the element
+ * @param int $h = height of the element
+ * @return void
+ */
+function calpress_teaseart_cropped($w = LEADARTSIZE, $h){
+	global $posts;
+    if(calpress_postimage()!=false) { //show the lead art photo
+        $srcimg = calpress_leadimagepath();//uploaded photo
+        $imgsrc = calpress_croppedimageurl($srcimg, $w, $h); // resized image url
+        
         echo("<div class=\"tease-art entry-leadphoto\">");
             if (is_single(get_the_ID())) {
                 echo ('<img alt="" src ="'.$imgsrc.'" />');//on article. no need to make image a link
@@ -586,7 +612,7 @@ function calpress_sizedimageurl($srcimg, $w){
  * @param int $z = crop zoom
  * @return string
  */
-function calpress_croppedimageurl($srcimg, $w, $h, $z){
+function calpress_croppedimageurl($srcimg, $w, $h, $z=1){
     $imgsrc = CALPRESSURI.'/library/extensions/timthumb.php?src='.$srcimg.'&amp;w='.$w.'&amp;h='.$h.'&amp;z='.$z;//resizer script
     return $imgsrc;
 }
@@ -1313,7 +1339,7 @@ add_filter( 'post_gallery', 'calpress_gallery', $attr );
 
 /**
  * A custom callback for wp_list_comments, so we can 
- * customize commenter links/stats.
+ * customize commenter links/stats. see comments.php
  *
  * @return string
  */
@@ -1434,7 +1460,7 @@ function pluralize($num, $plural = 's', $single = '') {
 }
 
 /**
- * Returns object of featured comments, sorted by my recently commented.
+ * Returns object of featured comments, sorted by most recently commented.
  *
  * This function assumes use of the featured-comments.php file, which updates wp_commentsmeta table
  *

@@ -7,6 +7,7 @@
  * @param boolean $art - show lead story art if available
  * @param boolean $arttease - show full fledge multimedia options (video, soundslides, youtube, etc). If false, just an image will appear
  * @param int $artsize - width of art. The default is 620px, which is full column lead story size
+ * @param int $artcrop - If > 0, crop the photo to this height
  * @param boolean $hed - show headline
  * @param boolean $meta - show story meta
  * @param boolean $excerpt - show story excerpt
@@ -14,7 +15,7 @@
  * @return string
  */
 
-function calpress_loop_content($art=true, $artsize=620, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0){
+function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0){
     global $post, $authordata;
 ?>  
   
@@ -27,12 +28,34 @@ function calpress_loop_content($art=true, $artsize=620, $multimedia=true, $hed=t
         if (!$multimedia) { // show tease art only (just images, not videos, etc)
             if (calpress_showteaseart()) { // only show tease if one is availble to show. otherwise, show nothing. 
                 echo('<div class="entry-image">');
-                    calpress_teaseart($artsize);
+                    //cropped version?
+                    if ($artcrop > 0) {
+                        calpress_teaseart_cropped($artsize,$artcrop);
+                    } else{
+                        calpress_teaseart($artsize);
+                    }
+                    
                 echo("</div>");
             }
         } else { // show fully functional lead art (videos, etc)
             echo('<div class="entry-image">');
-                calpress_leadart($artsize);
+                
+                // if we need to show a cropped lead art ($artcrop > 0 && $multimedia==true), we need to determine if the art is croppable. For now, only photos are supported.
+                // using output buffering and a class string search is a horribly fragile hack...
+                
+                //grab default lead art
+                ob_start();
+            	calpress_leadart($artsize);
+            	$leadart = ob_get_contents();
+                ob_end_clean();
+                
+                // see if calpress is planning on printing a photo (as opposed to entry-leadvideo, entry-leadyoube, etc)
+                if ( strpos($leadart, "entry-leadphoto") !== false && $artcrop > 0) {
+                    calpress_teaseart_cropped($artsize,$artcrop); //show cropped photo
+                } else {
+                    echo $leadart; // show unchanged lead art (video, youtube, etc)
+                }
+
             echo("</div>");
         }
     }
@@ -45,13 +68,17 @@ function calpress_loop_content($art=true, $artsize=620, $multimedia=true, $hed=t
   		<span class="meta-sep">|</span>
   		<span class="entry-date">
   		    <?php
+  		        /*
   		        if (get_the_modified_time() != get_the_time()){
   		            ?>
   		            <abbr class="entry-updated" title="<?php get_the_modified_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( 'Updated: %1$s &#8211; %2$s', 'sandbox' ), the_date( '', '', '', false ), get_the_modified_time() ) ?></abbr>
   		            <?php
   		        }else{ ?>
   		            <abbr class="published" title="<?php the_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( '%1$s &#8211; %2$s', 'sandbox' ), the_modified_time('F j, Y'), get_the_time() ) ?></abbr>
-  		        <?php } ?>
+  		        <?php 
+  		        }*/
+  		        ?>
+  		        <abbr class="published" title="<?php the_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( '%1$s &#8211; %2$s', 'sandbox' ), the_modified_time('F j, Y'), get_the_time() ) ?></abbr>
   		</span>
   	</div>
   	<?php if ($excerpt): ?>
