@@ -74,7 +74,7 @@ h1 + h2, h2 + h3 {
     text-align: right;
 }
 
-.caption, .entry-meta{
+.caption, .entry-meta, .wp-caption-text{
     color: #a2a2a2;
 }
 
