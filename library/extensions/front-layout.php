@@ -17,6 +17,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 // **********************************************************************
 
+
 // Make homepage in CalPress selectable, with default layouts in CalPress
 // and new layouts available in the /layouts/ folder of child themes. Child
 // themes may also override parent theme layouts by using the same name.

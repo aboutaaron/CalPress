@@ -78,7 +78,23 @@ function calpress_configuration_admin(){
         	    </tr>
         		<?php
         		break;
-
+                
+            	case 'arraylist':
+        		?>
+        		<tr valign="top"> 
+        	        <th scope="row"><?php echo __($value['name'],'calpress'); ?>:</th>
+        	        <td>
+        	            <?php echo __($value['desc'],'calpress'); ?><br />
+        	            <select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
+        	                <?php foreach ($value['options'] as $key => $option) { ?>
+        	                <option value="<?php echo($key); ?>"<?php if ( get_settings( $value['id'] ) == $option) { echo ' selected="selected"'; } elseif ($option == $value['std']) { echo ' selected="selected"'; } elseif ($key == get_settings( $value['id'] )) { echo ' selected="selected"'; } ?>><?php echo $option; ?></option>
+        	                <?php } ?>
+        	            </select>
+        	        </td>
+        	    </tr>
+        		<?php
+        		break;
+            		
         		case 'textarea':
         		$ta_options = $value['options'];
         		?>

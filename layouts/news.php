@@ -27,6 +27,7 @@
 // @param int $excerptlength - for any number greater than zero, truncate excerpt to that length
 //  @return string
 ?>
+
 <?php $storyCounter = 0 ?>
 
 <?php // Only show news design page on the very front page. Once we start paging, go to a basic view ?>

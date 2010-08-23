@@ -43,6 +43,13 @@ foreach ($layout_paths as $key => $layout_path) {
 }
 $layouts = array_unique($layouts);
 
+// get all categories for a selectable front page list. 
+$front_cats = &get_categories('hide_empty=0');
+$front_categories = array();
+$front_categories[0] = "---";
+foreach ($front_cats as $category) {
+    $front_categories[$category->cat_ID] = $category->cat_name;
+}
 
 
 // WP-Poll
@@ -63,6 +70,13 @@ if (function_exists('vote_poll')) {
  
 // CalPress configuration options
 $calpress_theme_options = array (
+	array(	"name" => __('Front Page Category','calpress'),
+			"desc" => __('Use selected category for front page. If not set, pulls from all Posts by date.','calpress'),
+			"id" => $shortname."_front_category",
+			"std" => "",
+			"type" => "arraylist",
+			"options" => $front_categories),
+	
 	array(	"name" => __('Hide Page-based Nav Menu','calpress'),
 			"desc" => __("By default, CalPress lists pages (or Menu Editor selections in WP3) as navigation elements under the header. This behavior can be turned off.",'calpress'),
 			"id" => $shortname."_hide_nav_menu",
