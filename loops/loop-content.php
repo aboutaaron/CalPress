@@ -83,13 +83,13 @@ function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=
   	</div>
   	<?php if ($excerpt): ?>
   	    <div class="entry-content">
-      	    
+      	    <p>
       	    <?php if ($excerptlength > 0): ?>
       	        <?php calpress_trim_excerpt($excerptlength); ?>
       	    <?php else : ?>
                 <?php the_excerpt(); ?>
             <?php endif; ?>    
-
+            </p>
               <?php wp_link_pages('before=<div class="page-link">' . __( 'Pages:', 'sandbox' ) . '&after=</div>') ?>
       	</div>
   	<?php endif ?>
