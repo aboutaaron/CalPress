@@ -32,10 +32,25 @@
 	<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
 </div>
 
-<?php while ( have_posts() ) : the_post() ?>
-    <?php // show post with art, sized at 620px ?>
-    <?php calpress_loop_content(); ?>
+<?php
+// see if there should be a front feature story overriding the default first story
+$get_front_feature = THEMESHORTNAME."_front_feature_override"; // get value from admin
+$front_feature = trim(get_settings($get_front_feature));
+?>
 
+<?php $storyCounter = 0 ?>
+<?php while ( have_posts() ) : the_post() ?>
+    
+    <?php if ( $storyCounter === 0 && $front_feature != ""): // lead story ?>
+        <div class="hentry p1 post publish category-front front-override">
+          <?php  echo(stripslashes($front_feature)); ?>
+        </div>
+    <?php else: // not lead story?>
+        <?php // show post with art, sized at 620px ?>
+        <?php calpress_loop_content(); ?>
+    <?php endif; ?>
+    
+<?php $storyCounter++ ?>
 <?php endwhile; ?>
 
 <div id="nav-below" class="navigation">

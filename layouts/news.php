@@ -36,9 +36,27 @@
 
         <?php if ($storyCounter === 0): // lead story ?>
             <div id="lead-story">
+            
+            <?php
+                // only show automated first post if not an override front feature in the admin
+                $get_front_feature = THEMESHORTNAME."_front_feature_override"; // get value from admin
+                $front_feature = trim(get_settings($get_front_feature));
+            ?>
+            
+            <?php if ($front_feature != ""): ?>
+            
+                <div class="hentry p1 post publish category-front front-override">
+                  <?php  echo(stripslashes($front_feature)); ?>
+                </div>
+            
+            <?php else: // automated featured story ?> 
+                
                 <?php // show post with art, sized at 300px ?>
                 <?php calpress_loop_content(true, 300, 0, true, true, true, true, 70); ?>
                 <p class="more"><a href="<?php the_permalink() ?>">More</a></p>
+            
+            <?php endif ?>    
+            
             </div><!-- #lead story -->
             <div class="clear"></div>
         <?php elseif ($storyCounter === 1 ): // story 2 ?>
