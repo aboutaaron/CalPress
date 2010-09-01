@@ -63,24 +63,30 @@ function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=
 
   	<h2 class="entry-title"><a href="<?php the_permalink() ?>" title="<?php printf( __('Permalink to %s', 'sandbox'), the_title_attribute('echo=0') ) ?>" rel="bookmark"><?php the_title() ?></a></h2>
 
-  	<div class="entry-meta">
-  	    <span class="author vcard"><?php printf( __( 'By %s', 'sandbox' ), '<a class="url fn n" href="' . get_author_link( false, $authordata->ID, $authordata->user_nicename ) . '" title="' . sprintf( __( 'View all posts by %s', 'sandbox' ), $authordata->display_name ) . '">' . get_the_author() . '</a>' ) ?></span>
-  		<span class="meta-sep">|</span>
-  		<span class="entry-date">
-  		    <?php
-  		        /*
-  		        if (get_the_modified_time() != get_the_time()){
-  		            ?>
-  		            <abbr class="entry-updated" title="<?php get_the_modified_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( 'Updated: %1$s &#8211; %2$s', 'sandbox' ), the_date( '', '', '', false ), get_the_modified_time() ) ?></abbr>
-  		            <?php
-  		        }else{ ?>
-  		            <abbr class="published" title="<?php the_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( '%1$s &#8211; %2$s', 'sandbox' ), the_modified_time('F j, Y'), get_the_time() ) ?></abbr>
-  		        <?php 
-  		        }*/
-  		        ?>
-  		        <abbr class="published" title="<?php the_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( '%1$s &#8211; %2$s', 'sandbox' ), the_modified_time('F j, Y'), get_the_time() ) ?></abbr>
-  		</span>
-  	</div>
+    <?php if ($meta): ?>
+
+        <div class="entry-meta">
+      	    <span class="author vcard"><?php printf( __( 'By %s', 'sandbox' ), '<a class="url fn n" href="' . get_author_link( false, $authordata->ID, $authordata->user_nicename ) . '" title="' . sprintf( __( 'View all posts by %s', 'sandbox' ), $authordata->display_name ) . '">' . get_the_author() . '</a>' ) ?></span>
+      		<span class="meta-sep">|</span>
+      		<span class="entry-date">
+      		    <?php
+      		        /*
+      		        if (get_the_modified_time() != get_the_time()){
+      		            ?>
+      		            <abbr class="entry-updated" title="<?php get_the_modified_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( 'Updated: %1$s &#8211; %2$s', 'sandbox' ), the_date( '', '', '', false ), get_the_modified_time() ) ?></abbr>
+      		            <?php
+      		        }else{ ?>
+      		            <abbr class="published" title="<?php the_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( '%1$s &#8211; %2$s', 'sandbox' ), the_modified_time('F j, Y'), get_the_time() ) ?></abbr>
+      		        <?php 
+      		        }*/
+      		        ?>
+      		        <abbr class="published" title="<?php the_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( '%1$s &#8211; %2$s', 'sandbox' ), the_modified_time('F j, Y'), get_the_time() ) ?></abbr>
+      		</span>
+      	</div>
+        
+    <?php endif ?>
+
+
   	<?php if ($excerpt): ?>
   	    <div class="entry-content">
       	    <p>
