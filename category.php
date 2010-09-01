@@ -13,7 +13,6 @@
 
 <?php $storyCounter = 0; while ( have_posts() ) : the_post() ?>
 
-			<?php // show post with art, sized at 300px ?>
             <?php calpress_loop_content(true, 140, 96, false, true, true, true, 25); ?>
 
 <?php $storyCounter++; endwhile; ?>
