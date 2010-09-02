@@ -76,6 +76,13 @@ $calpress_theme_options = array (
 			"std" => "",
 			"type" => "arraylist",
 			"options" => $front_categories),
+			
+	array(	"name" => __('Front Lead Story Category','calpress'),
+			"desc" => __('Use selected category in conjunction with the Front Page Category above to place stories in the lead spot of selected layouts. If not selected, only the category above will be used.','calpress'),
+			"id" => $shortname."_front_featured_category",
+			"std" => "",
+			"type" => "arraylist",
+			"options" => $front_categories),
 	
 	array(	"name" => __('Hide Page-based Nav Menu','calpress'),
 			"desc" => __("By default, CalPress lists pages (or Menu Editor selections in WP3) as navigation elements under the header. This behavior can be turned off.",'calpress'),
@@ -201,9 +208,10 @@ function calpress_admin_menus()
         
         if ( 'save' == $_REQUEST['action'] ) {
 
+            /*
             foreach ($current_options as $value) {
                update_option( $shortname."_layout", $_REQUEST[ $value['id'] ] ); 
-            }
+            }*/
 
             foreach ($current_options as $value) {
                if( isset( $_REQUEST[ $value['id'] ] ) ) { 
