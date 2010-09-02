@@ -459,11 +459,16 @@ function calpress_showteaseart(){
  */
 function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
     global $post;
+    $thePostID = $post->ID; // get_post_custom_values needs to use this id, b/c sometimes
+                            // the value of $post and $wp_query->post->ID are not the same b/c 
+                            // a page will temporarily reset $post, but get_post_custom_values
+                            // seems to use $wp_query->post->ID and not the current $post global.
+    
     $h = calpress_mediaheight($w, $ratio);
     
-    if ( get_post_custom_values('lead_video') ) {//show the lead art video
+    if ( get_post_custom_values('lead_video', $thePostID) ) {//show the lead art video
         $h = calpress_mediaheight($w, "169", "video");
-        $videos = get_post_custom_values('lead_video');
+        $videos = get_post_custom_values('lead_video', $thePostID);
         
         $options = calpress_parsextrafieldsoptions($videos[0]);
         $slug = $options[0];
@@ -474,9 +479,9 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
             calpress_embedvideo($slug,$cutline,"",$w,$h);
         echo("</div>");
         
-    } elseif ( get_post_custom_values('lead_youtube') ) {//show the lead art slideshow
+    } elseif ( get_post_custom_values('lead_youtube', $thePostID) ) {//show the lead art slideshow
         $h = calpress_mediaheight($w, "169", "video");
-        $videos = get_post_custom_values('lead_youtube');
+        $videos = get_post_custom_values('lead_youtube', $thePostID);
         // get custom field options
         // options are in this format:
         //  youtube ID    title   cutline     
@@ -487,9 +492,9 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
         echo("<div class=\"lead-art entry-leadyoutube\">");
             calpress_embedyoutube($youtubeid,$cutline,$title,$w,$h);
         echo("</div>");
-    } elseif ( get_post_custom_values('lead_vimeo') ) {//show the lead art slideshow
+    } elseif ( get_post_custom_values('lead_vimeo', $thePostID) ) {//show the lead art slideshow
         $h = calpress_mediaheight($w, "169", "video");
-        $videos = get_post_custom_values('lead_vimeo');   
+        $videos = get_post_custom_values('lead_vimeo', $thePostID);   
         $options = calpress_parsextrafieldsoptions($videos[0]);
         $vimeoid = $options[0];
         $title = "";
@@ -497,11 +502,11 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
         echo("<div class=\"lead-art entry-leadvimeo\">");
             calpress_embedvimeo($vimeoid,$cutline,$title,$w,$h);
         echo("</div>");
-    } elseif ( get_post_custom_values('lead_soundslides') ) {//show the lead art slideshow
+    } elseif ( get_post_custom_values('lead_soundslides', $thePostID) ) {//show the lead art slideshow
         echo("<div class=\"lead-art entry-leadsoundslides\">");
             $h = calpress_mediaheight($w, "43");//always used 4x3
             $h = $h + 34;//add control bar height
-            $soundslides = get_post_custom_values('lead_soundslides');
+            $soundslides = get_post_custom_values('lead_soundslides', $thePostID);
             $options = calpress_parsextrafieldsoptions($soundslides[0]);
             $slug = $options[0];
             
@@ -511,9 +516,9 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
             $cutline = $options[2];
             calpress_embedsoundslides($path,$cutline,$title,$w,$h);
         echo("</div>");
-    } elseif ( get_post_custom_values('lead_embed') ) {//show the lead art embed
+    } elseif ( get_post_custom_values('lead_embed', $thePostID) ) {//show the lead art embed
        echo("<div class=\"lead-art entry-leadembed\">");
-            $embeds = get_post_custom_values('lead_embed');
+            $embeds = get_post_custom_values('lead_embed', $thePostID);
             $options = calpress_parsextrafieldsoptions($embeds[0]);
             $embedcode = $options[0];
             $title = $options[1];
@@ -523,9 +528,9 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
 	        echo("<div class=\"embed caption\"><p class=\"caption\">$caption</p></div>");
 	        echo("</div>");   
        echo("</div>");
-   } elseif ( get_post_custom_values('Video') ) {//legacy FLV video on Oakland North
+   } elseif ( get_post_custom_values('Video', $thePostID) ) {//legacy FLV video on Oakland North
             $h = calpress_mediaheight($w, "169", "video");
-            $videos = get_post_custom_values('Video');
+            $videos = get_post_custom_values('Video', $thePostID);
             //FLV path
             $options = calpress_parsextrafieldsoptions($videos[0]);
             $flvpath = $options[0];
@@ -630,8 +635,11 @@ function calpress_croppedimageurl($srcimg, $w, $h, $z=1){
  * @return string
  */
 function calpress_postimage($size='large',$num=1, $caption=true) {
+    global $post;
+    $thePostID = $post->ID;
+    
 	if ( $images = get_children(array(
-		'post_parent' => get_the_ID(),
+		'post_parent' => $thePostID,
 		'post_type' => 'attachment',
 		'order' => 'ASC',
 		'orderby' => 'menu_order ID',
@@ -666,8 +674,11 @@ function calpress_postimage($size='large',$num=1, $caption=true) {
  * @return string
  */
 function calpress_leadimagepath(){
+    global $post;
+    $thePostID = $post->ID;
+    
     if ( $images = get_children(array(
-	    'post_parent' => get_the_ID(),
+	    'post_parent' => $thePostID,
 		'post_type' => 'attachment',
 		'order' => 'ASC',
 		'orderby' => 'menu_order ID',
@@ -689,8 +700,11 @@ function calpress_leadimagepath(){
  * @return string
  */
 function calpress_leadimagecaption(){
+    global $post;
+    $thePostID = $post->ID;
+    
     if ( $images = get_children(array(
-		'post_parent' => get_the_ID(),
+		'post_parent' => $thePostID,
 		'post_type' => 'attachment',
 		'order' => 'ASC',
 		'orderby' => 'menu_order ID',

@@ -80,7 +80,7 @@ function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=
       		        <?php 
       		        }*/
       		        ?>
-      		        <abbr class="published" title="<?php the_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( '%1$s &#8211; %2$s', 'sandbox' ), the_modified_time('F j, Y'), get_the_time() ) ?></abbr>
+      		        <abbr class="published" title="<?php the_time('Y-m-d\TH:i:sO') ?>"><?php unset($previousday); printf( __( '%1$s &#8211; %2$s', 'sandbox' ), the_time('F j, Y'), get_the_time() ) ?></abbr>
       		</span>
       	</div>
         

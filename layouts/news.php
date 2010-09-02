@@ -32,48 +32,101 @@
 
 <?php // Only show news design page on the very front page. Once we start paging, go to a basic view ?>
 <?php if (!is_paged()): ?>
+    
+    <?php
+    
+    // default loop needs to be shortened by number of features shown
+    $maxpost = get_option('posts_per_page');
+    
+    if ($use_front_feature){
+        $maxpost = $maxpost - 1;
+    }
+    
+    ?>
+    
     <?php while ( have_posts() ) : the_post() ?>
 
         <?php if ($storyCounter === 0): // lead story ?>
             <div id="lead-story">
             
-            <?php
-                // only show automated first post if not an override front feature in the admin
-                $get_front_feature = THEMESHORTNAME."_front_feature_override"; // get value from admin
-                $front_feature = trim(get_settings($get_front_feature));
-            ?>
-            
-            <?php if ($front_feature != ""): ?>
+            <?php if ($leadstoryoverride): // calpress producer code ?>
             
                 <div class="hentry p1 post publish category-front front-override">
-                  <?php  echo(stripslashes($front_feature)); ?>
+                  <?php  echo(stripslashes($leadstoryoverride_content)); ?>
                 </div>
             
             <?php else: // automated featured story ?> 
-                
-                <?php // show post with art, sized at 300px ?>
-                <?php calpress_loop_content(true, 300, 0, true, true, true, true, 70); ?>
-                <p class="more"><a href="<?php the_permalink() ?>">More</a></p>
+                <?php 
+                    
+                    if ($use_front_feature){ // use featured + front loop's content
+                        // tmp save global post
+                        $tmpGlobalPost = $post;
+                        // make global post the first featured story                        
+                        $post = get_post($featuredfrontposts_ids[$storyCounter]);
+                    } 
+                ?>
+                    <?php calpress_loop_content(true, 300, 0, true, true, true, true, 70); ?>
+                    <p class="more"><a href="<?php the_permalink() ?>">More</a></p>
+                    
+                <?php
+                    if ($use_front_feature) {
+                        // reassign old $post global back
+                        $post = $tmpGlobalPost;
+                    }
+                ?>
             
             <?php endif ?>    
             
             </div><!-- #lead story -->
             <div class="clear"></div>
         <?php elseif ($storyCounter === 1 ): // story 2 ?>
+            
             <div id="secondary-block">
                 <h3>News</h3>
                 <div id="secondary-stories">
-                    <?php // show post with art, sized at 300px ?>
+                    
+                    <?php
+                    if ($use_front_feature){ // use featured + front loop's content
+                        // tmp save global post
+                        $tmpGlobalPost = $post;
+                        // make global post the first featured story                        
+                        $post = get_post($featuredfrontposts_ids[$storyCounter]);
+                    }
+                    ?>
+                    
                     <?php calpress_loop_content(true, 300, 200, true, true, true, true, 15); ?>
+                    
+                    <?php
+                        if ($use_front_feature) {
+                            // reassign old $post global back
+                            $post = $tmpGlobalPost;
+                        }
+                    ?>
 
         <?php elseif ($storyCounter === 2): //story 3 ?>
 
-                    <?php // show post with art, sized at 300px ?>
+                    <?php
+                    if ($use_front_feature){ // use featured + front loop's content
+                        // tmp save global post
+                        $tmpGlobalPost = $post;
+                        // make global post the first featured story                        
+                        $post = get_post($featuredfrontposts_ids[$storyCounter]);
+                    }
+                    ?>
+
                     <?php calpress_loop_content(true, 300, 200, true, true, true, true, 15); ?>
+                    
+                    <?php
+                        if ($use_front_feature) {
+                            // reassign old $post global back
+                            $post = $tmpGlobalPost;
+                            rewind_posts();
+                        }
+                    ?>
 
                 </div><!-- #secondary-stories -->
                 <div id="tertiary-stories">         
-        <?php elseif ($storyCounter > 2): ?>
+        <?php elseif ($storyCounter > 2 && $storyCounter < $maxpost + 1): ?>
                 <?php calpress_loop_content(false, 0, 0, false,true,true,false, 0); ?>
         <?php endif; ?>
 
@@ -105,7 +158,3 @@
     </div>
     
 <?php endif ?>
-
-
-    
-    
