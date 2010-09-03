@@ -36,10 +36,36 @@
 <?php $storyCounter = 0 ?>
 <?php while ( have_posts() ) : the_post() ?>
     
-    <?php if ( $storyCounter === 0 && $leadstoryoverride): // lead story is overriden by calpress producer option ?>
-        <div class="hentry p1 post publish category-front front-override">
-          <?php  echo(stripslashes($leadstoryoverride_content)); ?>
-        </div>
+    <?php if ( $storyCounter === 0) : // lead story ?>
+    
+        <?php if ($leadstoryoverride) : // lead story is overriden by calpress producer option ?>
+            <div class="hentry p1 post publish category-front front-override">
+              <?php  echo(stripslashes($leadstoryoverride_content)); ?>
+            </div>
+        
+        <?php else: ?>    
+            <?php  
+                if ($use_front_feature){ // use featured + front loop's content
+                    // tmp save global post
+                    $tmpGlobalPost = $post;
+                    // make global post the first featured story                        
+                    $post = get_post($featuredfrontposts_ids[$storyCounter]);
+                } 
+            ?>
+            <?php // show post with art, sized at 620px ?>
+            <?php calpress_loop_content(); ?>
+            
+            <?php
+                if ($use_front_feature) {
+                    // reassign old $post global back
+                    $post = $tmpGlobalPost;
+                    rewind_posts();
+                }
+            ?>
+            
+        <?php endif ?>
+    
+
     <?php else: // not lead story?>
         <?php // show post with art, sized at 620px ?>
         <?php calpress_loop_content(); ?>
@@ -49,6 +75,6 @@
 <?php endwhile; ?>
 
 <div id="nav-below" class="navigation">
-	<div class="nav-previous"><?php next_posts_link(__( '<span class="meta-nav">&laquo;</span> Older posts', 'sandbox' )) ?></div>
-	<div class="nav-next"><?php previous_posts_link(__( 'Newer posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+	<div class="nav-previous"><?php next_posts_link(__( 'Older posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+	<div class="nav-next"><?php previous_posts_link(__( '<span class="meta-nav">&laquo;</span>Newer posts', 'sandbox' )) ?></div>
 </div>

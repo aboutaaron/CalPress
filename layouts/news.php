@@ -57,8 +57,7 @@
             
             <?php else: // automated featured story ?> 
 
-                <?php 
-                    
+                <?php  
                     if ($use_front_feature){ // use featured + front loop's content
                         // tmp save global post
                         $tmpGlobalPost = $post;
