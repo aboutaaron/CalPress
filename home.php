@@ -23,7 +23,6 @@
             if (is_numeric($front_featured_category_to_use) && $front_featured_category_to_use > 0) {
                 $front_featured_category_set = true;
                 $use_front_feature = true;
-                
                 $frontposts_ids = array();
                 
             }

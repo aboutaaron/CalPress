@@ -48,14 +48,15 @@
 
         <?php if ($storyCounter === 0): // lead story ?>
             <div id="lead-story">
-            
+          
             <?php if ($leadstoryoverride): // calpress producer code ?>
-            
+                
                 <div class="hentry p1 post publish category-front front-override">
                   <?php  echo(stripslashes($leadstoryoverride_content)); ?>
                 </div>
             
             <?php else: // automated featured story ?> 
+
                 <?php 
                     
                     if ($use_front_feature){ // use featured + front loop's content
