@@ -438,6 +438,10 @@ body.archive .post, body.category .post, body.page-template-category-page-php .p
     width: 620px;
 }
 
+body.archive.tag .post{
+    width: 380px;
+}
+
 body.archive .p1.post,body.category .p1.post, body.page-template-category-page-php .p1.post{
     padding-top: 0;
     border-top: 0;
