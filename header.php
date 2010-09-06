@@ -23,6 +23,7 @@ global $calpress_mobile;
     }
 	?>
 	<link rel="shortcut icon" href="<?php echo(THEMEURL); ?>/favicon.ico" />
+	<link rel="apple-touch-icon" href="<?php echo(THEMEURL); ?>/apple-touch-icon.png" />
 </head>
 
 <body class="<?php calpress_body_class(); ?><?php calpress_hook_bodyclass(); ?>">
