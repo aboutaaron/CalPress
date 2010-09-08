@@ -17,6 +17,7 @@
 
 function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0){
     global $post, $authordata;
+    setup_postdata($post);
 ?>  
   
   <div id="post-<?php the_ID() ?>" class="<?php calpress_post_class() ?>">

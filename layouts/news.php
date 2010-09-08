@@ -48,7 +48,7 @@
 
         <?php if ($storyCounter === 0): // lead story ?>
             <div id="lead-story">
-          
+            
             <?php if ($leadstoryoverride): // calpress producer code ?>
                 
                 <div class="hentry p1 post publish category-front front-override">
