@@ -66,10 +66,6 @@ function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=
     <?php if ($meta): ?>
 
         <div class="entry-meta">
-      	    <!--
-      	    <span class="author vcard"><?php printf( __( 'By %s', 'sandbox' ), '<a class="url fn n" href="' . get_author_link( false, $authordata->ID, $authordata->user_nicename ) . '" title="' . sprintf( __( 'View all posts by %s', 'sandbox' ), $authordata->display_name ) . '">' . get_the_author() . '</a>' ) ?></span>-->
-      	    
-      	    
       	    <?php calpress_bylines($authordata); ?>
       		<span class="meta-sep">|</span>
       		<span class="entry-date">
