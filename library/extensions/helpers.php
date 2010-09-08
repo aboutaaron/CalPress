@@ -30,9 +30,12 @@
  * @return void
  */
 function calpress_bylines($authordata = null){
-    if ( get_post_custom_values('byline') ) {
+    global $post;
+    $thePostID = $post->ID;
+    
+    if ( get_post_custom_values('byline', $thePostID ) ) {
         echo("<span class=\"entry-byline\">By: ");
-        $byline_values = get_post_custom_values('byline');
+        $byline_values = get_post_custom_values('byline', $thePostID);
         $byline = '';
         foreach ( $byline_values as $key => $value ) {
            $byline = $byline . $value . ", ";
