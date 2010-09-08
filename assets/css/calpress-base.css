@@ -741,7 +741,7 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, b
         margin-bottom: 4px;
     }
 
-    #secondary-block h3{
+    #secondary-block h3, #special-features h3{
         border-top: 1px solid #000;
         border-bottom: 1px solid #000;
         padding: 5px 0;

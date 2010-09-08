@@ -44,6 +44,15 @@
         font-family: "Georgia", "Times New Roman", "Times", serif;
     }
     
+    #calpress-options ul li {
+        margin-left: 15px;
+        font-weight: bold;
+    }
+    
+    #calpress-options ul li ul li{
+        font-weight: normal;
+    }
+    
     form p.submit{
         display: block;
         min-width: 80px;

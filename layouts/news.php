@@ -65,7 +65,7 @@
                         $post = get_post($featuredfrontposts_ids[$storyCounter]);
                     } 
                 ?>
-                    <?php calpress_loop_content(true, 300, 0, true, true, true, true, 70); ?>
+                    <?php calpress_loop_content(true, 300, 0, true, true, true, true, 60); ?>
                     <p class="more"><a href="<?php the_permalink() ?>">More</a></p>
                     
                 <?php
