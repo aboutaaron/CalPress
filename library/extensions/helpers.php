@@ -1227,8 +1227,11 @@ function calpress_trim_text($text, $length = 55) {
  */ 
 function calpress_trim_excerpt($length = 55) {
     global $post;
-
-	$text = $post->post_content;
+    setup_postdata($post);
+    
+	//$text = $post->post_content;
+	
+	$text = get_the_excerpt();
 	$text = strip_shortcodes( $text );
 	$text = apply_filters('the_content', $text);
 	$text = str_replace(']]>', ']]&gt;', $text);
