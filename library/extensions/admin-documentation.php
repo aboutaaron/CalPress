@@ -74,37 +74,9 @@ function calpress_documentation_admin(){
         </dl>
     </div>
     
-    <h3>Basic Tasks</h3>
-    
-    <ul>
-    		<li><a href="http://calpresstheme.org/blog/2010/08/10/posting-a-story/">Basic posts</a></li>
-
-    		<li>Multiple bylines</li>
-    		<li>Lead art
-    			<ul>
-    				<li><a href="http://calpresstheme.org/blog/2010/08/10/lead-photo/">Photos</a></li>
-    				<li><a href="http://calpresstheme.org/blog/2010/08/10/lead-video/">Quicktime</a></li>			
-    				<li><a href="http://calpresstheme.org/blog/2010/08/10/lead-youtube-vimeo/">YouTube/Vimeo</a></li>
-    				<li><a href="http://calpresstheme.org/blog/2010/08/10/embed-html-in-lead-art-spot/">Embedding content into lead art spot</a></li>
-    			</ul>
-    		</li>
-    		<li><a href="http://calpresstheme.org/blog/2010/08/10/digital-sites-soundslides-workflow/">Soundslides</a></li>
-    		<li>Geotagging posts</li>
-
-    		<li>Inline Content
-    			<ul>
-    				<li>Overview</li>
-    				<li><a href="http://calpresstheme.org/blog/2010/08/10/inline-video/">Inline Quicktime video</a></li>
-
-    				<li><a href="http://calpresstheme.org/blog/2010/08/10/inline-youtube-vimeo/">Inline YouTube/Vimeo</a></li>
-    				<li><a href="http://calpresstheme.org/blog/2010/08/10/related-links/">Related links</a></li>
-    				<li>Related Twitter search</li>
-    				<li>Audio</li>
-    			</ul>
-    		</li>
-    		<li>Author bio Page</li>
-
-    	</ul>
+    <div style="width: 450px; height: 1200px;">
+    <iframe src="http://calpresstheme.org/wp-content/themes/calpresstheme/documentation-lite.php" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+    </div>
     
     
     
