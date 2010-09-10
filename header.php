@@ -11,7 +11,6 @@ global $calpress_mobile;
         <?php echo '<link href="'. PARENTCSS  .'/calpress-ie.css" rel="stylesheet" type="text/css"/>'; ?>
         
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="<?php echo(PRIMARYCSS); ?>" />
     <?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' );//for threaded comments ?>
     <?php wp_head() // For plugins ?>
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf( __( '%s latest posts', 'sandbox' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>" />
