@@ -54,7 +54,12 @@ function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=
                 if ( strpos($leadart, "entry-leadphoto") !== false && $artcrop > 0) {
                     calpress_teaseart_cropped($artsize,$artcrop); //show cropped photo
                 } else {
-                    echo $leadart; // show unchanged lead art (video, youtube, etc)
+                    // see if calpress wants to print an embed. if so, only show photo
+                     if ( strpos($leadart, "entry-leadembed") !== false ) {
+                         calpress_teaseart($artsize);
+                     } else {
+                         echo $leadart; // show unchanged lead art (video, youtube, etc)
+                     }
                 }
 
             echo("</div>");

@@ -691,7 +691,7 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, b
         margin-top: 0;
     }
     
-    body.front-layout-news #lead-story .lead-art, body.front-layout-news #lead-story .caption{
+    body.front-layout-news #lead-story .lead-art, body.front-layout-news #lead-story .entry-image, body.front-layout-news #lead-story .caption{
         width: 300px;
         float: left;
         margin-right: 20px;

@@ -124,6 +124,19 @@ div.post:hover{
     display: none;
 }
 
+#nav-below{
+    overflow: auto;
+}
+.nav-previous, .nav-next{
+    width: 50%;
+    float: right;
+    overflow: auto;
+}
+
+.nav-previous{
+    text-align: right;
+}
+
 #sidebar{
     display: none;
 }

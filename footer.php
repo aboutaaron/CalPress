@@ -1,5 +1,14 @@
-
+<?php
+global $calpress_mobile;
+?>
     </div><div class="clear"></div><!-- #container -->
+    
+    <?php 
+	    if ($calpress_mobile->showMobile()) {
+	       calpress_globalnav("12"); 
+	    }
+	?>
+    
     <div id="footer" class="grid_12">
 		
 		
