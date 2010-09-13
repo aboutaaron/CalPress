@@ -103,6 +103,26 @@ body{
     padding: 10px;
 }
 
+#content {
+    background-color: #fff;
+}
+
+body.single .post{
+    background-color: #fff;
+}
+
+body.single div.post:hover{
+    background-color: transparent;
+}
+
+p{
+    margin-bottom: 25px;
+}
+
+.entry-image, .entry-image img, .lead-art, .lead-art img{
+    width: 300px;
+}
+
 div.post{
     border-bottom:1px solid #B2B2B2;
     padding: 5px 0;
@@ -166,3 +186,4 @@ div.post:hover{
     color: #FFF;
     text-decoration: none;
 }
+
