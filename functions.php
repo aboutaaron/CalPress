@@ -165,6 +165,9 @@ require_once(THEMELIB . '/extensions/relative-time.php');
 // Load twitter search widget at end of stories
 require_once(THEMELIB . '/extensions/twitter-search.php');
 
+// Load weather functionality
+require_once(THEMELIB . '/extensions/weather.php');
+
 // Load custom login screen
 require_once(THEMELIB . '/extensions/custom-login.php');
 
