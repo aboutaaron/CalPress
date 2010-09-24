@@ -432,7 +432,11 @@ class CalPress_Weather
         echo $this->get_rising();
     }
     
-    
+    /**
+     * Return textual representation of int-based get_rising() (eg: 1 = "rising")
+     *
+     * @return string
+     */
     public function get_barometric_pressure_status(){
         $status = $this->get_rising();
         $status_text = "";
@@ -450,58 +454,128 @@ class CalPress_Weather
         return $status_text;
     }
     
+    /**
+     * Print textual representation of int-based get_rising() (eg: 1 = "rising")
+     *
+     * @return none
+     */
     public function barometric_pressure_status(){
         echo $this->get_barometric_pressure_status();
     }
     
+    /**
+     * Return temperature unit being used, either C of F
+     *
+     * @return string
+     */
     public function get_units_temperature(){
         return $this->_units[0]['attribs']['']['temperature'];
     }
     
+    /**
+     * Print temperature unit being used, either C of F
+     *
+     * @return none
+     */
     public function units_temperature(){
         echo $this->get_units_temperature();
     }
     
+    /**
+     * Return distance unit being used, either m or km
+     *
+     * @return string
+     */
     public function get_units_distance(){
         return $this->_units[0]['attribs']['']['distance'];
     }
 
+    /**
+     * Print distance unit being used, either m or km
+     *
+     * @return none
+     */
     public function units_distance(){
         echo $this->get_units_distance();
     }
     
+    /**
+     * Return barometric pressure unit being used
+     *
+     * @return string
+     */
     public function get_units_pressure(){
         return $this->_units[0]['attribs']['']['pressure'];
     }
 
+    /**
+     * Print barometric pressure unit being used
+     *
+     * @return none
+     */
     public function units_pressure(){
         echo $this->get_units_pressure();
     }
     
+    /**
+     * Return speed unit being used, for wind speed etc
+     *
+     * @return string
+     */
     public function get_units_speed(){
         return $this->_units[0]['attribs']['']['speed'];
     }
 
+    /**
+     * Print speed unit being used, for wind speed etc
+     *
+     * @return none
+     */
     public function units_speed(){
         echo $this->get_units_speed();
     }
     
+    /**
+     * Return wind chill
+     *
+     * @return string
+     */
     public function get_wind_chill(){
         return $this->_wind[0]['attribs']['']['chill'];
     }
     
+    /**
+     * Print wind chill
+     *
+     * @return string
+     */
     public function wind_chill(){
         echo $this->get_wind_chill();
     }
     
+    /**
+     * Return wind speed
+     *
+     * @return string
+     */
     public function get_wind_speed(){
         return $this->_wind[0]['attribs']['']['speed'];
     }
 
+    /**
+     * Print wind speed
+     *
+     * @return string
+     */
     public function wind_speed(){
         echo $this->get_wind_speed();
     }
 
+    /**
+     * Return wind speed, formatted with appropriate unit
+     *
+     * @return string
+     */
     public function get_wind_speed_formatted(){
         $speed = $this->get_wind_speed();
         $unit = $this->get_units_speed();
@@ -509,14 +583,29 @@ class CalPress_Weather
         return $speed . ' ' . $unit;
     }
     
+    /**
+     * Print wind speed, formatted with appropriate unit
+     *
+     * @return none
+     */
     public function wind_speed_formatted(){
         echo $this->get_wind_speed_formatted();
     }
     
+    /**
+     * Return wind direction in degrees
+     *
+     * @return string
+     */
     public function get_wind_degrees_formatted(){
         return $this->_wind[0]['attribs']['']['direction'];
     }
 
+    /**
+     * Print wind direction in degrees
+     *
+     * @return none
+     */
     public function wind_degrees(){
         echo $this->get_wind_degrees();
     }
