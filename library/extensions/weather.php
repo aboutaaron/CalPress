@@ -391,10 +391,29 @@ class CalPress_Weather
     /**
      * Print current humidity
      *
-     * @return string
+     * @return none
      */
     public function humidity(){
         echo $this->get_humidity();
+    }
+    
+    /**
+     * Return current humidity with unit
+     *
+     * @return string
+     */
+    public function get_humidity_formatted(){
+        $h = $this->get_humidity();
+        return $h . '%';
+    }
+
+    /**
+     * Print current humidity with unit
+     *
+     * @return none
+     */
+    public function humidity_formatted(){
+        echo $this->get_humidity_formatted();
     }
     
     /**
@@ -409,10 +428,30 @@ class CalPress_Weather
     /**
      * Print current visibility
      *
-     * @return string
+     * @return none
      */
     public function visibility(){
         echo $this->get_visibility();
+    }
+    
+    /**
+     * Return current visibility
+     *
+     * @return string
+     */
+    public function get_visibility_formatted(){
+        $v = $this->get_visibility();
+        $u = $this->get_units_distance();
+        return $v . ' ' . $u;
+    }
+
+    /**
+     * Print current visibility
+     *
+     * @return none
+     */
+    public function visibility_formatted(){
+        echo $this->get_visibility_formatted();
     }
     
     /**
@@ -591,6 +630,25 @@ class CalPress_Weather
      */
     public function wind_chill(){
         echo $this->get_wind_chill();
+    }
+    
+    /**
+     * Return wind chill with degree symbol
+     *
+     * @return string
+     */
+    public function get_wind_chill_formatted(){
+        $wc = $this->get_wind_chill();
+        return $wc .'&#176;';
+    }
+    
+    /**
+     * Print wind chill with degree symbol
+     *
+     * @return string
+     */
+    public function wind_chill_formatted(){
+        echo $this->get_wind_chill_formatted();
     }
     
     /**
