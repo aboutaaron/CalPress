@@ -28,13 +28,14 @@ function _hourly_feed(){
 class CalPress_Weather
 {
     private $_woeid; // Yahoo Where on Earth ID
-    private $_weather; // stores feed
+    private $_weather; // stores full feed
     private $_current_conditions; // stores current conditions in array
     private $_astronomy; // stores sunrise / sunset
     private $_location; // stores city/region/country
     private $_atmosphere; // stores humidity / pressure / visibilty / rising
     private $_units; // store units being used - mi / pressure / speed / distance 
-    private $_wind; // store wind info  
+    private $_wind; // store wind info 
+    private $_forecast; // store mutliday forecast 
     private $_validfeed = false;
     
     function __construct($woeid){
@@ -60,6 +61,7 @@ class CalPress_Weather
             $this->_atmosphere = $feed->get_channel_tags('http://xml.weather.yahoo.com/ns/rss/1.0', 'atmosphere');
             $this->_units = $feed->get_channel_tags('http://xml.weather.yahoo.com/ns/rss/1.0', 'units');
             $this->_wind = $feed->get_channel_tags('http://xml.weather.yahoo.com/ns/rss/1.0', 'wind');
+            $this->_forecast = $this->_weather->get_item_tags('http://xml.weather.yahoo.com/ns/rss/1.0', 'forecast');
             $_validfeed = true;
         }
     }
@@ -83,6 +85,25 @@ class CalPress_Weather
     }
     
     /**
+     * Return current temperature with the degree sign
+     *
+     * @return string
+     */
+    public function get_temperature_formatted(){
+        $t = $this->get_temperature();
+        return $t .'&#176;';
+    }
+    
+    /**
+     * Echo current temperature with the degree sign
+     *
+     * @return none
+     */
+    public function temperature_formatted(){
+        echo $this->get_temperature_formatted();
+    }
+    
+    /**
      * Return current conditions text (cloudy, sunny, etc)
      *
      * @return string
@@ -98,6 +119,24 @@ class CalPress_Weather
      */
     public function current_condition(){
         echo $this->get_current_condition();
+    }
+    
+    /**
+     * Return current conditions text (cloudy, sunny, etc)
+     *
+     * @return string
+     */
+    public function get_current_condition_image(){
+         return "http://l.yimg.com/a/i/us/we/52/12.gif";
+    }
+    
+    /**
+     * Print current conditions text (cloudy, sunny, etc)
+     *
+     * @return none
+     */
+    public function current_condition_image(){
+        echo $this->get_current_condition_image();
     }
     
     /**
@@ -401,8 +440,9 @@ class CalPress_Weather
      */
     public function get_barometric_pressure_formatted(){
         $pressure = $this->get_barometric_pressure();
+        $units = $this->get_units_pressure();
         $rising = $this->get_barometric_pressure_status();
-        return $pressure . ' and ' . $rising;
+        return $pressure . ' ' . $units . ' and ' . $rising;
     }
     
     /**
@@ -610,10 +650,128 @@ class CalPress_Weather
         echo $this->get_wind_degrees();
     }
     
-    /*
-        TODO 
-        wind, forecast
-    */
-
+    public function get_forecast(){
+        $forecasts = array();
+        
+        foreach ($this->_forecast as $forecast) {
+            $forecasts[] = new CalPress_Forecast($forecast);
+        }
+        
+        return $forecasts;
+    }
+    
 }
+
+class CalPress_Forecast{
+    
+    private $_day;
+    private $_date; 
+    private $_low;
+    private $_high;
+    private $_code;
+    private $_text;
+    
+    private $_imgsrc;
+    private $_imgext;
+    
+    function __construct($src, $imgsrc='http://l.yimg.com/a/i/us/we/52/', $imgext="gif"){
+        $this->_day = $src['attribs']['']['day'];
+        $this->_date = $src['attribs']['']['date'];
+        $this->_low = $src['attribs']['']['low'];
+        $this->_high = $src['attribs']['']['high'];
+        $this->_code = $src['attribs']['']['code'];
+        $this->_text = $src['attribs']['']['text'];
+        
+        // source of image graphics for each condition code
+        $this->_imgsrc = $imgsrc;
+        $this->_imgext = $imgext;
+    }
+    
+    public function set_imgsrc($src){
+        $this->_imgsrc = $src;
+    }
+    
+    public function set_imgext($ext){
+        $this->_imgext = $ext;
+    }
+    
+    public function get_day(){
+        return $this->_day;
+    }
+    
+    public function day(){
+        echo $this->get_day();
+    }
+    
+    public function get_date(){
+        return $this->_date;
+    }
+
+    public function date(){
+        echo $this->get_date();
+    }
+    
+    public function get_low(){
+        return $this->_low;
+    }
+
+    public function low(){
+        echo $this->get_low();
+    }
+    
+    public function get_high(){
+        return $this->_high;
+    }
+
+    public function high(){
+        echo $this->get_high();
+    }
+    
+    public function get_code(){
+        return $this->_code;
+    }
+
+    public function get_high_formatted(){
+        $h = $this->get_high();
+        return $h .'&#176;';
+    }
+
+    public function high_formatted(){
+        echo $this->get_high_formatted();
+    }
+
+    public function get_low_formatted(){
+        $l = $this->get_low();
+        return $l .'&#176;';
+    }
+
+    public function low_formatted(){
+        echo $this->get_low_formatted();
+    }
+
+    public function code(){
+        echo $this->get_code();
+    }
+    
+    public function get_text(){
+        return $this->_text;
+    }
+
+    public function text(){
+        echo $this->get_text();
+    }
+    
+    public function get_image(){
+        $imgdir = $this->_imgsrc;
+        $code = $this->get_code();
+        $extension = $this->_imgext;
+        
+        return $imgdir . $code . '.' . $extension;
+    }
+    
+    public function image(){
+        echo $this->get_image();
+    }
+}
+
 ?>
