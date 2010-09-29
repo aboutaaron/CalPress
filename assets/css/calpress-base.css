@@ -812,6 +812,10 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, b
         padding-top: 10px;
     }
     
+     body.front-layout-news3 #secondary-stories .p4, body.front-layout-news3-alt #secondary-stories .p4{
+         margin-left: 0;
+         margin-right: 10px;
+     }
     
     body.front-layout-news3 #content, body.front-layout-news3-alt #content{
         position: relative;
@@ -832,6 +836,7 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, b
     
     body.front-layout-news3 #tertiary-stories>div:first-child, body.front-layout-news3 #tertiary-stories>div:first-child{
         border-top: 0;
+        padding-top: 0;
 
     }
     
