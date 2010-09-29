@@ -815,6 +815,7 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, b
      body.front-layout-news3 #secondary-stories .p4, body.front-layout-news3-alt #secondary-stories .p4{
          margin-left: 0;
          margin-right: 10px;
+         clear: left;
      }
     
     body.front-layout-news3 #content, body.front-layout-news3-alt #content{
