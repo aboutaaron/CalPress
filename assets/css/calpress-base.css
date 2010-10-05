@@ -719,6 +719,7 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, b
     
     #special-features{
         clear: both;
+        overflow: auto;
     }
     
     /* News2 layout */
