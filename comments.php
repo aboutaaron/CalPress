@@ -18,6 +18,7 @@
 ?>
 <?php if ( have_comments() ) : ?>
 				<div id="comments-list" class="comments">
+				    <?php calpress_update_comment_count();//exlude ping and trackback in comment count ?>
 					<h3><?php comments_number('', __('<span>One</span> Comment', 'sandbox'), __('<span>%</span> Comments', 'sandbox') ); ?></h3>
 					<div id="comments-nav-above" class="comments-navigation">
 <?php paginate_comments_links($args); ?>

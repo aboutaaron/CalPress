@@ -1358,6 +1358,39 @@ remove_filter( 'post_gallery', 'sandbox_gallery', $attr );
 add_filter( 'post_gallery', 'calpress_gallery', $attr );
 
 /**
+ * A custom comment counter for Posts. Excludes track/ping backs
+ *
+ * Based on work by Ian Stewart:
+ * http://themeshaper.com/wordpress-theme-comments-template-tutorial/
+ * @return string
+ */
+function calpress_get_comment_count(){
+    global $wp_query;
+    
+    $comments = $wp_query->comments;
+    $comment_count = 0;
+    foreach ( $comments as $comment ) {
+        if($comment->comment_type != "pingback" && $comment->comment_type != "trackback"){
+            $comment_count++;
+        }
+    }
+    
+    return $comment_count;
+}
+
+/**
+ * A function to change the behavior of WP's get_comment_count to exclude trackback and pingbacks
+ *
+ * @uses get_comments_number()
+ * Based on :
+ * http://sivel.net/2008/10/wp-27-comment-separation/
+ * @return string
+ */
+function calpress_update_comment_count(){
+    add_filter('get_comments_number', 'calpress_get_comment_count', 0);
+}
+
+/**
  * A custom callback for wp_list_comments, so we can 
  * customize commenter links/stats. see comments.php
  *
