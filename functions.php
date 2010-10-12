@@ -109,6 +109,9 @@ if ( $calpress_mobile->showMobile() ) {
     }    
 } else {
     $primarycss = get_bloginfo('stylesheet_url');
+    // append last modified date to path to clear old caches
+    $cssmoddate = date ("YmdHis", filemtime(CURRENTTEMPLATEPATH.'/style.css'));
+    $primarycss .= '?ver='.$cssmoddate;
 }
 define('PRIMARYCSS', $primarycss);
  
