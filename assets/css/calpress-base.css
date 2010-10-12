@@ -826,6 +826,7 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, b
     body.front-layout-news3 #tertiary-stories, body.front-layout-news3-alt #tertiary-stories{
         position: absolute;
         top: 0px;
+        margin-left: 320px;
     }
     
     body.front-layout-news3 #tertiary-stories>div, body.front-layout-news3-alt #tertiary-stories>div{
@@ -833,7 +834,6 @@ body.front-layout-news #lead-story, body.front-layout-news #secondary-stories, b
         margin-left: 0;
         float: none;
         position: relative;
-        left: 320px;
     }
     
     body.front-layout-news3 #tertiary-stories>div:first-child, body.front-layout-news3 #tertiary-stories>div:first-child{
