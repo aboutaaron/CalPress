@@ -65,7 +65,7 @@
                         $post = get_post($featuredfrontposts_ids[$storyCounter]);
                     } 
                 ?>
-                    <?php calpress_loop_content(true, 300, 0, true, true, true, true, 40); ?>
+                    <?php calpress_loop_content(true, 300, 0, true, true, true, true, 0); ?>
                     
                 <?php
                     if ($use_front_feature) {
@@ -92,7 +92,7 @@
             }
             ?>
             
-            <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15); ?>
+            <?php calpress_loop_content(true, 300, 200, false, true, true, true, 20); ?>
             
             <?php
                 if ($use_front_feature) {
@@ -112,11 +112,11 @@
             }
             ?>
 
-            <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15); ?>
+            <?php calpress_loop_content(true, 300, 200, false, true, true, true, 20); ?>
             
         <?php elseif ($storyCounter === 4): //story 5 ?>
         
-            <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15); ?>
+            <?php calpress_loop_content(true, 300, 200, false, true, true, true, 20); ?>
         
             <?php
                 if ($use_front_feature) {
