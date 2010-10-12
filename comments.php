@@ -56,6 +56,8 @@
 								get_bloginfo('wpurl') . '/wp-admin/profile.php',
 								wp_specialchars( $user_identity, 1 ),
 								get_bloginfo('wpurl') . '/wp-login.php?action=logout&amp;redirect_to=' . get_permalink() ) ?></p>
+								
+							<?php calpress_hook_comment_message(); ?>	
 
 <?php else : ?>
 
