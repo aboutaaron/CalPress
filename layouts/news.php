@@ -94,7 +94,7 @@
                     }
                     ?>
                     
-                    <?php calpress_loop_content(true, 300, 200, true, true, true, true, 15); ?>
+                    <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15); ?>
                     
                     <?php
                         if ($use_front_feature) {
@@ -114,7 +114,7 @@
                     }
                     ?>
 
-                    <?php calpress_loop_content(true, 300, 200, true, true, true, true, 15); ?>
+                    <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15); ?>
                     
                     <?php
                         if ($use_front_feature) {
