@@ -116,6 +116,15 @@
             
         <?php elseif ($storyCounter === 4): //story 5 ?>
         
+            <?php
+                if ($use_front_feature) {
+                    // tmp save global post
+                    $tmpGlobalPost = $post;
+                    // make global post the first featured story                        
+                    $post = get_post($featuredfrontposts_ids[$storyCounter]);
+                }
+            ?>
+        
             <?php calpress_loop_content(true, 300, 200, false, true, true, true, 20); ?>
         
             <?php
