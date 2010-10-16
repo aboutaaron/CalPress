@@ -48,6 +48,13 @@ h4 {
     margin-bottom: 6px;
 }
 
+h5 { 
+    font-size: 11px; 
+    line-height: 16px; 
+    margin-bottom: 6px;
+    font-style: italic;
+}
+
 dl dt{
     margin-top: 5px;
 }
@@ -65,10 +72,13 @@ q:before, q:after {
 }
 
 /* When a sub head follows a headline (H1 > H2), eleminate the margin between */
-h1 + h2, h2 + h3 {
+h1 + h2, h2 + h3, h3 + h4 {
     margin-top: -18px;
 }
 
+h4 + h5{
+    margin-top: -6px;
+}
 .more{
     font-weight: bold;
     text-align: right;
