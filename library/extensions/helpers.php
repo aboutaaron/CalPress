@@ -1518,12 +1518,37 @@ function pluralize($num, $plural = 's', $single = '') {
  * This function assumes use of the featured-comments.php file, which updates wp_commentsmeta table
  *
  * @param int $limit - number of comments to return
+ * @param int $category - for any number > 0, return only featured comments from posts in that category
  * 
  * @return obj
  */
-function calpress_featured_comments($limit = 1){
+function calpress_featured_comments($limit = 1, $category = 0){
     global $wpdb;
-    $sql = "SELECT wp_commentmeta.*, wp_comments.comment_ID, wp_comments.comment_content, wp_comments.comment_post_ID, wp_comments.comment_author, wp_comments.comment_date, wp_posts.post_title, wp_posts.post_date FROM $wpdb->commentmeta, $wpdb->comments, $wpdb->posts WHERE wp_commentmeta.meta_key LIKE 'featured' AND wp_commentmeta.meta_value = 1 AND wp_commentmeta.comment_id = wp_comments.comment_ID AND wp_posts.id = wp_comments.comment_post_ID ORDER BY wp_commentmeta.meta_id DESC LIMIT $limit;";
+    if ($category > 0) {
+        /*
+            TODO: convert all into $wpdb
+        */
+        $sql = "SELECT DISTINCT ID, post_title, post_password, c.comment_ID, 
+        comment_post_ID, comment_author, comment_date, cm.meta_key, comment_approved, 
+        comment_type,comment_author_url, comment_content FROM wp_term_taxonomy as t1, 
+            wp_posts, wp_term_relationships as r1, wp_comments c, wp_commentmeta as cm
+        WHERE comment_approved = '1'
+           AND comment_type = ''
+           AND ID = comment_post_ID
+           AND post_password = ''
+           AND ID = r1.object_id
+           AND r1.term_taxonomy_id = t1.term_taxonomy_id
+           AND t1.taxonomy = 'category'
+           AND cm.meta_key LIKE 'featured'
+           AND cm.meta_value = 1
+           AND cm.comment_id = c.comment_ID
+           AND t1.term_id IN ('$category')
+        ORDER BY comment_date DESC LIMIT $limit;";
+        
+    } else {
+        $sql = "SELECT wp_commentmeta.*, wp_comments.comment_ID, wp_comments.comment_content, wp_comments.comment_post_ID, wp_comments.comment_author, wp_comments.comment_date, wp_posts.post_title, wp_posts.post_date FROM $wpdb->commentmeta, $wpdb->comments, $wpdb->posts WHERE wp_commentmeta.meta_key LIKE 'featured' AND wp_commentmeta.meta_value = 1 AND wp_commentmeta.comment_id = wp_comments.comment_ID AND wp_posts.id = wp_comments.comment_post_ID ORDER BY wp_commentmeta.meta_id DESC LIMIT $limit;";
+    }
+
     return $wpdb->get_results($sql);
 }
 
