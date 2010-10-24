@@ -464,6 +464,12 @@ body.archive .entry-image, body.category .entry-image, body.page-template-catego
     margin-bottom: 10px;
 }
 
+body.tag .entry-image{
+    float: none;
+    width: 380px;
+    margin-right: 0;
+}
+
 body.archive .entry-date, body.category .entry-date, body.page-template-category-page-php .entry-date{
    margin-bottom: 5px;
 }
