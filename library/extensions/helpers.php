@@ -1526,6 +1526,9 @@ function calpress_featured_comments($limit = 1, $category = 0){
     global $wpdb;
     if ($category > 0) {
         /*
+            based on:
+            http://wordpress.org/support/topic/get-last-comments-per-category
+            
             TODO: convert all into $wpdb
         */
         $sql = "SELECT DISTINCT ID, post_title, post_password, c.comment_ID, 
