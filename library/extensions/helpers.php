@@ -1196,9 +1196,9 @@ function calpress_inspanish(){
 }
 
 /**
- * Much like calpress_trim_except, except can trim any text to a lenght
+ * Much like calpress_trim_except, except can trim any text to a length
  *
- * @param $length - int - number of words to use in the excerpt
+ * @param $length - int - number of words to trim to
  * @return string
  */ 
 function calpress_trim_text($text, $length = 55) {
