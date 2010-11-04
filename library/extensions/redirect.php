@@ -41,4 +41,45 @@ function calpress_redirect(){
     }
 }
 add_action('template_redirect', 'calpress_redirect');
+
+/**
+ * Return redirect link
+ *
+ * @param none
+ * @return void
+ */
+function calpress_redirect_get_link(){
+    global $wp_query, $post;
+    setup_postdata($post);
+    $thePostID = $post->ID;
+    
+    $redirect = get_post_meta($thePostID, 'redirect', true);
+    
+    if ($redirect != '')
+	{   
+	    return $redirect;
+	}
+	else{
+	    return false; 
+	}
+} 
+
+/**
+ * Return redirect link domain
+ *
+ * @param none
+ * @return void
+ */
+function calpress_redirect_get_domain(){
+    if (calpress_redirect_get_link() !== false) {
+        $url = calpress_redirect_get_link();
+        $url = parse_url(trim($url));
+        return trim($url[host] ? $url[host] : array_shift(explode('/', $url[path], 2)));
+    } else{
+        return false;
+    }
+} 
+
+
+ 
 ?>
