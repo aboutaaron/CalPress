@@ -457,14 +457,14 @@ body.archive .p1.post,body.category .p1.post, body.page-template-category-page-p
     border-top: 0;
 }
 
-body.archive .entry-image, body.category .entry-image, body.page-template-category-page-php .entry-image, body.four04 .entry-image{
+body.archive #content .entry-image, body.category #content .entry-image, body.page-template-category-page-php #content .entry-image, body.four04 #content .entry-image{
     float: left;
     width: 140px;
     margin-right: 10px;
     margin-bottom: 10px;
 }
 
-body.tag .entry-image{
+body.tag #content .entry-image{
     float: none;
     width: 380px;
     margin-right: 0;
