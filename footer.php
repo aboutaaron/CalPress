@@ -31,6 +31,10 @@ global $calpress_mobile;
 </div><!-- #wrapper .hfeed -->
 
 <?php wp_footer() ?>
-<!-- <?php echo get_num_queries(); ?> queries in <?php timer_stop(1,5); ?> -->
+<?php 
+if (current_user_can('level_10')) {
+	echo '<!-- ' . get_num_queries() . ' queries in ' . timer_stop(0,3) . ' seconds -->';
+} 
+?>
 </body>
 </html>
