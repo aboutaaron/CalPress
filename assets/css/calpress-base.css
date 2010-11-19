@@ -452,6 +452,10 @@ body.archive.tag .post{
     width: 380px;
 }
 
+body.archive .grid_5 .post, body.category .grid_5 .post, body.page-template-category-page-php .grid_5 .post{
+    width: 380px;
+}
+
 body.archive .p1.post,body.category .p1.post, body.page-template-category-page-php .p1.post{
     padding-top: 0;
     border-top: 0;
