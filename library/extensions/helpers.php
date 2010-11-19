@@ -120,13 +120,13 @@ function calpress_globalnav( $g = "12" ) {
     	
     	if (function_exists('wp_nav_menu') && has_nav_menu( 'nav-bar' ) ) {//wordpress 3.0 menu builder
     	    wp_nav_menu( array( 'container' => 'div', 'container_class' => 'grid_12', 'container_id' => 'menu', 'theme_location' => 'nav-bar' ) ); 
+    	    echo '<div class="clear"></div>';
     	}else{// <= 2.9
     	    if ( $menu = str_replace( array( "\r", "\n", "\t" ), '', wp_list_pages('title_li=&sort_column=menu_order&echo=0') ) )
         		$menu = '<ul>' . $menu . '</ul>';
         	$menu = '<div id="menu" class="grid_' . $grid . '">' . $menu . '</div><div class="clear"></div>';
         	echo apply_filters( 'globalnav_menu', $menu ); // Filter to override default globalnav: globalnav_menu  
     	}
-    	echo '<div class="clear"></div><!-- #menu -->';
     }	
 }
 
