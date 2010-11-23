@@ -63,6 +63,14 @@ dl dt:first-child{
     margin-top: 0px;
 }
 
+dl.standard dt{
+    font-weight: bold;
+}
+
+dl.standard dd{
+    margin-left: 10px;
+}
+
 blockquote, q {
 	quotes: "" "";
 }
