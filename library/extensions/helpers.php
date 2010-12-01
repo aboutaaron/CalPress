@@ -1178,11 +1178,11 @@ add_filter('user_contactmethods','change_contactmethod',10,1);
  *
  * @return void
  */
-function calpress_spanishurl(){
+function calpress_spanishlink(){
      if ( get_post_custom_values('in_spanish') ){
          $url = get_post_custom_values('in_spanish');
         echo("<div class=\"alternate-url spanish\">");
-            echo ("<a href=\"$url[0]\">En Espanol</a>");
+            echo ("<a href=\"$url[0]\">En Espa&#241;ol</a>");
         echo("</div>");
     }
 }
