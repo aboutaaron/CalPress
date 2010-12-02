@@ -26,10 +26,11 @@ $sizeLimits = array(
 //ini_set("display_errors", 1);
 
 
-// Local Edit 
-// if possible, load WordPress and find wp-content/cache dir
-if( is_file( $_SERVER['DOCUMENT_ROOT'] . 'wp-load.php' ) ) {
-    require_once ($_SERVER['DOCUMENT_ROOT'] . 'wp-load.php');
+// Local Edit -- if possible, load WordPress and find wp-content/cache dir
+$docroot = $_SERVER['DOCUMENT_ROOT']."/";
+$docroot = str_replace ("//", "/", $docroot);//get around PHP sometimes returning doc root with trailing slash, sometimes not.
+if( is_file( $docroot . 'wp-load.php' ) ) {
+    require_once ($docroot . 'wp-load.php');
 
     $path_to_cache;
 
