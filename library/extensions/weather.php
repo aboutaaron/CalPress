@@ -35,6 +35,8 @@ class CalPress_Weather
     private $_atmosphere; // stores humidity / pressure / visibilty / rising
     private $_units; // store units being used - mi / pressure / speed / distance 
     private $_wind; // store wind info 
+    private $_geo_lat; // store lat and long
+    private $_geo_long;
     private $_forecast; // store mutliday forecast 
     private $_validfeed = false;
     
@@ -61,6 +63,8 @@ class CalPress_Weather
             $this->_atmosphere = $feed->get_channel_tags('http://xml.weather.yahoo.com/ns/rss/1.0', 'atmosphere');
             $this->_units = $feed->get_channel_tags('http://xml.weather.yahoo.com/ns/rss/1.0', 'units');
             $this->_wind = $feed->get_channel_tags('http://xml.weather.yahoo.com/ns/rss/1.0', 'wind');
+            $this->_geo_lat = $this->_weather->get_item_tags('http://www.w3.org/2003/01/geo/wgs84_pos#', 'lat');
+            $this->_geo_long = $this->_weather->get_item_tags('http://www.w3.org/2003/01/geo/wgs84_pos#', 'long');
             $this->_forecast = $this->_weather->get_item_tags('http://xml.weather.yahoo.com/ns/rss/1.0', 'forecast');
             $_validfeed = true;
         }
@@ -122,12 +126,13 @@ class CalPress_Weather
     }
     
     /**
-     * Return current conditions text (cloudy, sunny, etc)
+     * Return current link to current condition image (cloudy, sunny, etc)
      *
      * @return string
      */
     public function get_current_condition_image(){
-         return "http://l.yimg.com/a/i/us/we/52/12.gif";
+        $conditioncode = $this->get_condition_code();
+        return "http://l.yimg.com/a/i/us/we/52/$conditioncode.gif";
     }
     
     /**
@@ -341,6 +346,42 @@ class CalPress_Weather
      */
     public function city(){
         echo $this->get_city();
+    }
+    
+    /**
+     * Return latitude of city
+     *
+     * @return string
+     */
+    public function get_latitude(){
+        return $this->_geo_lat[0]['data'];
+    }
+    
+    /**
+     * Print latitude
+     *
+     * @return none
+     */
+    public function latitude(){
+       echo $this->get_latitude();
+    }
+    
+    /**
+     * Return longitude of city
+     *
+     * @return string
+     */
+    public function get_longitude(){
+        return $this->_geo_long[0]['data'];
+    }
+    
+    /**
+     * Print longitude
+     *
+     * @return none
+     */
+    public function longitude(){
+       echo $this->get_longitude();
     }
     
     /**
