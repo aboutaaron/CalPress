@@ -187,10 +187,14 @@ class CalPress_Weather
      *
      * @return string
      */
-    public function get_weather_formatted_html(){
+    public function get_weather_formatted_html($link = false){
         $a = $this->get_text_attribution();
         $w = $this->get_basic_weather();
-        return '<p class="weather">'. $a . ': ' . $w . '</p>';
+        if ($link) {
+            return '<p class="weather">'. $a . ': <a href="/weather/" title="Complete forecast">' . $w . '</a></p>';
+        } else {
+            return '<p class="weather">'. $a . ': ' . $w . '</p>';
+        }
     }
     
     /**
@@ -198,8 +202,12 @@ class CalPress_Weather
      *
      * @return string
      */
-    public function weather_formatted_html(){
-        echo $this->get_weather_formatted_html();
+    public function weather_formatted_html($link = false){
+        if ($link) {
+            echo $this->get_weather_formatted_html(true);
+        } else {
+           echo $this->get_weather_formatted_html();
+        }
     }
     
     /**
