@@ -22,41 +22,25 @@ $sizeLimits = array(
 );
 */
 
-//error_reporting(E_ALL);
-//ini_set("display_errors", 1);
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 
-// Local Edit -- if possible, load WordPress and find wp-content/cache dir
+// Local Edit -- if possible, detect WordPress and find wp-content/cache dir
+
+$tmp_dir = './temp'; // default for timthumb 1.15
+$cache_dir = './cache';
+
 $docroot = $_SERVER['DOCUMENT_ROOT']."/";
 $docroot = str_replace ("//", "/", $docroot);//get around PHP sometimes returning doc root with trailing slash, sometimes not.
 if( is_file( $docroot . 'wp-load.php' ) ) {
-    require_once ($docroot . 'wp-load.php');
-
-    $path_to_cache;
-
-    // wordpress install location 
-    $wploc = explode ('/', WP_CONTENT_DIR);
-
-    // location of this timtumb (likely not in WP_CONTENT_DIR due to symlinks)
-    $timthumbdir = getcwd();
-    $timthumbloc = explode ('/', $timthumbdir);
-
-    // build relative path between this file and the WP_CONTENT_DIR
-    $stepsback = count ( array_diff($timthumbloc,$wploc) ); // how many directories back (../../../)
-    for ($i = 0; $i < $stepsback; $i++) {
-        $path_to_cache .= "../";
-    }
-    $pathforward = array_diff($wploc,$timthumbloc);// walk through directories going forward
-    foreach ($pathforward as $path) {
-       $path_to_cache .= "$path/";
-    }
-    
-    $tmp_dir = $path_to_cache . 'cache';
-    $cache_dir = $path_to_cache . 'cache';
-    
-}else{
-    $tmp_dir = './temp'; // default for timthumb 1.15
-    $cache_dir = './cache';
+        $cache_path = $docroot;
+        $cache_path = $cache_path . 'wp-content/cache';
+        if (is_dir($cache_path)) {
+                //reset cache path
+                $tmp_dir = $cache_path;
+                $cache_dir = $cache_path;
+        }
 }
 // end local edit
 
