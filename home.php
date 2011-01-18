@@ -1,32 +1,31 @@
 <?php get_header() ?>
-
 		<div id="content" class="grid_8 alpha">
-
+		<?php
+		// determine which category to show on front page. default from wordpress is all. 
+         $front_category_to_use = get_option('cp_front_category');
+         $front_category_set = false;
+         
+         if (is_numeric($front_category_to_use) && $front_category_to_use > 0) { //use a special category
+             $front_category_set = true;
+         }
+         
+          // in addition to front category, we can use another category to place featured spot
+         $front_featured_category_to_use = get_option('cp_front_featured_category');
+         $front_featured_category_set = false;
+         $use_front_feature = false;
+         if (is_numeric($front_featured_category_to_use) && $front_featured_category_to_use > 0) {
+             $front_featured_category_set = true;
+             $use_front_feature = true;
+             $frontposts_ids = array();
+             
+         }
+		?>
+		<?php if (!is_paged()): // if true front page, show special layout ?>
             <?php // hook above loop ?>
             <?php calpress_hook_frontfeatures_above(); ?>
 
             <?php
             //setup variables that can be used in individual layouts
-            
-            // determine which category to show on front page. default from wordpress is all. 
-            $front_category_to_use = get_option('cp_front_category');
-            $front_category_set = false;
-            
-            if (is_numeric($front_category_to_use) && $front_category_to_use > 0) { //use a special category
-                $front_category_set = true;
-            }
-            
-             // in addition to front category, we can use another category to place featured spot
-            $front_featured_category_to_use = get_option('cp_front_featured_category');
-            $front_featured_category_set = false;
-            $use_front_feature = false;
-            if (is_numeric($front_featured_category_to_use) && $front_featured_category_to_use > 0) {
-                $front_featured_category_set = true;
-                $use_front_feature = true;
-                $frontposts_ids = array();
-                
-            }
-            
             if ( $front_category_set ) { // on front page, change default query to only include selected front page category
                 
                 // in addition to a front category above, default layouts in calpress allow the lead spot to 
@@ -49,11 +48,7 @@
                 } else {
                     query_posts('cat='.$front_category_to_use);
                 }
-                
-                
             }
-            
-            
 
             
             // save the value of the "lead story override" in calpress producer here. Layouts should 
@@ -73,7 +68,22 @@
             
             <?php //hook below loop ?>
             <?php calpress_hook_frontfeatures_below(); ?>
-            
+        <?php else: //!is_paged()?> 
+			<?php
+				if ( $front_category_set ){
+					$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+					query_posts('cat='.$front_category_to_use.'&paged=' . $paged);
+				}
+				while ( have_posts() ) {
+					the_post();
+					calpress_loop_content();
+				}
+			?>
+			<div id="nav-below" class="navigation">
+		    	<div class="nav-previous"><?php next_posts_link(__( 'Older posts <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?></div>
+		    	<div class="nav-next"><?php previous_posts_link(__( '<span class="meta-nav">&laquo;</span>Newer posts', 'sandbox' )) ?></div>
+		    </div>
+		<?php endif //!is_paged()?>    
 		</div><!-- #content -->
         <?php get_sidebar() ?>
         
