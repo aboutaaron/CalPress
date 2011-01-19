@@ -183,6 +183,10 @@ body.single .entry-content p{
     overflow: auto;
 }
 
+.post{
+	overflow: hidden;
+}
+
 .nav-previous, .nav-next{
     width: 50%;
     float: right;
