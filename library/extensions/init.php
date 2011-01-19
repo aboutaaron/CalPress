@@ -50,6 +50,15 @@ function calpress_init() {
 }    
 add_action('init', 'calpress_init');
 
+function calpress_in_head_content(){
+	?>
+	<script type="text/javascript">
+	        var tb_pathToImage = '<?php echo bloginfo('wpurl') ?>/wp-includes/js/thickbox/loadingAnimation.gif';
+	        var tb_closeImage = '<?php echo bloginfo('wpurl') ?>/wp-includes/js/thickbox/tb-close.png';
+	     </script>
+	<?php
+}
+add_action('wp_head', 'calpress_in_head_content');
 
 /**
  * register_calpress_global_menu() - Registers WP 3.0 menu
