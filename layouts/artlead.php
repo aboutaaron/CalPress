@@ -65,7 +65,7 @@
                         $post = get_post($featuredfrontposts_ids[$storyCounter]);
                     } 
                 ?>
-					<h2 class="entry-title artlead"><a href="<?php the_permalink() ?>" title="<?php printf( __('Permalink to %s', 'sandbox'), the_title_attribute('echo=0') ) ?>" rel="bookmark"><?php the_title() ?></a></h2>
+					<h2 class="entry-title artlead-headline"><a href="<?php the_permalink() ?>" title="<?php printf( __('Permalink to %s', 'sandbox'), the_title_attribute('echo=0') ) ?>" rel="bookmark"><?php the_title() ?></a></h2>
                     <?php calpress_loop_content(true, 620, 0, true, false, true, true, 70); ?>
                     <p class="more"><a href="<?php the_permalink() ?>">More</a></p>
                     
