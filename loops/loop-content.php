@@ -66,9 +66,9 @@ function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=
         }
     }
   	?>
-
-  	<h2 class="entry-title"><a href="<?php the_permalink() ?>" title="<?php printf( __('Permalink to %s', 'sandbox'), the_title_attribute('echo=0') ) ?>" rel="bookmark"><?php the_title() ?></a></h2>
-
+	<?php if($hed): ?>
+  		<h2 class="entry-title"><a href="<?php the_permalink() ?>" title="<?php printf( __('Permalink to %s', 'sandbox'), the_title_attribute('echo=0') ) ?>" rel="bookmark"><?php the_title() ?></a></h2>
+	<?php endif ?>
     <?php if ($meta): ?>
 
         <div class="entry-meta">
