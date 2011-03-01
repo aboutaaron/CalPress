@@ -12,10 +12,11 @@
  * @param boolean $meta - show story meta
  * @param boolean $excerpt - show story excerpt
  * @param int $excerptlength - for any number greater than zero, truncate excerpt to that length
+ * @param boolean $artleadembed - Show multimedia if it's embedded media with a defined size e.g. Flash
  * @return string
  */
 
-function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0){
+function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=true, $hed=true, $meta=true, $excerpt=true, $excerptlength = 0, $artleadembed=false){
     global $post, $authordata;
     setup_postdata($post);
 ?>  
@@ -43,7 +44,6 @@ function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=
                 
                 // if we need to show a cropped lead art ($artcrop > 0 && $multimedia==true), we need to determine if the art is croppable. For now, only photos are supported.
                 // using output buffering and a class string search is a horribly fragile hack...
-                
                 //grab default lead art
                 ob_start();
             	calpress_leadart($artsize);
@@ -54,13 +54,13 @@ function calpress_loop_content($art=true, $artsize=620, $artcrop=0, $multimedia=
                 if ( strpos($leadart, "entry-leadphoto") !== false && $artcrop > 0) {
                     calpress_teaseart_cropped($artsize,$artcrop); //show cropped photo
                 } else {
-                    // see if calpress wants to print an embed. if so, only show photo
-                     if ( strpos($leadart, "entry-leadembed") !== false ) {
-                         calpress_teaseart($artsize);
-                     } else {
-                         echo $leadart; // show unchanged lead art (video, youtube, etc)
-                     }
-                }
+	                    // see if calpress wants to print an embed. if so, only show photo
+                		if ( strpos($leadart, "entry-leadembed") !== false && calpress_showteaseart() !== false && $artleadembed === false) {
+		                    calpress_teaseart($artsize);
+		                } else {
+		                    echo $leadart; // show unchanged lead art (video, youtube, etc)
+		                }
+	            }
 
             echo("</div>");
         }

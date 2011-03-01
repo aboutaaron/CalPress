@@ -25,6 +25,7 @@
 // @param boolean $meta - show story meta
 // @param boolean $excerpt - show story excerpt
 // @param int $excerptlength - for any number greater than zero, truncate excerpt to that length
+// @param boolean $artleadembed - Show multimedia if it's embedded media with a defined size e.g. Flash
 //  @return string
 ?>
 
@@ -66,7 +67,7 @@
                     } 
                 ?>
 					<h2 class="entry-title artlead-headline"><a href="<?php the_permalink() ?>" title="<?php printf( __('Permalink to %s', 'sandbox'), the_title_attribute('echo=0') ) ?>" rel="bookmark"><?php the_title() ?></a></h2>
-                    <?php calpress_loop_content(true, 620, 0, true, false, true, true, 70); ?>
+                    <?php calpress_loop_content(true, 620, 0, true, false, true, true, 70, true); ?>
                     <p class="more"><a href="<?php the_permalink() ?>">More</a></p>
                     
                 <?php
@@ -95,7 +96,7 @@
                     }
                     ?>
                     
-                    <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15); ?>
+                    <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15, false); ?>
                     
                     <?php
                         if ($use_front_feature) {
@@ -115,7 +116,7 @@
                     }
                     ?>
 
-                    <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15); ?>
+                    <?php calpress_loop_content(true, 300, 200, false, true, true, true, 15, false); ?>
                     
                     <?php
                         if ($use_front_feature) {

@@ -49,7 +49,7 @@ define('CURRENTTEMPLATEPATH', STYLESHEETPATH);
 
 //get root url of current theme, regardelss of whether it's a parent or child theme
 $surl = get_bloginfo('stylesheet_directory');
-define(THEMEURL, $surl);
+define('THEMEURL', $surl);
 
 // set root url paths for parent theme assets, for use in parent or child themes
 $base_url = get_bloginfo('wpurl');
