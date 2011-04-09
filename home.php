@@ -35,10 +35,43 @@
                 if ($front_featured_category_set) { 
                     
                     // Don't include articles from the front featured category in our main front feed b/c there could be duplicates
-                    query_posts( array('category__in' => array($front_category_to_use), 'category__not_in' => array($front_featured_category_to_use) ) );
-                    
+                    //query_posts( array('category__in' => array($front_category_to_use), 'category__not_in' => array($front_featured_category_to_use) ) );
+                    $cptaxquery['tax_query'] = array(
+									array(
+										'taxonomy' => 'category',
+										'terms' => array($front_category_to_use),
+										'field' => 'id',
+										'operator' => 'IN'
+									),
+									array(
+										'taxonomy' => 'category',
+										'terms' => array($front_featured_category_to_use),
+										'field' => 'id',
+										'operator' => 'NOT IN'									
+									)
+					);
+					
+					query_posts($cptaxquery);
+
+
                     // Store front features in a sepreate loop
-                    $featuredfrontposts = new WP_Query( array('category__and' => array($front_category_to_use, $front_featured_category_to_use) ) );
+                    //$featuredfrontposts = new WP_Query( array('category__and' => array($front_category_to_use, $front_featured_category_to_use) ) );
+					$taxqueryfeaturedargs = array(
+							'tax_query' => array(
+								'relation' => 'AND',
+								array(
+									'taxonomy' => 'category',
+									'terms' => array($front_category_to_use),
+									'field' => 'id'
+									),
+								array(
+									'taxonomy' => 'category',
+									'terms' => array($front_featured_category_to_use),
+									'field' => 'id'
+									)
+							)
+						);
+					$featuredfrontposts = new WP_Query($taxqueryfeaturedargs);
                     $featuredfrontposts_ids = array();
                     while ($featuredfrontposts->have_posts()){
                         $featuredfrontposts->the_post();
@@ -54,7 +87,7 @@
             // save the value of the "lead story override" in calpress producer here. Layouts should 
             // take that value into account, and show that code instead of the automated first post. 
             $get_leadstoryoverride = THEMESHORTNAME."_front_feature_override"; // get value from admin
-            $leadstoryoverride_content = trim(get_settings($get_leadstoryoverride));
+            $leadstoryoverride_content = trim(get_option($get_leadstoryoverride));
             if ($leadstoryoverride_content != ""){
                 $leadstoryoverride = true;
             } else {
