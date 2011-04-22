@@ -103,6 +103,32 @@ function calpress_hook_blogdescription() {
 }
 
 /**
+ * calpress_hook_abovemenu()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed above the menu.
+ * @example add_action('calpress_hook_abovemenu', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_abovemenu
+ */
+function calpress_hook_abovemenu() {
+	do_action('calpress_hook_abovemenu');
+}
+
+/**
+ * calpress_hook_belowmenu()
+ *
+ * Template function appearing in header.php, allows actions
+ * to be executed below the menu.
+ * @example add_action('calpress_hook_belowmenu', 'my_function');
+ * @since 0.7
+ * @hook action calpress_hook_belowmenu
+ */
+function calpress_hook_belowmenu() {
+	do_action('calpress_hook_belowmenu');
+}
+
+/**
  * calpress_hook_footer()
  *
  * Template function appearing in header.php, allows actions

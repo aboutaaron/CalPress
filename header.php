@@ -44,9 +44,13 @@ global $calpress_mobile;
 		<div id="blog-description"><?php calpress_hook_blogdescription(); ?></div>
 	</div><div class="clear"></div><!--  #header -->
 	
+	
+	
 	<?php 
 	    if (! $calpress_mobile->showMobile()) {
-	       calpress_globalnav("12"); 
+			calpress_hook_abovemenu();
+	       	calpress_globalnav("12"); 
+			calpress_hook_belowmenu();
 	    }
 	?><!-- #menu -->
 
