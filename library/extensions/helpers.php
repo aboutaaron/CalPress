@@ -1186,6 +1186,15 @@ function calpress_spanishlink(){
         echo("</div>");
     }
 }
+
+//put a small bug next to headline if there is a spanish version
+function calpress_spanishbug($image_link = null){
+	if ( get_post_custom_values('in_spanish') && $image_link){
+		$url = get_post_custom_values('in_spanish');
+		echo("&nbsp;<span class=\"spanish-bug\"><a href=\"$url[0]\"><img src=\"$image_link\" alt=\"Spanish icon\" /></a></span>");
+	}
+}
+
 // spanish version of an asset?
 function calpress_inspanish(){
     if ( get_post_custom_values('in_spanish') ){

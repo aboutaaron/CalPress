@@ -212,6 +212,21 @@ function calpress_hook_loopcontent_below() {
 }
 
 /**
+ *
+ * calpress_hook_loopcontent_title()
+ *
+ * Temlate function appearing in loop-content, allows actions 
+ * to be executed just after the article title.
+ * @example add_action('calpress_hook_loopcontent_title', 'my_function');
+ * @example see home.php
+ * @since 0.7
+ * @hook action calpress_hook_loopcontent_title
+ */
+function calpress_hook_loopcontent_title() {
+	do_action('calpress_hook_loopcontent_title');
+}
+
+/**
  * calpress_hook_postcontent_above()
  *
  * Template function appearing in single.php, allows actions
