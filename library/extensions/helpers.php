@@ -1255,8 +1255,7 @@ function calpress_trim_excerpt($length = 55) {
 	} else {
 		$text = implode(' ', $words);
 	}
-	
-	echo $text;
+	echo '<p>'.$text.'</p>';
 }
 
 function new_excerpt_more($more) {
