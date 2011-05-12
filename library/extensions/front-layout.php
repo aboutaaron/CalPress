@@ -31,10 +31,10 @@ if ($layout == "") {
 }
 
 $layout_template = 'layouts/'.$layout;
-if ( file_exists(TEMPLATEPATH . '/' .$layout_template) ) { // current theme
-    $front_template = TEMPLATEPATH . '/' .$layout_template ;
-} elseif ( file_exists(CURRENTTEMPLATEPATH . '/' .$layout_template)  ) { // calpress theme
+if ( file_exists(CURRENTTEMPLATEPATH . '/' .$layout_template) ) { // current theme
     $front_template = CURRENTTEMPLATEPATH . '/' .$layout_template ;
+} elseif ( file_exists(TEMPLATEPATH . '/' .$layout_template)  ) { // calpress theme
+    $front_template = TEMPLATEPATH . '/' .$layout_template ;
 } else {
     $front_template = TEMPLATEPATH.'/layouts/blog.php';
 }

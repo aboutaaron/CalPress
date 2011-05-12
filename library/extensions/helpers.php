@@ -61,7 +61,7 @@ function calpress_googleanalytics() {
     $gaID = trim(get_settings($get_ga_id));
     
     // see if its value is not blank
-    if ($gaID != "" && !is_user_logged_in()){
+    if ($gaID != "" && !is_user_logged_in() && stripos($_SERVER['REQUEST_URI'],'/template/') === false){
 	$gacode = '<!-- GOOGLE ANALYTICS TRACKING CODE -->
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
