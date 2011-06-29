@@ -1190,9 +1190,9 @@ function calpress_spanishlink(){
 
 //put a small bug next to headline if there is a spanish version
 function calpress_spanishbug($image_link = null){
-	if ( get_post_custom_values('in_spanish') && $image_link){
+	if ( get_post_custom_values('in_spanish')){
 		$url = get_post_custom_values('in_spanish');
-		echo("&nbsp;<span class=\"spanish-bug\"><a href=\"$url[0]\"><img src=\"$image_link\" alt=\"Spanish icon\" /></a></span>");
+		echo("&nbsp;<span class=\"spanish-bug\"><a href=\"$url[0]\">en espa&ntilde;ol</a></span>");
 	}
 }
 
