@@ -1192,7 +1192,7 @@ function calpress_spanishlink(){
 function calpress_spanishbug($image_link = null){
 	if ( get_post_custom_values('in_spanish')){
 		$url = get_post_custom_values('in_spanish');
-		echo("&nbsp;<span class=\"spanish-bug\"><a href=\"$url[0]\">en espa&ntilde;ol</a></span>");
+		echo("&nbsp;<span class=\"spanish-bug\"><a href=\"$url[0]\"><img src=\"$image_link\" alt=\"spanish icon\" /></a></span>");
 	}
 }
 
