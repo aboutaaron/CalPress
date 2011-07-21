@@ -138,6 +138,24 @@ $calpress_theme_options = array (
 			"id" => $shortname."_sharethis",
 			"std" => __(" ", 'calpress'),
 			"type" => "text",),
+			
+    array(	"name" => __('DotSpotting Username','calpress'),
+			"desc" => __("Include your dotspotting user ID name. See http://dotspotting.org for more info.",'calpress'),
+			"id" => $shortname."_dotspotting",
+			"std" => __(" ", 'calpress'),
+			"type" => "text",),
+
+    array(	"name" => __('DotSpotting Starting Latitude','calpress'),
+			"desc" => __("Specify the stargin Latitude for Dotspotting maps",'calpress'),
+			"id" => $shortname."_dotspotting_lat",
+			"std" => __(" ", 'calpress'),
+			"type" => "text",),
+			
+    array(	"name" => __('DotSpotting Starting Longitude','calpress'),
+			"desc" => __("Specify the starting Longitude for Dotspotting maps",'calpress'),
+			"id" => $shortname."_dotspotting_lng",
+			"std" => __(" ", 'calpress'),
+			"type" => "text",),
 );
 
 

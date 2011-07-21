@@ -571,4 +571,55 @@ function calpress_get_embedmap($lat=37.875356, $lng=-122.260817,$z=15,$t="ROADMA
 	return $html;
 }
 
+/**
+ * Display a Dotspotting Map
+ *
+ * To get the actual code without displaying it, use calpress_get_embed_dotspotting()
+ *
+ * @param int $lat = latitude
+ * @param int $lng = longitude
+ * @param int $z = zoomlevel
+ * @param int $uid = dotspotting user id
+ * @param int $st = dotspotting sheet number
+ * @param int $w = width
+ * @param int $h = height
+ * @param string $ti = title
+ * @param boolean $sti = show title?
+ * @param boolean $slnk = show dotspotting link?
+ * @return void
+ */
+function calpress_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,$st=1083,$w=620,$h=400,$ti="",$sti=true,$slnk=true){
+	echo calpress_get_embed_dotspotting($lat, $lng, $z, $uid, $st, $w, $h, $ti, $sti, $slnk);
+}
+
+/**
+ * HTML for a Dotspotting Map
+ *
+ * To display a map, use calpress_embed_dotspotting()
+ *
+ * @param int $lat = latitude
+ * @param int $lng = longitude
+ * @param int $z = zoomlevel
+ * @param int $uid = dotspotting user id
+ * @param int $st = dotspotting sheet number
+ * @param int $w = width
+ * @param int $h = height
+ * @param string $ti = title
+ * @param boolean $sti = show title?
+ * @param boolean $slnk = show dotspotting link?
+ * @return string
+ */
+function calpress_get_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,$st=1083,$w=620,$h=400,$ti="",$sti=true,$slnk=true){
+    $html = "";
+	$pti = split(" ", $ti);
+	$pti = join("+", $pti);
+
+    $html .= "<iframe type=\"text/html\" width=\"" . $w . "\" height=\"". $h ."\""; 
+	$html .= "src=\"http://dotspotting.org/embed/crime/map?user=" . $uid . "&amp;sheet=". $st ."&amp;title=". $pti ."&amp;ui=1#". $z ."/". $lat ."/". $lng ."\" frameborder=\"0\"></iframe>\n";
+	if($slnk){	
+		$html .= $ti != "" ? "<p><a href='http://dotspotting.org/u/". $uid ."/sheets/". $st ."'>". $ti ."</a> on <a href='http://dotspotting.org/'>Dotspotting</a></p>\n" : "<a href='http://dotspotting.org/'>See this map on Dotspotting</a></p>\n";
+	}
+	return $html;
+}
+
 ?>

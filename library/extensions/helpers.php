@@ -98,6 +98,47 @@ function calpress_sharethis(){
     }
 }
 
+
+/**
+ * Return dotspotting user ID from CalPress Admin
+ *
+ * @return string
+ */
+function calpress_dotspotting(){
+    // get value from admin
+    $get_dotspotting_id = THEMESHORTNAME."_dotspotting";
+    $dotspottingID = trim(get_settings($get_dotspotting_id));
+
+    // see if its value is not blank
+    if ($dotspottingID != ""){
+		return $dotspottingID;
+    } else {
+		return false;
+	}
+}
+
+/**
+ * Return dotspotting longitude and latitude from CalPress Admin
+ *
+ * @return Array
+ */
+function calpress_dotspotting_lat_lng(){
+    // get value from admin
+    $get_dotspotting_lat = THEMESHORTNAME."_dotspotting_lat";
+    $get_dotspotting_lng = THEMESHORTNAME."_dotspotting_lng";
+
+    $dotspotting_lat = trim(get_settings($get_dotspotting_lat));
+    $dotspotting_lng = trim(get_settings($get_dotspotting_lng));
+
+    // see if its value is not blank
+    if ($get_dotspotting_lat != "" && $dotspotting_lng != ""){
+		return array($dotspotting_lat, $dotspotting_lng);
+    } else {
+		return false;
+	}
+}
+
+
 /**
  * List pages in global nav unless told not to in the admin
  *
@@ -412,7 +453,8 @@ function calpress_showleadart(){
         get_post_custom_values('lead_youtube') ||
         get_post_custom_values('lead_vimeo') ||
         get_post_custom_values('lead_embed') ||
-        get_post_custom_values('lead_soundslides')
+        get_post_custom_values('lead_soundslides') ||
+		get_post_custom_values('lead_dotspotting')
         ) 
     {
         return true;
@@ -496,6 +538,26 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
         echo("<div class=\"lead-art entry-leadyoutube\">");
             calpress_embedyoutube($youtubeid,$cutline,$title,$w,$h);
         echo("</div>");
+	} elseif ( get_post_custom_values('lead_dotspotting', $thePostID) ) {//show the lead art slideshow
+        $h = calpress_mediaheight($w, "43");//always used 4x3
+        $map = get_post_custom_values('lead_dotspotting', $thePostID);
+        $options = calpress_parsextrafieldsoptions($map[0]);
+        $userID = calpress_dotspotting();
+		$lat_lng = calpress_dotspotting_lat_lng();
+        $sheetID = $options[0];
+        $title = $options[1] != "" ? $options[1] : "";
+		$usetitle = $title == "" ? false : true;
+		if($userID){
+	        echo("<div class=\"lead-art entry-dotspotting\">");
+				if($lat_lng){
+	            	calpress_embed_dotspotting($lat_lng[0], $lat_lng[1], 14, $userID, $sheetID, $w, $h, $title, $usetitle, true);
+				} else {
+					calpress_embed_dotspotting(37.7621, -122.4174, 14, $userID, $sheetID, $w, $h, $title, $usetitle, true);
+				}
+	        echo("</div>");
+		} else {
+			echo("<p>Dotspotting user ID not set in administration!</p>");
+		}
     } elseif ( get_post_custom_values('lead_vimeo', $thePostID) ) {//show the lead art slideshow
         $h = calpress_mediaheight($w, "169", "video");
         $videos = get_post_custom_values('lead_vimeo', $thePostID);   
