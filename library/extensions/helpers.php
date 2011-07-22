@@ -545,18 +545,18 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
         $userID = calpress_dotspotting();
 		$lat_lng = calpress_dotspotting_lat_lng();
         $sheetID = $options[0];
-        $title = $options[1] != "" ? $options[1] : "";
+        $title = $options[1];
 		$usetitle = $title == "" ? false : true;
 		if($userID){
 	        echo("<div class=\"lead-art entry-dotspotting\">");
 				if($lat_lng){
-	            	calpress_embed_dotspotting($lat_lng[0], $lat_lng[1], 14, $userID, $sheetID, $w, $h, $title, $usetitle, true);
+	            	calpress_embed_dotspotting($lat_lng[0], $lat_lng[1], 14, $userID, $sheetID, $w, $h, $title, $usetitle, true, 1);
 				} else {
-					calpress_embed_dotspotting(37.7621, -122.4174, 14, $userID, $sheetID, $w, $h, $title, $usetitle, true);
+					calpress_embed_dotspotting(37.7621, -122.4174, 14, $userID, $sheetID, $w, $h, $title, $usetitle, true, 1);
 				}
 	        echo("</div>");
 		} else {
-			echo("<p>Dotspotting user ID not set in administration!</p>");
+			echo("<p>Dotspotting user ID not set.</p>");
 		}
     } elseif ( get_post_custom_values('lead_vimeo', $thePostID) ) {//show the lead art slideshow
         $h = calpress_mediaheight($w, "169", "video");
@@ -893,6 +893,7 @@ function calpress_showinlines(){
         get_post_custom_values('related_links') || 
         get_post_custom_values('inline_story') ||
         get_post_custom_values('inline_audio') ||
+		get_post_custom_values('inline_dotspotting') ||
         ( get_post_custom_values('inline_poll') && function_exists('vote_poll') ) ||
         get_post_custom_values('inline_map')) {
 	    return true;
@@ -1031,7 +1032,30 @@ function calpress_get_inlines(){
 	                $html .= "</div><!--//end .sidebar-element -->"; 
 	            }
             }
-            
+
+			// dotspotting
+			if ( get_post_custom_values('inline_dotspotting') ) {
+				$w = calpress_sidebarmediawidth();
+				$h = 350;
+		        $map = get_post_custom_values('inline_dotspotting');
+		        $options = calpress_parsextrafieldsoptions($map[0]);
+		        $userID = calpress_dotspotting();
+				$lat_lng = calpress_dotspotting_lat_lng();
+		        $sheetID = $options[0];
+		        $title = $options[1] != "" ? $options[1] : "";
+				$usetitle = $title == "" ? false : true;
+				if($userID){
+			        $html .= "<div class=\"sidebar-element entry-sidebar-dotspotting\">";
+						if($lat_lng){
+			            	$html .= calpress_get_embed_dotspotting($lat_lng[0], $lat_lng[1], 14, $userID, $sheetID, $w, $h, $title, false, true, 0);
+						} else {
+							$html .= calpress_get_embed_dotspotting(37.7621, -122.4174, 14, $userID, $sheetID, $w, $h, $title, false, true, 0);
+						}
+			        $html .= "</div><!--//end .sidebar-element -->";
+				} else {
+					$html .= "<p>Dotspotting user ID not set in administration!</p>";
+				}
+            }
             // soundsslides
             if ( get_post_custom_values('inline_soundslides') ) {
                 $soundslides = get_post_custom_values('inline_soundslides');

@@ -597,8 +597,8 @@ function calpress_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,
  *
  * To display a map, use calpress_embed_dotspotting()
  *
- * @param int $lat = latitude
- * @param int $lng = longitude
+ * @param int $lat = starting latitude
+ * @param int $lng = starting longitude
  * @param int $z = zoomlevel
  * @param int $uid = dotspotting user id
  * @param int $st = dotspotting sheet number
@@ -607,17 +607,23 @@ function calpress_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,
  * @param string $ti = title
  * @param boolean $sti = show title?
  * @param boolean $slnk = show dotspotting link?
+ * @param int $showui = 0 or 1 to show legend in map
  * @return string
  */
-function calpress_get_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,$st=1083,$w=620,$h=400,$ti="",$sti=true,$slnk=true){
+function calpress_get_embed_dotspotting($lat=37.7621, $lng=-122.4174, $z=14, $uid=233, $st=1083, $w=620, $h=400, $ti="", $sti=true, $slnk=true, $showui=1){
     $html = "";
-	$pti = split(" ", $ti);
-	$pti = join("+", $pti);
-
-    $html .= "<iframe type=\"text/html\" width=\"" . $w . "\" height=\"". $h ."\""; 
-	$html .= "src=\"http://dotspotting.org/embed/crime/map?user=" . $uid . "&amp;sheet=". $st ."&amp;title=". $pti ."&amp;ui=1#". $z ."/". $lat ."/". $lng ."\" frameborder=\"0\"></iframe>\n";
+	if($ti != ""){
+		$pti = split(" ", $ti);
+		$pti = join("+", $pti);
+	}
+    $html .= "<iframe type=\"text/html\" width=\"" . $w . "\" height=\"". $h ."\" "; 
+	$html .= "src=\"http://dotspotting.org/embed/crime/map?user=" . $uid . "&amp;sheet=". $st ."&amp;";
+	if($ti != ""){
+		$html .= "title=". $pti . "&amp;";
+	}
+	$html .= "ui=". $showui ."\" frameborder=\"0\"></iframe>\n";
 	if($slnk){	
-		$html .= $ti != "" ? "<p><a href='http://dotspotting.org/u/". $uid ."/sheets/". $st ."'>". $ti ."</a> on <a href='http://dotspotting.org/'>Dotspotting</a></p>\n" : "<a href='http://dotspotting.org/'>See this map on Dotspotting</a></p>\n";
+		$html .= "<p class=\"dotspotting-linkback\"><a href='http://dotspotting.org/u/". $uid ."/sheets/". $st ."'>Map by Dotspotting.org</a>\n";
 	}
 	return $html;
 }
