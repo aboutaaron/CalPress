@@ -357,14 +357,6 @@ CalPress Content Section-specific rules
     width:290px; /* 4 col on a 12col 960 grid */
 }
 
-.entry-sidebar-dotspotting iframe{
-	border:1px solid #000;
-}
-
-.dotspotting-linkback a{
-	font-size: .7em;
-}
-
 #footer{
 	text-align: center;
 	border-top: 2px solid #000;
