@@ -19,7 +19,7 @@ define ('MEMORY_LIMIT', '30M');				// Set PHP memory limit
 define ('BLOCK_EXTERNAL_LEECHERS', false);		// If the image or webshot is being loaded on an external site, display a red "No Hotlinking" gif.
 
 //Image fetching and caching
-define ('ALLOW_EXTERNAL', false);			// Allow image fetching from external websites. Will check against ALLOWED_SITES if ALLOW_ALL_EXTERNAL_SITES is false
+define ('ALLOW_EXTERNAL', TRUE);			// Allow image fetching from external websites. Will check against ALLOWED_SITES if ALLOW_ALL_EXTERNAL_SITES is false
 define ('ALLOW_ALL_EXTERNAL_SITES', false);		// Less secure. 
 define ('FILE_CACHE_ENABLED', TRUE);			// Should we store resized/modified images on disk to speed things up?
 define ('FILE_CACHE_TIME_BETWEEN_CLEANS', 86400);	// How often the cache is cleaned 
@@ -95,7 +95,13 @@ define ('WEBSHOT_XVFB_RUNNING', false);			//ADVANCED: Enable this if you've got 
 
 
 // If ALLOW_EXTERNAL is true and ALLOW_ALL_EXTERNAL_SITES is false, then external images will only be fetched from these domains and their subdomains. 
-$ALLOWED_SITES = array ();
+$ALLOWED_SITES = array (
+	'flickr.com',
+	'picasa.com',
+	'wordpress.com',
+	'img.youtube.com',
+	'media.journalism.berkeley.edu'
+);
 // -------------------------------------------------------------
 // -------------- STOP EDITING CONFIGURATION HERE --------------
 // -------------------------------------------------------------
