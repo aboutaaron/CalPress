@@ -156,6 +156,12 @@ $calpress_theme_options = array (
 			"id" => $shortname."_dotspotting_lng",
 			"std" => __(" ", 'calpress'),
 			"type" => "text",),
+			
+    array(	"name" => __('DotSpotting Icon Base Path','calpress'),
+			"desc" => __("Specify the base path for map icons",'calpress'),
+			"id" => $shortname."_dotspotting_base",
+			"std" => __(" ", 'calpress'),
+			"type" => "text",),
 );
 
 

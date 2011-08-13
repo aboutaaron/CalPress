@@ -138,6 +138,25 @@ function calpress_dotspotting_lat_lng(){
 	}
 }
 
+/**
+ * Return dotspotting icon base path from CalPress Admin
+ *
+ * @return string
+ */
+function calpress_dotspotting_base(){
+    // get value from admin
+    $get_dotspotting_base = THEMESHORTNAME."_dotspotting_base";
+    $dotspotting_base = trim(get_settings($get_dotspotting_base));
+
+    // see if its value is not blank
+    if ($dotspotting_base != ""){
+		return $dotspotting_base;
+    } else {
+		return false;
+	}
+}
+
+
 
 /**
  * List pages in global nav unless told not to in the admin
@@ -544,15 +563,16 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
         $options = calpress_parsextrafieldsoptions($map[0]);
         $userID = calpress_dotspotting();
 		$lat_lng = calpress_dotspotting_lat_lng();
+		$base_path = calpress_dotspotting_base();
         $sheetID = $options[0];
         $title = $options[1];
 		$usetitle = $title == "" ? false : true;
 		if($userID){
 	        echo("<div class=\"lead-art entry-dotspotting\">");
 				if($lat_lng){
-	            	calpress_embed_dotspotting($lat_lng[0], $lat_lng[1], 14, $userID, $sheetID, $w, $h, $title, $usetitle, true, 1);
+	            	calpress_embed_dotspotting($lat_lng[0], $lat_lng[1], 14, $userID, $sheetID, $w, $h, $title, $usetitle, true, 1, "toner", $base_path);
 				} else {
-					calpress_embed_dotspotting(37.7621, -122.4174, 14, $userID, $sheetID, $w, $h, $title, $usetitle, true, 1);
+					calpress_embed_dotspotting(37.7621, -122.4174, 14, $userID, $sheetID, $w, $h, $title, $usetitle, true, 1, "toner", $base_path);
 				}
 	        echo("</div>");
 		} else {
@@ -1041,15 +1061,16 @@ function calpress_get_inlines(){
 		        $options = calpress_parsextrafieldsoptions($map[0]);
 		        $userID = calpress_dotspotting();
 				$lat_lng = calpress_dotspotting_lat_lng();
+				$base_path = calpress_dotspotting_base();
 		        $sheetID = $options[0];
 		        $title = $options[1] != "" ? $options[1] : "";
 				$usetitle = $title == "" ? false : true;
 				if($userID){
 			        $html .= "<div class=\"sidebar-element entry-sidebar-dotspotting\">";
 						if($lat_lng){
-			            	$html .= calpress_get_embed_dotspotting($lat_lng[0], $lat_lng[1], 14, $userID, $sheetID, $w, $h, $title, false, true, 0);
+			            	$html .= calpress_get_embed_dotspotting($lat_lng[0], $lat_lng[1], 14, $userID, $sheetID, $w, $h, $title, false, true, 0, "toner", $base_path);
 						} else {
-							$html .= calpress_get_embed_dotspotting(37.7621, -122.4174, 14, $userID, $sheetID, $w, $h, $title, false, true, 0);
+							$html .= calpress_get_embed_dotspotting(37.7621, -122.4174, 14, $userID, $sheetID, $w, $h, $title, false, true, 0, "toner", $base_path);
 						}
 			        $html .= "</div><!--//end .sidebar-element -->";
 				} else {

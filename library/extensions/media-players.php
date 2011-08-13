@@ -588,8 +588,8 @@ function calpress_get_embedmap($lat=37.875356, $lng=-122.260817,$z=15,$t="ROADMA
  * @param boolean $slnk = show dotspotting link?
  * @return void
  */
-function calpress_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,$st=1083,$w=620,$h=400,$ti="",$sti=true,$slnk=true){
-	echo calpress_get_embed_dotspotting($lat, $lng, $z, $uid, $st, $w, $h, $ti, $sti, $slnk);
+function calpress_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,$st=1083,$w=620,$h=400,$ti="",$sti=true,$slnk=true, $showui=1, $base="toner", $iconbase=""){
+	echo calpress_get_embed_dotspotting($lat, $lng, $z, $uid, $st, $w, $h, $ti, $sti, $slnk, $showui, $base, $iconbase);
 }
 
 /**
@@ -608,9 +608,10 @@ function calpress_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,
  * @param boolean $sti = show title?
  * @param boolean $slnk = show dotspotting link?
  * @param int $showui = 0 or 1 to show legend in map
+ * @param string $base = map theme, i.e. crime, toner
  * @return string
  */
-function calpress_get_embed_dotspotting($lat=37.7621, $lng=-122.4174, $z=14, $uid=233, $st=1083, $w=620, $h=400, $ti="", $sti=true, $slnk=true, $showui=1){
+function calpress_get_embed_dotspotting($lat=37.7621, $lng=-122.4174, $z=14, $uid=233, $st=1083, $w=620, $h=400, $ti="", $sti=true, $slnk=true, $showui=1, $base="toner", $iconbase=""){
     $html = "";
 	if($ti != ""){
 		$pti = split(" ", $ti);
@@ -621,7 +622,10 @@ function calpress_get_embed_dotspotting($lat=37.7621, $lng=-122.4174, $z=14, $ui
 	if($ti != ""){
 		$html .= "title=". $pti . "&amp;";
 	}
-	$html .= "ui=". $showui ."\" frameborder=\"0\"></iframe>\n";
+	if($iconbase != ""){
+		$html .= "iconbase=" . $iconbase . "&amp;";
+	}
+	$html .= "ui=". $showui ."&amp;base=". $base ."&amp;\" frameborder=\"0\"></iframe>\n";
 	if($slnk){	
 		$html .= "<p class=\"dotspotting-linkback\"><a href='http://dotspotting.org/u/". $uid ."/sheets/". $st ."'>Map by Dotspotting.org</a>\n";
 	}
