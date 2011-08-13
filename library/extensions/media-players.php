@@ -592,6 +592,7 @@ function calpress_embed_dotspotting($lat=37.7621, $lng=-122.4174,$z=14,$uid=233,
 	echo calpress_get_embed_dotspotting($lat, $lng, $z, $uid, $st, $w, $h, $ti, $sti, $slnk, $showui, $base, $iconbase);
 }
 
+if (!function_exists('calpress_get_embed_dotspotting')):
 /**
  * HTML for a Dotspotting Map
  *
@@ -631,5 +632,7 @@ function calpress_get_embed_dotspotting($lat=37.7621, $lng=-122.4174, $z=14, $ui
 	}
 	return $html;
 }
+
+endif;
 
 ?>
