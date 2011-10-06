@@ -419,16 +419,9 @@ function calpress_get_embedvimeo($m,$c="",$t="",$w=250,$h=188){
 	//title
     if($t != ""){
         $html .= "<div class=\"vimeo title\"><h3>$t</h3></div>\n";
-    }
-    
-	$html .= "
-    <div id=\"video_$r\">Flash Player 8 required to see Vimeo video</div>
-    <script language=\"JavaScript\" type=\"text/javascript\">
-        var so = new SWFObject('http://vimeo.com/moogaloop.swf?clip_id=$m&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=59a5d1&amp;fullscreen=1', 'vimeo', '$w', '$h', '8');
-        so.addParam(\"wmode\", \"transparent\");
-        so.addParam('allowfullscreen','true');
-        so.write('video_$r');
-    </script>\n";
+    }    
+    $html .= "
+      <iframe src=\"http://player.vimeo.com/video/$m?title=0&amp;byline=0&amp;portrait=0\" width=\"$w\" height=\"$h\" frameborder=\"0\" webkitAllowFullScreen allowFullScreen></iframe>\n";
 
 	if($c!=""){
         $html .= "<p class=\"vimeo caption\">$c</p>\n";
