@@ -579,7 +579,7 @@ function calpress_leadart($w = LEADARTSIZE, $ratio = "169"){
 			echo("<p>Dotspotting user ID not set.</p>");
 		}
     } elseif ( get_post_custom_values('lead_vimeo', $thePostID) ) {//show the lead art slideshow
-        $h = calpress_mediaheight($w, "169", "video");
+        $h = round($w * .5626); //calpress_mediaheight($w, "169", "video");
         $videos = get_post_custom_values('lead_vimeo', $thePostID);   
         $options = calpress_parsextrafieldsoptions($videos[0]);
         $vimeoid = $options[0];
@@ -1193,7 +1193,7 @@ function calpress_get_inlines(){
             if ( get_post_custom_values('inline_vimeo') ) {
                 $videos = get_post_custom_values('inline_vimeo');
 	            $w = calpress_sidebarmediawidth();
-                $h = calpress_mediaheight($w, "169", "video");
+                $h = round($w * .5626);;
 	            for ($i = 0; $i < sizeof($videos); $i++) {
 	                
 	                // get custom field options
