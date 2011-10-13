@@ -1671,4 +1671,21 @@ function calpress_featured_comments($limit = 1, $category = 0){
     return $wpdb->get_results($sql);
 }
 
+
+/**
+ * Returns object of sorted recent comments, regardless if they are featured.
+ *
+ *
+ * @param int $limit - number of comments to return
+ * 
+ * @return obj 
+ */
+function calpress_recent_comments($limit=1){
+  global $wpdb;
+  
+  $sql = "SELECT wp_comments.comment_ID, wp_comments.comment_content, wp_comments.comment_post_ID, wp_comments.comment_author, wp_comments.comment_date, wp_comments.comment_approved, wp_comments.comment_type, wp_posts.post_title, wp_posts.post_date, wp_posts.post_password FROM $wpdb->comments, $wpdb->posts WHERE wp_comments.comment_approved ='1' AND wp_comments.comment_type = '' AND wp_posts.post_password = '' AND wp_posts.id = wp_comments.comment_post_ID ORDER BY wp_comments.comment_date DESC LIMIT $limit;";
+  
+  return $wpdb->get_results($sql);
+}
+
 ?>
