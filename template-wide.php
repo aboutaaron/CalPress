@@ -3,6 +3,9 @@
 Template Name: Full Page Template - Does Not Remove Auto Paragraph
 */
 remove_filter('the_content', 'wpautop');
+remove_filter('the_content', 'wptexturize');
+remove_filter('the_content', 'convert_chars' );
+remove_filter('the_content', 'convert_smilies');
 ?>
 <?php get_header() ?>
 
