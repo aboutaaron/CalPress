@@ -779,7 +779,7 @@ function calpress_leadimagepath(){
 		//http://www.binarymoon.co.uk/2009/10/timthumb-wordpress-mu/
 		global $blog_id;
 		if (isset($blog_id) && $blog_id > 0) {
-			$imageParts = explode('/files/', $$attachmenturl);
+			$imageParts = explode('/files/', $attachmenturl);
 			if (isset($imageParts[1])) {
 				$attachmenturl = '/blogs.dir/' . $blog_id . '/files/' . $imageParts[1];
 			}
