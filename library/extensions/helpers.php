@@ -763,6 +763,7 @@ function calpress_leadimagepath(){
     global $post;
     $thePostID = $post->ID;
     
+	// check for existence of image
     if ( $images = get_children(array(
 	    'post_parent' => $thePostID,
 		'post_type' => 'attachment',
@@ -773,6 +774,17 @@ function calpress_leadimagepath(){
 		$image_key = array_keys($images);
 		$image = $images[$image_key[0]];
 		$attachmenturl=wp_get_attachment_url($image->ID);
+		
+		// check to see if this is multisite. If so, alter image path
+		//http://www.binarymoon.co.uk/2009/10/timthumb-wordpress-mu/
+		global $blog_id;
+		if (isset($blog_id) && $blog_id > 0) {
+			$imageParts = explode('/files/', $$attachmenturl);
+			if (isset($imageParts[1])) {
+				$attachmenturl = '/blogs.dir/' . $blog_id . '/files/' . $imageParts[1];
+			}
+		}
+		
 		return $attachmenturl;
 		
 	} else {
